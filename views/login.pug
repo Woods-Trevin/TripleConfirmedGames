@@ -1,0 +1,14 @@
+extends layout.pug 
+
+block content 
+    form(action="/login", method="post")
+        input(type="hidden" name="_csrf" value=token)
+        div
+            label(for="username") Username
+            input(type="text" name="username" required id="username")
+        div
+            label(for="password") Password
+            input(type="password" name="password" required id="password")
+        div
+            button(type="submit") wow! 
+        //-include the token when we pass it in later
