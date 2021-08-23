@@ -9,13 +9,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       like: {
+        allowNull: false,
         type: Sequelize.BOOLEAN
       },
       reviewId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        referencesr: {
+          model: "Reviews"
+        },
+        unique: true
       },
       userId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        unique: true,
+        references: {
+          model: "Users"
+        }
       },
       createdAt: {
         allowNull: false,

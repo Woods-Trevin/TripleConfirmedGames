@@ -5,8 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.INTEGER,
     gameId: DataTypes.INTEGER
   }, {});
-  GameCleanRating.associate = function(models) {
+  GameCleanRating.associate = function (models) {
     // associations can be defined here
+    GameCleanRating.belongsTo(models.Game, { foreignKey: "gameId" })
+    GameCleanRating.belongsTo(models.User, { foreignKey: "userId" })
+
   };
   return GameCleanRating;
 };
