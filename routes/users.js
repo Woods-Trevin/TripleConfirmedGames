@@ -86,7 +86,7 @@ router.post('/signup', csrfProtection, userValidators,
     const hashedPassword = await bcrypt.hash(password, 10);
 
     if (validatorErrors.isEmpty()) {
-      const user = await db.User.create({
+      const user = await User.create({
         email,
         firstName,
         lastName,
@@ -97,7 +97,7 @@ router.post('/signup', csrfProtection, userValidators,
       res.redirect('/games');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      const user = db.User.build();
+      const user = User.build();
 
       res.render('signup', {
         title: 'Signup',
