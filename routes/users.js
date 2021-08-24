@@ -7,6 +7,7 @@ const { loginUser, logoutUser, requireAuth } = require('../auth');
 
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, userValidators, loginValidator } = require('../utils.js');
+const { ResultWithContext } = require('express-validator/src/chain');
 
 /* GET users listing. */
 router.get('/', asyncHandler(async (req, res, next) => {
@@ -118,7 +119,7 @@ router.post('/signup', csrfProtection, userValidators,
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   const user = await User.findByPk(req.params.id)
 
-  const shelf = await Shelf.findAll({
+  const shelves = await Shelf.findAll({
     where: {
       userId: req.params.id,
     }, include: Game
@@ -130,17 +131,18 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     }
   })
 
-  //make sure eveyone has this added
   const reviewLikes = await ReviewLike.findAll({
     where: {
       userId: req.params.id
     }
   });
 
+  const totalReviewLikes = reviewLikes.length;
+
   const totalReviews = review.length;
   console.log(totalReviews)
 
-  res.render('profile', { title: 'This is a profile page', review, shelf, user, totalReviews })
+  res.render('profile', { title: 'This is a profile page', review, shelves, user, totalReviews, totalReviewLikes })
 }))
 
 

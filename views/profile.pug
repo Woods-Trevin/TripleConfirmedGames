@@ -1,18 +1,24 @@
-extends layout.pug 
+extends layout.pug
 
 
 
 block content
-    div 
+    div
         h2 #{user.username}
     div
-        h4 Details 
-            ul 
-                li #{user.firstName} 
-                p #{user.lastName} 
+        h4 Details
+            ul
+                li #{user.firstName}
+                p #{user.lastName}
                 p #{user.email}
-    div 
-        h4 Activity 
+    div
+        h4 Activity
             ul
                 li Joined In #{user.createdAt}
-                li Total Reviews: #{totalReviews}  
+                li Total Reviews: #{totalReviews}
+                li Total Review Likes: #{totalReviewLikes}
+    div
+        h4 #{user.firstName}'s Game Library Shelves
+            each shelf in shelves
+                ul
+                    li #{shelf.name}
