@@ -61,8 +61,11 @@ router.post('/signup', csrfProtection, userValidators,
       res.redirect('/games');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
+      // const user = db.User.build();
+
       res.render('signup', {
         title: 'Signup',
+        user,
         errors,
         csrfToken: req.csrfToken(),
       });
