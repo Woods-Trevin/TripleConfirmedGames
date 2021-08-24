@@ -37,4 +37,4 @@ npx dotenv sequelize db:seed:undo:all
 npx dotenv sequelize db:migrate:undo:all
 
 (you can also use):
-npx sequelize db:drop
+npx dotenv sequelize db:drop
