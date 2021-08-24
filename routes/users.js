@@ -16,7 +16,7 @@ router.get('/', asyncHandler(async (req, res, next) => {
 
 router.get('/login', csrfProtection, asyncHandler(async (req, res, next) => {
   // res.send('respond with a resource');
-  res.render('login', { title: 'header', token: req.csrfToken() });
+  res.render('login', { title: 'header', token: req.csrfToken()});
 }));
 
 router.post('/login', loginValidator, csrfProtection, asyncHandler(async (req, res, next) => {
@@ -62,7 +62,7 @@ router.post('/login', loginValidator, csrfProtection, asyncHandler(async (req, r
 
 
 router.get('/signup', csrfProtection, (req, res) => {
-  const user = db.User.build();
+  const user = User.build();
   res.render('signup', {
     title: 'Signup',
     user,
