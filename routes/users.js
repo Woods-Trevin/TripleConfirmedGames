@@ -60,6 +60,11 @@ router.post('/login', loginValidator, csrfProtection, asyncHandler(async (req, r
 
 }));
 
+router.post('/logout', (req, res) => {
+  logoutUser(req, res);
+  res.redirect('/users/login');
+});
+
 
 router.get('/signup', csrfProtection, (req, res) => {
   const user = User.build();
