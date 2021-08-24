@@ -9,15 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(100)
       },
       content: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(1000)
       },
       userId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       gameId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {
