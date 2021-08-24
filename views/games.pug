@@ -9,9 +9,11 @@ append head
 block content
   h1= title
   p Welcome to your Project Skeleton
-  //- a(class='btn' href='/book/add' role='button') Add Book 
+  //- a(class='btn' href='/book/add' role='button') Add Book
 
   div
-    each game in games 
-      div= game.title 
+    each game in games
+      div
+        a(href=`/games/${game.id}`) #{game.title}
     //-game.image   <--- potentially add to database
+
