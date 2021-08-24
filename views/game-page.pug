@@ -1,7 +1,8 @@
 extends layout
 
 block content
-    div= game.title
-    div= game.description
-    //- div
-    //-     game.Review.content
+    div= games.title
+    div= games.description
+    each review in reviews
+        ul
+            li #{review.content}

@@ -16,10 +16,11 @@ router.get('/', asyncHandler(async (req, res, next) => {
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   const gameId = req.params.id;
-  const game = await Game.findByPk(gameId, {
+  const games = await Game.findByPk(gameId, {
     include: [Review, GameCleanRating, Shelf]
   })
-  res.render('game-page', {title: game.title, game: game})
+  const reviews = games.Reviews
+  res.render('game-page', {title: games.title, games: games, reviews: reviews})
 }))
 
 module.exports = router;
