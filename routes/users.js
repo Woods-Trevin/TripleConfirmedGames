@@ -119,6 +119,7 @@ router.post('/signup', csrfProtection, userValidators,
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   const user = await User.findByPk(req.params.id)
 
+
   const games = await Game.findAll({
     include: [Review, Shelf]
   })
