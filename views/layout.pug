@@ -7,10 +7,10 @@ html
   body
     if locals.authenticated
       span(class='navbar-text px-4') Welcome #{user.firstName}!
-      form(class='form-inline pr-4' action='/user/logout' method='post')
-        button(class='btn btn-sm btn-warning' type='submit') Logout
+      form(class='form-inline pr-4' action='/users/logout' method='post')
+        button(class='btn' type='submit') Logout
     else
       span(class='navbar-text px-4')
-        a(class='btn btn-sm btn-dark mr-2' href='/user/login') Login
-        a(class='btn btn-sm btn-dark' href='/user/register') Register
+        a(class='btn' href='/users/login') Login
+        a(class='btn' href='/users/signup') Register
     block content
