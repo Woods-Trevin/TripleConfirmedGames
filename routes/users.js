@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db/models');
+const { User } = db;
 const bcrypt = require('bcryptjs');
 const { loginUser, logoutUser } = require('../auth');
 
@@ -96,6 +97,7 @@ router.post('/signup', csrfProtection, userValidators,
       loginUser(req, res, user)
       res.redirect('/games');
     } else {
+      console.log("ERROR HERE");
       const errors = validatorErrors.array().map((error) => error.msg);
       const user = db.User.build();
 
