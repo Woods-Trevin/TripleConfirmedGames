@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db/models');
-const { User, Shelf, Game, Review } = db;
+const { User, Shelf, Game, Review, ReviewLike } = db;
 const bcrypt = require('bcryptjs');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
 
@@ -130,7 +130,12 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     }
   })
 
-  const reviewLikes = await ReviewLikes.findAll
+  //make sure eveyone has this added
+  const reviewLikes = await ReviewLike.findAll({
+    where: {
+      userId: req.params.id
+    }
+  });
 
   const totalReviews = review.length;
   console.log(totalReviews)
