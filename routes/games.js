@@ -5,7 +5,7 @@ const {csrfProtection, asyncHandler} = require ('../utils.js');
 
 /* GET home page. */
 router.get('/', asyncHandler(async(req, res, next) => {
-  res.render('index', { title: 'a/A Express Skeleton Home' });
+  res.render('games', { title: 'a/A Express Skeleton Home' });
 }));
 
 module.exports = router;
