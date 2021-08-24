@@ -2,7 +2,11 @@ extends layout
 
 block content
     div= games.title
+    div= games.studio
     div= games.description
+    div= games.avgCleanRating
+    div= games.releaseDate
     each review in reviews
         ul
+            //- li #{}
             li #{review.content}
