@@ -2,7 +2,9 @@ extends layout.pug
 
 
 block content
-    form(method='POST' action="/#{userId}/addShelf")
-        label(for="shelf-name") Add Shelf Name
-        input(type="text" name='shelf-name' placeholder='Shelf Name')
-        button(type="submit" action='/users/#{userId}/mygames') Submit
+    if shelves
+        p This shelf already exists
+    form(method='POST' action=`/users/${userId}/addShelf`)
+        label(for="name") Add Shelf Name
+        input(type="text" name='name' placeholder='Shelf Name')
+        button(type="submit" action=`/users/${userId}/mygames`) Submit

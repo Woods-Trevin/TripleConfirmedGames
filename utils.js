@@ -62,6 +62,13 @@ const loginValidator = [
     .withMessage('Please provide a value for Password')
 ]
 
+const shelfNameValidator = [
+  check('name')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a name')
+    .isLength({ max: 50 })
+    .withMessage('Name must not be more than 50 characters long')
+
 const reviewValidator = [
   check('content')
     .exists({ checkFalsy: true })
@@ -75,5 +82,6 @@ module.exports = {
   asyncHandler,
   userValidators,
   loginValidator,
+  shelfNameValidator,
   reviewValidator,
 };
