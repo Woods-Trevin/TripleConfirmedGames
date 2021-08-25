@@ -30,18 +30,19 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     include: User
   });
 
-  const userReviews = [];
-  reviewNames.forEach(element => {
-    userReviews.push(element.User.username)
-  });
-  console.log(userReviews);
+  // console.log(reviewNames[0].User)
+  // const userReviews = [];
+  // reviewNames.forEach(element => {
+  //   userReviews.push(element.User.username)
+  // });
+  // console.log(userReviews);
 
 
   // const userIds = reviews.map(review => review.userId);
   // console.log(userIds);
   // const users = await userIds.map(async id => await User.findByPk(id));
   // console.log(users);
-  res.render('game-page', {title: games.title, games: games, reviews: reviews})
+  res.render('game-page', {title: games.title, games: games, reviews: reviews, reviewNames})
 }))
 
 module.exports = router;
