@@ -14,6 +14,5 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('SlapOns', null, {});
-  }
+    return queryInterface.bulkDelete('SlapOns', null, { truncate: true, cascade: true, restartIdentity: true });  }
 };

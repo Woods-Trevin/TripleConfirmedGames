@@ -24,6 +24,5 @@ module.exports = {
 
       Example:
       */
-   return queryInterface.bulkDelete('GameJoins', null, {});
-  }
+      return queryInterface.bulkDelete('GameJoins', null, { truncate: true, cascade: true, restartIdentity: true });  }
 };
