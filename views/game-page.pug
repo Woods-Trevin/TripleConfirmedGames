@@ -16,3 +16,4 @@ block content
         each review in reviewNames
             li #{review.User.username}
             li #{review.content}
+            a(href=`/reviews/${review.id}/edit`) Edit
