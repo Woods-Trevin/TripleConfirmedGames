@@ -3,5 +3,6 @@ extends layout
 block content
     div
         form(action=`/reviews/${review.id}/edit`, method="post")
+            input(type="hidden" name="_csrf" value=token)
             textarea(name="content") #{review.content}
             button(type="submit") Update Review

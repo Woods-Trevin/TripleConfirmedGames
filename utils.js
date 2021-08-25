@@ -69,6 +69,12 @@ const shelfNameValidator = [
     .isLength({ max: 50 })
     .withMessage('Name must not be more than 50 characters long')
 
+const reviewValidator = [
+  check('content')
+    .exists({ checkFalsy: true })
+    .withMessage('Your review cannot be empty')
+    .isLength({ max: 1000 })
+    .withMessage('Your review must not be more than 1000 characters long')
 ]
 
 module.exports = {
@@ -77,4 +83,5 @@ module.exports = {
   userValidators,
   loginValidator,
   shelfNameValidator,
+  reviewValidator,
 };
