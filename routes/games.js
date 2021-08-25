@@ -51,9 +51,9 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
 router.post('/:id(\\d+)', requireAuth, asyncHandler(async(req, res, next) => {
   const gameId = req.params.id;
   const {title, content} = req.body;
-  const username = res.locals.user.id
+  const userId = res.locals.user.id
   await Review.create({
-    userId: username,
+    userId,
     title: '',
     content,
     gameId
