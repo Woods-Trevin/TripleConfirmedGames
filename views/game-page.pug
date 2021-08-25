@@ -6,6 +6,11 @@ block content
     div= games.description
     div= games.avgCleanRating
     div= games.releaseDate
+    div
+        form(action=`/games/${games.id}`, method="post")
+            //- input(type="text", name="title")
+            textarea(name="content", cols="30", rows="10")
+            button(type="submit") Add A Review
     ul
         each review in reviewNames
             li #{review.User.username}

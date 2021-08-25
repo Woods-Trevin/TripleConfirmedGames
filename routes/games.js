@@ -45,4 +45,19 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   res.render('game-page', {title: games.title, games: games, reviews: reviews, reviewNames})
 }))
 
+router.post('/:id(\\d+)', requireAuth, asyncHandler(async(req, res, next) => {
+  const gameId = req.params.id;
+  const {title, content} = req.body;
+
+  await Review.create({
+    userId: res.locals.user.id,
+    title: '',
+    content,
+    gameId
+  });
+
+  res.redirect(`/games/${gameId}`);
+
+}));
+
 module.exports = router;
