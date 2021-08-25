@@ -131,7 +131,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
       userId: req.params.id,
     }, include: Game
   })
-
+  console.log(shelves)
   //grabbing number of games tied to a certain shelf through query above and adding them to an 
   //array.
   const numOfGames = []
@@ -143,6 +143,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   console.log(numOfGames)
 
   // const shelves = await Shelf.findAll()
+  //Cleaaaan
 
 
   const namedShelves = []
