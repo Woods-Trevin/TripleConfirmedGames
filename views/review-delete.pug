@@ -7,6 +7,7 @@ block content
         p #{review.content}
     div
         form(action=`/reviews/${review.id}/delete`, method="post")
+            input(type="hidden" name="_csrf" value=token)
             button(type="submit") Delete
         form(action=`/games/${review.gameId}`, method="get")
             button(type="submit") Cancel

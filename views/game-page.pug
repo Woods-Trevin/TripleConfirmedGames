@@ -1,15 +1,20 @@
 extends layout
 
+include utils.pug 
+
 block content
     div= games.title
+    div= games.rating
     div= games.studio
     div= games.description
     div= games.avgCleanRating
     div= games.releaseDate
     if user
         div #{user.firstName}
-    div
+    div.anything
+        +validationErrorSummary(errors)
         form(action=`/games/${games.id}`, method="post")
+            input(type="hidden" name="_csrf" value=token)
             textarea(name="content")
             button(type="submit") Add A Review
     ul
