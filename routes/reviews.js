@@ -31,15 +31,40 @@ router.post('/:id(\\d+)/edit', requireAuth, asyncHandler(async(req, res) => {
         content,
         gameId: oldReview.gameId
     };
-    console.log(reviewId);
-    console.log(oldReview);
-    console.log(content);
-    console.log(username);
-    console.log(newReview);
+
     await oldReview.update(newReview)
 
     res.redirect(`/games/${newReview.gameId}`);
 
 }));
+
+router.get('/:id(\\d+)/delete', requireAuth, asyncHandler(async(req, res) => {
+    const reviewId = parseInt(req.params.id, 10);
+    const gameId = req.params.id;
+    console.log(req.params);
+    console.log(reviewId);
+
+    const oldReview = await Review.findByPk(reviewId);
+
+    const review = await Review.findByPk(reviewId);
+    res.render('review-delete', {
+      title: 'Delete Review',
+      review,
+      gameId: oldReview.gameId
+    });
+
+}));
+
+router.post('/:id(\\d+)/delete', requireAuth,
+  asyncHandler(async (req, res) => {
+    const reviewId = parseInt(req.params.id, 10);
+    const review = await Review.findByPk(reviewId);
+
+    // checkPermissions(book, res.locals.user);
+
+    await review.destroy();
+    res.redirect(`/games/${review.gameId}`);
+}));
+
 
 module.exports = router;
