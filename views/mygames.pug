@@ -8,5 +8,18 @@ block content
             each shelf in shelves
                 ul
                     li #{shelf.name}(#{shelf.Games.length})
-        form(action="/users/#{userId}/addShelf" method='POST')
-            button(type='submit') Add Shelf
+        a(href=`/users/${userId}/addShelf`) Add Shelf 
+    table
+        thead
+            tr
+                th Box Art
+                th Title
+                th Studio 
+                th AvgCleanRating 
+                th Shelves
+                th Review
+                th ReleaseDate
+        tbody
+            tr
+                td
+            

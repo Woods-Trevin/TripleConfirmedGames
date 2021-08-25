@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
 
 const { check, validationResult } = require('express-validator');
-const { csrfProtection, asyncHandler, userValidators, loginValidator } = require('../utils.js');
+const { csrfProtection, asyncHandler, userValidators, loginValidator, shelfNameValidator } = require('../utils.js');
 const { ResultWithContext } = require('express-validator/src/chain');
 
 /* GET users listing. */
@@ -61,13 +61,13 @@ router.post('/login', loginValidator, csrfProtection, asyncHandler(async (req, r
 
 }));
 
-router.post('/logout', (req, res) => {
+router.post('/logout', (req, res, next) => {
   logoutUser(req, res);
   res.redirect('/users/login');
 });
 
 
-router.get('/signup', csrfProtection, (req, res) => {
+router.get('/signup', csrfProtection, (req, res, next) => {
   const user = User.build();
   res.render('signup', {
     title: 'Signup',
@@ -78,7 +78,7 @@ router.get('/signup', csrfProtection, (req, res) => {
 
 
 router.post('/signup', csrfProtection, userValidators,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const {
       email,
       firstName,
@@ -116,16 +116,19 @@ router.post('/signup', csrfProtection, userValidators,
     }
   }));
 
-router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const user = await User.findByPk(req.params.id, {
-    include: [ GameCleanRating, {
+    include: [GameCleanRating, {
       model: Game,
       // where: {userId: req.params.id},
-      include: [ Shelf, Review ]
-    },{
-      model: Review,
-      include: Game
-    },
+      include: [Shelf, Review]
+    }, {
+        model: Review,
+        where: {
+          userId: req.params.id
+        },
+        include: Game
+      },
     ]
   });
 
@@ -193,7 +196,23 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   })
 }))
 
-router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next) => {
+  const { userId } = req.session.auth
+  console.log(userId)
+
+  // const users = await User.findByPk(userId, {
+  //   include: [Shelf, Game]
+  // });
+  const shelves = await Shelf.findAll({
+    where: {
+      userId: req.params.id,
+    }, include: Game
+  })
+
+  res.render('mygames', { title: 'My Games', userId, shelves })
+}));
+
+router.post('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next) => {
   const { userId } = req.session.auth
   console.log(userId)
 
@@ -212,10 +231,47 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res) => {
 //need a post route for my games for add shelf button
 
 
-router.get('/:id(\\d+)/addShelf', requireAuth, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)/addShelf', requireAuth, asyncHandler(async (req, res, next) => {
+  const { userId } = req.session.auth
+
+  // const shelves = await Shelf.findAll({
+  //   where: {
+  //     name: name
+  //   }
+  // })
+
+  res.render('addShelf', { title: 'My Games', userId })
+}));
 
 
-  res.render('addShelf', { title: 'My Games', userId, shelves })
+router.post('/:id(\\d+)/addShelf', requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
+  const { userId } = req.session.auth
+  const { name } = req.body
+  const shelves = await Shelf.findAll({
+    where: {
+      name: name
+    }
+  })
+  try {
+    if (!shelves) {
+      await Shelf.create({
+        name,
+        userId
+      })
+      res.redirect(`/users/${userId}/mygames`)
+    } else {
+      // const error = "This Name Is Taken"
+      res.render('addShelf', {
+        title: 'Add Shelf Name',
+        shelves,
+        userId
+
+      })
+    }
+  } catch (e) {
+    next(e)
+  }
+
 }));
 
 
@@ -223,3 +279,4 @@ router.get('/:id(\\d+)/addShelf', requireAuth, asyncHandler(async (req, res) => 
 
 module.exports = router;
 //testing comment
+//demo user1 pass- Password12!
