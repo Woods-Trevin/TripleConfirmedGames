@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db/models');
-const { User, Shelf, Game, Review, ReviewLike, GameCleanRating } = db;
+const { User, Shelf, Game, Review, ReviewLike, GameCleanRating, GameJoin } = db;
 const bcrypt = require('bcryptjs');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
 
@@ -118,16 +118,15 @@ router.post('/signup', csrfProtection, userValidators,
 
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   const user = await User.findByPk(req.params.id, {
-    include: [Review, Game, GameCleanRating, {
+    include: [ GameCleanRating, {
       model: Game,
-      include: Shelf
-    }, {
-        model: Shelf,
-        where: {
-          userId: req.params.id
-        },
-        include: Game
-      }]
+      // where: {userId: req.params.id},
+      include: [ Shelf, Review ]
+    },{
+      model: Review,
+      include: Game
+    },
+    ]
   });
 
 
@@ -169,7 +168,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
       userId: req.params.id
     }
   })
-  console.log(user.Shelves)
+  console.log(user.Games)
 
   const reviewLikes = await ReviewLike.findAll({
     where: {
@@ -210,8 +209,10 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res) => {
   res.render('mygames', { title: 'My Games', userId, shelves })
 }));
 
+//need a post route for my games for add shelf button
 
-router.get('/#{userId}/addShelf', requireAuth, asyncHandler(async (req, res) => {
+
+router.get('/:id(\\d+)/addShelf', requireAuth, asyncHandler(async (req, res) => {
 
 
   res.render('addShelf', { title: 'My Games', userId, shelves })

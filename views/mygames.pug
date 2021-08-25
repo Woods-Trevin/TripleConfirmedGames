@@ -1,11 +1,12 @@
-extends layout.pug 
+extends layout.pug
 
 
-block content 
+block content
     h2 #{title}
     div.sideBar
         h3 Gameshelves
-            each shelf in shelves 
-                ul 
+            each shelf in shelves
+                ul
                     li #{shelf.name}(#{shelf.Games.length})
-        button(type='submit' href='/users/#{userId}/addShelf') Add Shelf
+        form(action="/users/#{userId}/addShelf" method='POST')
+            button(type='submit') Add Shelf

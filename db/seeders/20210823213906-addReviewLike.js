@@ -8,6 +8,5 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-   return queryInterface.bulkDelete('ReviewLikes', null, {});
-  }
+    return queryInterface.bulkDelete('ReviewLikes', null, { truncate: true, cascade: true, restartIdentity: true });  }
 };

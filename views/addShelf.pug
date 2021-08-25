@@ -1,4 +1,8 @@
-extends layout.pug 
+extends layout.pug
 
 
 block content
+    form(method='POST' action="/#{userId}/addShelf")
+        label(for="shelf-name") Add Shelf Name
+        input(type="text" name='shelf-name' placeholder='Shelf Name')
+        button(type="submit" action='/users/#{userId}/mygames') Submit
