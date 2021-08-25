@@ -16,15 +16,11 @@ router.get('/', asyncHandler(async (req, res, next) => {
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   const gameId = req.params.id;
-  // const { username } = req.body;
-  // console.log(username)
-  // const user = await User.findOne({ where: { username } });
+
   const games = await Game.findByPk(gameId, {
     include: [Review, GameCleanRating, Shelf]
   })
   const reviews = games.Reviews
-  // console.log(reviews);
-  // console.log(users)
 
   const reviewNames = await Review.findAll(
     {where: {
@@ -33,18 +29,6 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     include: User
   });
 
-  // console.log(reviewNames[0].User)
-  // const userReviews = [];
-  // reviewNames.forEach(element => {
-  //   userReviews.push(element.User.username)
-  // });
-  // console.log(userReviews);
-
-
-  // const userIds = reviews.map(review => review.userId);
-  // console.log(userIds);
-  // const users = await userIds.map(async id => await User.findByPk(id));
-  // console.log(users);
   res.render('game-page', {title: games.title, games, reviews, reviewNames})
 }))
 
@@ -62,5 +46,6 @@ router.post('/:id(\\d+)', requireAuth, asyncHandler(async(req, res, next) => {
   res.redirect(`/games/${gameId}`);
 
 }));
+
 
 module.exports = router;
