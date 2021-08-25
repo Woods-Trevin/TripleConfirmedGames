@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+
+    h3 Are you sure you want to delete this?
+     div
+        p #{review.content}
+    div
+        form(action=`/reviews/${review.id}/delete`, method="post")
+            button(type="submit") Delete
+        form(action=`/games/${review.gameId}`, method="get")
+            button(type="submit") Cancel
