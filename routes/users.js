@@ -143,6 +143,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   console.log(numOfGames)
 
   // const shelves = await Shelf.findAll()
+  //Cleaaaan
 
 
   const namedShelves = []
