@@ -62,9 +62,18 @@ const loginValidator = [
     .withMessage('Please provide a value for Password')
 ]
 
+const reviewValidator = [
+  check('content')
+    .exists({ checkFalsy: true })
+    .withMessage('Your review cannot be empty')
+    .isLength({ max: 1000 })
+    .withMessage('Your review must not be more than 1000 characters long')
+]
+
 module.exports = {
   csrfProtection,
   asyncHandler,
   userValidators,
   loginValidator,
+  reviewValidator,
 };

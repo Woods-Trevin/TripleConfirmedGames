@@ -8,18 +8,19 @@ const { Game, Review, GameCleanRating, Shelf, User } = db;
 
 const { csrfProtection, asyncHandler } = require('../utils.js');
 
-router.get('/:id(\\d+)/edit', requireAuth, asyncHandler(async(req, res) => {
+router.get('/:id(\\d+)/edit', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
     const reviewId = parseInt(req.params.id, 10);
     console.log(reviewId);
     const review = await Review.findByPk(reviewId);
     res.render('review-edit', {
       title: 'Edit Review',
-      review
+      review,
+      token: req.csrfToken()
     });
 
 }));
 
-router.post('/:id(\\d+)/edit', requireAuth, asyncHandler(async(req, res) => {
+router.post('/:id(\\d+)/edit', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
     const reviewId = parseInt(req.params.id, 10);
     const oldReview = await Review.findByPk(reviewId);
 
@@ -29,16 +30,18 @@ router.post('/:id(\\d+)/edit', requireAuth, asyncHandler(async(req, res) => {
         userId: username,
         title: '',
         content,
-        gameId: oldReview.gameId
+        gameId: oldReview.gameId,
     };
 
+    //handle validation errors here
     await oldReview.update(newReview)
+
 
     res.redirect(`/games/${newReview.gameId}`);
 
 }));
 
-router.get('/:id(\\d+)/delete', requireAuth, asyncHandler(async(req, res) => {
+router.get('/:id(\\d+)/delete', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
     const reviewId = parseInt(req.params.id, 10);
     const gameId = req.params.id;
     console.log(req.params);
@@ -50,12 +53,13 @@ router.get('/:id(\\d+)/delete', requireAuth, asyncHandler(async(req, res) => {
     res.render('review-delete', {
       title: 'Delete Review',
       review,
-      gameId: oldReview.gameId
+      gameId: oldReview.gameId,
+      token: req.csrfToken()
     });
 
 }));
 
-router.post('/:id(\\d+)/delete', requireAuth,
+router.post('/:id(\\d+)/delete', csrfProtection, requireAuth,
   asyncHandler(async (req, res) => {
     const reviewId = parseInt(req.params.id, 10);
     const review = await Review.findByPk(reviewId);
