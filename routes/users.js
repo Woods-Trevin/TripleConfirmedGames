@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db/models');
-const { User, Shelf, Game, Review, ReviewLike } = db;
+const { User, Shelf, Game, Review, ReviewLike, GameCleanRating } = db;
 const bcrypt = require('bcryptjs');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
 
@@ -117,7 +117,10 @@ router.post('/signup', csrfProtection, userValidators,
   }));
 
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
-  const user = await User.findByPk(req.params.id)
+  const users = await User.findByPk(req.params.id, {
+    include: [ Review, Game, GameCleanRating, Shelf]
+  });
+
 
 
   const games = await Game.findAll({
@@ -131,46 +134,56 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
       userId: req.params.id,
     }, include: Game
   })
-  console.log(shelves)
-  //grabbing number of games tied to a certain shelf through query above and adding them to an 
+  // console.log(shelves)
+  //grabbing number of games tied to a certain shelf through query above and adding them to an
   //array.
-  const numOfGames = []
-  shelves.forEach(element => {
-    const num = element.Games
-    numOfGames.push(num.length)
-  })
+  // const numOfGames = []
+  // shelves.forEach(element => {
+    //   const num = element.Games
+    //   numOfGames.push(num.length)
+    // })
 
-  console.log(numOfGames)
+    // console.log(numOfGames)
 
-  // const shelves = await Shelf.findAll()
-  //Cleaaaan
-
-
-  const namedShelves = []
-  shelves.forEach(element => {
-    namedShelves.push(element.name)
-  });
+    // const shelves = await Shelf.findAll()
+    //Cleaaaan
 
 
-  const review = await Review.findAll({
-    where: {
-      userId: req.params.id
-    }
-  })
+    // const namedShelves = []
+    // shelves.forEach(element => {
+      //   namedShelves.push(element.name)
+      // });
 
-  const reviewLikes = await ReviewLike.findAll({
-    where: {
-      userId: req.params.id
-    }
-  });
 
-  const totalReviewLikes = reviewLikes.length;
+      const review = await Review.findAll({
+        where: {
+          userId: req.params.id
+        }
+      })
+      console.log(users)
 
-  const totalReviews = review.length;
-  console.log(totalReviews)
+      const reviewLikes = await ReviewLike.findAll({
+        where: {
+          userId: req.params.id
+        }
+      });
 
-  res.render('profile', { title: 'This is a profile page', review, shelves, user, totalReviews, totalReviewLikes })
-}))
+      const totalReviewLikes = reviewLikes.length;
+
+      const totalReviews = review.length;
+      // console.log(totalReviews)
+
+
+
+      res.render('profile', { title: 'This is a profile page',
+        review,
+        shelves,
+        users,
+        totalReviews,
+        totalReviewLikes,
+        userGames: users.Games,
+        userReviews: users.Reviews })
+    }))
 
 
 

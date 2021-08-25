@@ -14,6 +14,8 @@ npx sequelize model:generate --name SlapOn --attributes shelfId:integer,gameId:i
 
 npx sequelize model:generate --name Review --attributes title:string,content:string,userId:integer,gameId:integer
 
+npx sequelize model:generate --name GameJoin --attributes userId:integer,gameId:integer
+
 npx sequelize seed:generate --name addGame
 
 npx sequelize seed:generate --name addReview
@@ -27,6 +29,8 @@ npx sequelize seed:generate --name addReviewLike
 npx sequelize seed:generate --name addGameCleanRating
 
 npx sequelize seed:generate --name addUser
+
+npx sequelize seed:generate --name addGameJoin
 
 npx dotenv sequelize db:migrate
 
