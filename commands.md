@@ -42,3 +42,5 @@ npx dotenv sequelize db:migrate:undo:all
 
 (you can also use):
 npx dotenv sequelize db:drop
+
+git push --set-upstream origin pro

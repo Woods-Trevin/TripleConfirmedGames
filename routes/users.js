@@ -117,8 +117,17 @@ router.post('/signup', csrfProtection, userValidators,
   }));
 
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
-  const users = await User.findByPk(req.params.id, {
-    include: [ Review, Game, GameCleanRating, Shelf]
+  const user = await User.findByPk(req.params.id, {
+    include: [Review, Game, GameCleanRating, {
+      model: Game,
+      include: Shelf
+    }, {
+        model: Shelf,
+        where: {
+          userId: req.params.id
+        },
+        include: Game
+      }]
   });
 
 
@@ -139,51 +148,75 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   //array.
   // const numOfGames = []
   // shelves.forEach(element => {
-    //   const num = element.Games
-    //   numOfGames.push(num.length)
-    // })
+  //   const num = element.Games
+  //   numOfGames.push(num.length)
+  // })
 
-    // console.log(numOfGames)
+  // console.log(numOfGames)
 
-    // const shelves = await Shelf.findAll()
-    //Cleaaaan
-
-
-    // const namedShelves = []
-    // shelves.forEach(element => {
-      //   namedShelves.push(element.name)
-      // });
+  // const shelves = await Shelf.findAll()
+  //Cleaaaan
 
 
-      const review = await Review.findAll({
-        where: {
-          userId: req.params.id
-        }
-      })
-      console.log(users)
-
-      const reviewLikes = await ReviewLike.findAll({
-        where: {
-          userId: req.params.id
-        }
-      });
-
-      const totalReviewLikes = reviewLikes.length;
-
-      const totalReviews = review.length;
-      // console.log(totalReviews)
+  // const namedShelves = []
+  // shelves.forEach(element => {
+  //   namedShelves.push(element.name)
+  // });
 
 
+  const review = await Review.findAll({
+    where: {
+      userId: req.params.id
+    }
+  })
+  console.log(user.Shelves)
 
-      res.render('profile', { title: 'This is a profile page',
-        review,
-        shelves,
-        users,
-        totalReviews,
-        totalReviewLikes,
-        userGames: users.Games,
-        userReviews: users.Reviews })
-    }))
+  const reviewLikes = await ReviewLike.findAll({
+    where: {
+      userId: req.params.id
+    }
+  });
+
+  const totalReviewLikes = reviewLikes.length;
+
+  const totalReviews = review.length;
+  // console.log(use)
+
+
+
+  res.render('profile', {
+    title: 'This is a profile page',
+    review,
+    shelves,
+    user,
+    totalReviews,
+    totalReviewLikes
+  })
+}))
+
+router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res) => {
+  const { userId } = req.session.auth
+  console.log(userId)
+
+  // const users = await User.findByPk(userId, {
+  //   include: [Shelf, Game]
+  // });
+  const shelves = await Shelf.findAll({
+    where: {
+      userId: req.params.id,
+    }, include: Game
+  })
+
+  res.render('mygames', { title: 'My Games', userId, shelves })
+}));
+
+
+router.get('/#{userId}/addShelf', requireAuth, asyncHandler(async (req, res) => {
+
+
+  res.render('addShelf', { title: 'My Games', userId, shelves })
+}));
+
 
 
 

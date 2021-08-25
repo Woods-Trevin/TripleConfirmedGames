@@ -24,11 +24,16 @@ block content
                 li #{shelf.name}(#{shelf.Games.length})
     div
         h3 #{user.username.toUpperCase()}'s RECENT UPDATES
-        each user in userGames
             ul
-                li #{user.title}
-                li #{user.studio}
-                //- each review in userReviews
-                //-     li #{review.content}
-                //- li #{user.studio}
-                //- li #{user.studio}
+                each game in user.Games
+                    li #{game.title}
+                    li #{game.studio}
+                    li #{game.avgCleanRating}
+                    li #{game.description}
+                //- if user.Games.id === user.Reviews.
+                each review in user.Reviews
+                    li #{review.content}
+                each game in user.Games 
+                    li #{game.name}
+                    each shelf in game.Shelves
+                        li #{shelf.name}
