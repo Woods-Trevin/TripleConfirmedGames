@@ -14,6 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.ReviewLike, { foreignKey: 'userId' })
     User.hasMany(models.Review, { foreignKey: "userId" })
 
+    const columnMapping = {
+      through: "GameJoin",
+      otherKey: "gameId",
+      foreignKey: "userId",
+    }
+    User.belongsToMany(models.Game, columnMapping)
+
 
   };
   return User;

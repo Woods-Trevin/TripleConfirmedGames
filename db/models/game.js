@@ -18,6 +18,13 @@ module.exports = (sequelize, DataTypes) => {
 
     Game.hasMany(models.GameCleanRating, { foreignKey: "gameId" })
     Game.hasMany(models.Review, { foreignKey: "gameId" })
+
+    const map = {
+      through: "GameJoin",
+      otherKey: "userId",
+      foreignKey: "gameId",
+    }
+    Game.belongsToMany(models.User, map)
   };
   return Game;
 };

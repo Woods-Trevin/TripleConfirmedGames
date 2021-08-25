@@ -6,19 +6,29 @@ block content
     div
         h2 #{user.username}
     div
-        h4 Details
-            ul
-                li #{user.firstName}
-                li #{user.lastName}
-                li #{user.email}
+        h3 Details
+        ul
+            li #{user.firstName}
+            li #{user.lastName}
+            li #{user.email}
     div
-        h4 Activity
-            ul
-                li Joined In #{user.createdAt}
-                li Total Reviews: #{totalReviews}
-                li Total Review Likes: #{totalReviewLikes}
+        h3 Activity
+        ul
+            li Joined In #{user.createdAt}
+            li Total Reviews: #{totalReviews}
+            li Total Review Likes: #{totalReviewLikes}
     div
-        h4 #{user.firstName}'s Game Library Shelves
-            each shelf in shelves
-                ul
-                    li #{shelf.name}(#{shelf.Games.length})
+        h3 #{user.firstName}'s GAME SHELVES
+        each shelf in shelves
+            ul
+                li #{shelf.name}(#{shelf.Games.length})
+    div
+        h3 #{user.username.toUpperCase()}'s RECENT UPDATES
+        each user in userGames
+            ul
+                li #{user.title}
+                li #{user.studio}
+                //- each review in userReviews
+                //-     li #{review.content}
+                //- li #{user.studio}
+                //- li #{user.studio}
