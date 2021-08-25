@@ -119,11 +119,37 @@ router.post('/signup', csrfProtection, userValidators,
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   const user = await User.findByPk(req.params.id)
 
+
+  const games = await Game.findAll({
+    include: [Review, Shelf]
+  })
+
+  const shelvesObj = []
+
   const shelves = await Shelf.findAll({
     where: {
       userId: req.params.id,
     }, include: Game
   })
+
+  //grabbing number of games tied to a certain shelf through query above and adding them to an 
+  //array.
+  const numOfGames = []
+  shelves.forEach(element => {
+    const num = element.Games
+    numOfGames.push(num.length)
+  })
+
+  console.log(numOfGames)
+
+  // const shelves = await Shelf.findAll()
+
+
+  const namedShelves = []
+  shelves.forEach(element => {
+    namedShelves.push(element.name)
+  });
+
 
   const review = await Review.findAll({
     where: {

@@ -6,7 +6,7 @@ block content
     div= games.description
     div= games.avgCleanRating
     div= games.releaseDate
-    each review in reviews
-        ul
-            //- li #{}
+    ul
+        each review in reviewNames
+            li #{review.User.username}
             li #{review.content}
