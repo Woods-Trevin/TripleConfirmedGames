@@ -89,12 +89,12 @@ router.post('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     where: {reviewId, userId: currentUser}
   });
   if (reviewLike){
-    console.log(' --------------- IN IF BLOCK');
+    // console.log(' --------------- IN IF BLOCK');
     // if (currentUser === reviewLike.userId) {
       await reviewLike.destroy();
     // }
   } else {
-    console.log(' --------------- IN ELSE BLOCK');
+    // console.log(' --------------- IN ELSE BLOCK');
     await ReviewLike.create({
       like: true,
       reviewId,
