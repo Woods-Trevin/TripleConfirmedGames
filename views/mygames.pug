@@ -11,14 +11,14 @@ block content
             ul
                 each shelf in shelves
                     li(class='shelf' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
-        a(href=`/users/${userId}/addShelf`) Add Shelf    
+        a(href=`/users/${userId}/addShelf`) Add Shelf
         table
             thead
                 tr
                     th Box Art
                     th Title
-                    th Studio 
-                    th AvgCleanRating 
+                    th Studio
+                    th AvgCleanRating
                     th Shelves
                     th Review
                     th ReleaseDate
@@ -31,12 +31,10 @@ block content
                         td #{game.avgCleanRating}
                         each shelf in game.Shelves
                             td #{shelf.name},
-                        //- td #{game.}        
+                        //- td #{game.}
                         each review in game.Reviews
                             if review.userId === userId
                                 td #{review.content}
                             a(href=`/games/${userId}`) Write a Review
                         td #{game.releaseDate}
-    script(src="/javascripts/mygamesDOM.js") 
-
-            
+    script(src="/javascripts/mygamesDOM.js")
