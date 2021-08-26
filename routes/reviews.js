@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { requireAuth } = require('../auth.js');
 const db = require('../db/models');
-const { Game, Review, GameCleanRating, Shelf, User } = db;
+const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js');
@@ -83,15 +83,22 @@ router.post('/:id(\\d+)/delete', csrfProtection, requireAuth,
 
 
 router.post('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
-
-  const reviewLikes = ReviewLike.findAll();
-
-
-
-  // const user = User.findAll();
-  // console.log('----------->>>>>>>>>>>>>>');
-  // console.log(user);
-  //randowm comment
+  const reviewId = parseInt(req.params.id, 10);
+  const currentUser = req.session.auth.userId;
+  const reviewLike = await ReviewLike.findOne({
+    where: {reviewId}
+  });
+  if (reviewLike){
+    if (currentUser === reviewLike.userId) {
+      await reviewLike.destroy();
+    }
+  } else {
+    await ReviewLike.create({
+      like: true,
+      reviewId,
+      userId: currentUser
+    });
+  }
 
 }));
 
