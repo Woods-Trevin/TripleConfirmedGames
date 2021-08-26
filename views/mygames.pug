@@ -3,37 +3,40 @@ extends layout.pug
 
 block content
     h2 #{title}
+    div(id=userId class='myGamesUserId')
+        input(type="hidden" id='myGamesUserId' value=userId)
+    div(id=shelfName class='myGamesGameId')
     div.sideBar
         h3 Gameshelves
-            each shelf in shelves
-                ul
-                    li #{shelf.name}(#{shelf.Games.length})
-        a(href=`/users/${userId}/addShelf`) Add Shelf 
-    table
-        thead
-            tr
-                th Box Art
-                th Title
-                th Studio 
-                th AvgCleanRating 
-                th Shelves
-                th Review
-                th ReleaseDate
-        tbody
-            each game in user.Games
+            ul
+                each shelf in shelves
+                    li(class='shelf' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
+        a(href=`/users/${userId}/addShelf`) Add Shelf    
+        table
+            thead
                 tr
-                    td placeholder box art
-                    td #{game.title}
-                    td #{game.studio}
-                    td #{game.avgCleanRating}
-                    each shelf in game.Shelves
-                        td #{shelf.name}
-                    //- td #{game.}        
-                    each review in game.Reviews
-                        if review.userId === userId
-                            td #{review.content}
-                        else
-                            a(href=`/games/${userId}`) 
-                    td #{game.releaseDate}
+                    th Box Art
+                    th Title
+                    th Studio 
+                    th AvgCleanRating 
+                    th Shelves
+                    th Review
+                    th ReleaseDate
+            tbody.tableBody
+                each game in user.Games
+                    tr
+                        td placeholder box art
+                        td #{game.title}
+                        td #{game.studio}
+                        td #{game.avgCleanRating}
+                        each shelf in game.Shelves
+                            td #{shelf.name},
+                        //- td #{game.}        
+                        each review in game.Reviews
+                            if review.userId === userId
+                                td #{review.content}
+                            a(href=`/games/${userId}`) Write a Review
+                        td #{game.releaseDate}
+    script(src="/javascripts/mygamesDOM.js") 
 
             

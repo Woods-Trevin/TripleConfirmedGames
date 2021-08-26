@@ -9,6 +9,8 @@ const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, userValidators, loginValidator, shelfNameValidator } = require('../utils.js');
 const { ResultWithContext } = require('express-validator/src/chain');
 
+
+
 /* GET users listing. */
 router.get('/', asyncHandler(async (req, res, next) => {
   res.send('respond with a resource');
@@ -118,7 +120,6 @@ router.post('/signup', csrfProtection, userValidators,
 
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const { userId } = req.session.auth;
-
   const user = await User.findByPk(req.params.id, {
     include: [GameCleanRating, {
       model: Game,
@@ -215,7 +216,18 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
       userId: req.params.id,
     }, include: Game
   })
-  // console.log
+
+  const shelf = await Shelf.findAll({
+    where: {
+      userId: req.params.id,
+    }, include: Game
+  })
+  // const shelves = await Shelf.findAll({
+  //   where: {
+  //     userId: req.params.id,
+  //   }, include: Game
+  // })
+  console.log(shelves)
 
   res.render('mygames', { title: 'My Games', userId, shelves, user })
 }));
@@ -283,8 +295,15 @@ router.post('/:id(\\d+)/addShelf', requireAuth, shelfNameValidator, asyncHandler
 }));
 
 
+router.post('/:id(\\d+)/mygames/:shelfName', asyncHandler(async (req, res) => {
+  const { shelfName } = req.params.shelfName
+  const { userId } = req.params.id
+}))
+
 
 
 module.exports = router;
+// module.exports = { userID }
+
 //testing comment
 //demo user1 pass- Password12!
