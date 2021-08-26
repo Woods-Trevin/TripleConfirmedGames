@@ -86,19 +86,31 @@ router.post('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   const reviewId = parseInt(req.params.id, 10);
   const currentUser = req.session.auth.userId;
   const reviewLike = await ReviewLike.findOne({
-    where: {reviewId}
+    where: {reviewId, userId: currentUser}
   });
   if (reviewLike){
-    if (currentUser === reviewLike.userId) {
+    console.log(' --------------- IN IF BLOCK');
+    // if (currentUser === reviewLike.userId) {
       await reviewLike.destroy();
-    }
+    // }
   } else {
+    console.log(' --------------- IN ELSE BLOCK');
     await ReviewLike.create({
       like: true,
       reviewId,
       userId: currentUser
     });
   }
+  //fetch all review likes from this review with findall for all review likes where review id
+  // return in json format the
+  //res.send (key total likes, send back review Id)
+  //send back to the script
+  //const res = await fetch to this url method post, no body, headers content type application/json
+  //after fetch made, check status of variable
+  //if res.ok is not true or not 200, then throw res
+  //if res.ok is ok or 200, res.json, have object with updated number of review likes
+  //grab the specific div on pug displaying the likes, give it id or name field
+  //
 
 }));
 

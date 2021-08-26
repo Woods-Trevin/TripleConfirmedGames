@@ -5,7 +5,7 @@ const { requireAuth } = require('../auth.js');
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js');
 const db = require('../db/models');
-const { Game, Review, GameCleanRating, Shelf, User } = db;
+const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 // router.use(requireAuth); this applies to all routes, but we only want it for certain paths
 
 /* GET home page. */
@@ -15,11 +15,24 @@ router.get('/', asyncHandler(async (req, res, next) => {
 }));
 
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => {
+  const reviewId = parseInt(req.params.id, 10);
+  const currentUser = req.session.auth.userId;
+  const reviewLike = await ReviewLike.findAll({
+    where: {reviewId}
+  });
+
+  const totalLikes = reviewLike.length;
+  // console.log(`--------------->>>>>${totalLikes}`);
+  // console.log(`--------------->>>>>${reviewLike}`);
+  // console.log(`--------------->>>>>${reviewId}`);
+
   const gameId = req.params.id;
 
   const games = await Game.findByPk(gameId, {
-    include: [Review, GameCleanRating, Shelf]
+    include: [{model: Review, include: [ReviewLike, User]}, GameCleanRating, Shelf]
   })
+
+  console.log(games.Reviews);
   const reviews = games.Reviews
 
   const reviewNames = await Review.findAll(
@@ -29,7 +42,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
     include: User
   });
 
-  res.render('game-page', {title: games.title, games, reviews, reviewNames, token: req.csrfToken()})
+  res.render('game-page', {title: games.title, games, reviews, reviewNames, totalLikes, token: req.csrfToken()})
 }))
 
 router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHandler(async(req, res, next) => {
@@ -71,6 +84,8 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
   console.log(errors);
 
   // res.redirect(`/games/${gameId}`)
+
+
 }));
 
 
