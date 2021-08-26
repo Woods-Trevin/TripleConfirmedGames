@@ -18,10 +18,10 @@ block content
             textarea(name="content")
             button(type="submit") Add A Review
     ul
-        each review in reviewNames
+        each review in games.Reviews
             li #{review.User.username}
             li #{review.content}
-            //- li #{review.totalLikes}
+            li(id= review.id) Likes: #{review.ReviewLikes.length}
             if user
                 form(action=`/reviews/${review.id}`, method="post")
                     button(type="submit") Like!
