@@ -5,6 +5,7 @@ const { requireAuth } = require('../auth.js');
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js');
 const db = require('../db/models');
+const reviewlike = require('../db/models/reviewlike.js');
 const { Game, Review, GameCleanRating, Shelf, User } = db;
 // router.use(requireAuth); this applies to all routes, but we only want it for certain paths
 
@@ -40,6 +41,8 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
     include: [Review, GameCleanRating, Shelf]
   })
   const reviews = games.Reviews
+  
+  const reviewLikes = await reviewlike.findAll();
 
   const reviewNames = await Review.findAll(
     {where: {
@@ -48,6 +51,7 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
     include: User
   });
 
+  let errors = [];
   const validatorErrors = validationResult(req);
 
   if (validatorErrors.isEmpty()) {
@@ -71,6 +75,7 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
 
   // res.redirect(`/games/${gameId}`)
 }));
+
 
 
 module.exports = router;
