@@ -296,8 +296,36 @@ router.post('/:id(\\d+)/addShelf', requireAuth, shelfNameValidator, asyncHandler
 
 
 router.post('/:id(\\d+)/mygames/:shelfName', asyncHandler(async (req, res) => {
-  const { shelfName } = req.params.shelfName
-  const { userId } = req.params.id
+  const shelfName = req.params.shelfName
+  const userId = parseInt(req.params.id, 10);
+  console.log('@@@@@@@@@@', userId)
+  console.log(shelfName)
+
+  const user = await User.findByPk(userId, {
+    include: [GameCleanRating, {
+        model: Shelf,
+        where: {
+          name: shelfName,
+          userId: userId
+        },
+        include: Game,
+
+       }, Review]
+  });
+  console.log('OOOOOOOOOOOOOOOO');
+  console.log(user.Shelves);
+
+  // const shelf = await Shelf.findAll({
+  //   where: {
+  //     name: shelfName,
+  //     userId: userId
+  //   },
+  //   include: [ Game, Review ]
+  // })
+  // console.log(shelf);
+
+  res.json({user})
+
 }))
 
 
