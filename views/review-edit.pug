@@ -1,7 +1,10 @@
 extends layout
 
+include utils.pug 
+
 block content
     div
+        +validationErrorSummary(errors)
         form(action=`/reviews/${review.id}/edit`, method="post")
             input(type="hidden" name="_csrf" value=token)
             textarea(name="content") #{review.content}

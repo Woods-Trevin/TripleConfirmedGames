@@ -6,7 +6,8 @@ const { requireAuth } = require('../auth.js');
 const db = require('../db/models');
 const { Game, Review, GameCleanRating, Shelf, User } = db;
 
-const { csrfProtection, asyncHandler } = require('../utils.js');
+const { check, validationResult } = require('express-validator');
+const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js');
 
 router.get('/:id(\\d+)/edit', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
     const reviewId = parseInt(req.params.id, 10);
@@ -20,25 +21,35 @@ router.get('/:id(\\d+)/edit', csrfProtection, requireAuth, asyncHandler(async(re
 
 }));
 
-router.post('/:id(\\d+)/edit', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
+router.post('/:id(\\d+)/edit', csrfProtection, requireAuth, reviewValidator, asyncHandler(async(req, res) => {
     const reviewId = parseInt(req.params.id, 10);
     const oldReview = await Review.findByPk(reviewId);
-
     const {content} = req.body;
     const username = res.locals.user.id
-    const newReview = {
-        userId: username,
-        title: '',
-        content,
-        gameId: oldReview.gameId,
-    };
+    let errors = [];
+    const validatorErrors = validationResult(req);
 
+    if (validatorErrors.isEmpty()) {
+        const newReview = {
+            userId: username,
+            title: '',
+            content,
+            gameId: oldReview.gameId,
+        };
+
+        await oldReview.update(newReview)
+        res.redirect(`/games/${newReview.gameId}`);
+    } else {
+        errors = validatorErrors.array().map((error) => error.msg);
+        res.render('review-edit', {
+            title: 'Edit Review',
+            review: oldReview,
+            token: req.csrfToken(),
+            errors
+        });
+      // const user = User.build();
+    }
     //handle validation errors here
-    await oldReview.update(newReview)
-
-
-    res.redirect(`/games/${newReview.gameId}`);
-
 }));
 
 router.get('/:id(\\d+)/delete', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
@@ -70,5 +81,18 @@ router.post('/:id(\\d+)/delete', csrfProtection, requireAuth,
     res.redirect(`/games/${review.gameId}`);
 }));
 
+
+router.post('/:id(\\d+)', requireAuth, asyncHandler(async(req, res) => {
+
+    const reviewLikes = ReviewLike.findAll();
+
+    
+
+    // const user = User.findAll();
+    // console.log('----------->>>>>>>>>>>>>>');
+    // console.log(user);
+
+
+  }));
 
 module.exports = router;
