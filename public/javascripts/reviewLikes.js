@@ -16,9 +16,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         //    const totalLikes = event.target.id
         //     console.log(`------------------->>>>>>${totalLikes}`)
             const review = await Review.findAll();
-            const totalLikes = await ReviewLike.findAll({
-                where: {review.id}
-              });
+            // const totalLikes = await ReviewLike.findAll({
+            //     where: {review.id}
+            //   });
              await fetch(`/reviews/${userId}/`, {
                 method: "POST",
                 totalLikes,
