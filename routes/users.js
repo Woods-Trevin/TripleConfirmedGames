@@ -164,6 +164,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   // shelves.forEach(element => {
   //   namedShelves.push(element.name)
   // });
+  //hi
 
 
   const review = await Review.findAll({
