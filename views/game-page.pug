@@ -21,6 +21,7 @@ block content
         each review in reviewNames
             li #{review.User.username}
             li #{review.content}
+            //- li #{review.totalLikes}
             if user
                 form(action=`/reviews/${review.id}`, method="post")
                     button(type="submit") Like!
