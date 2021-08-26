@@ -1,6 +1,6 @@
 extends layout
 
-include utils.pug 
+include utils.pug
 
 block content
     div= games.title
@@ -22,6 +22,8 @@ block content
             li #{review.User.username}
             li #{review.content}
             if user
+                form(action=`/reviews/${review.id}`, method="post")
+                    button(type="submit") Like!
                 if user.id === review.userId
                     a(href=`/reviews/${review.id}/edit`) Edit
                     a(href=`/reviews/${review.id}/delete`) Delete
