@@ -68,7 +68,7 @@ const shelfNameValidator = [
     .withMessage('Please provide a name')
     .isLength({ max: 50 })
     .withMessage('Name must not be more than 50 characters long')
-
+]
 const reviewValidator = [
   check('content')
     .exists({ checkFalsy: true })
