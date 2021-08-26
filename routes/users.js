@@ -117,20 +117,22 @@ router.post('/signup', csrfProtection, userValidators,
   }));
 
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
+  const { userId } = req.session.auth;
+
   const user = await User.findByPk(req.params.id, {
     include: [GameCleanRating, {
       model: Game,
       // where: {userId: req.params.id},
       include: [Shelf, Review]
-    }, {
-        model: Review,
-        where: {
-          userId: req.params.id
-        },
-        include: Game
-      },
-    ]
+    }]
   });
+
+  // const user = await User.findByPk(userId, {
+  //   include: [GameCleanRating, {
+  //     model: Game,
+  //     include: [Shelf, Review]
+  //   }]
+  // });
 
 
 
@@ -138,7 +140,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
     include: [Review, Shelf]
   })
 
-  const shelvesObj = []
+  // const shelvesObj = []
 
   const shelves = await Shelf.findAll({
     where: {
@@ -164,7 +166,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   // shelves.forEach(element => {
   //   namedShelves.push(element.name)
   // });
-  //hi
+
 
 
   const review = await Review.findAll({
@@ -192,6 +194,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
     review,
     shelves,
     user,
+    userId,
     totalReviews,
     totalReviewLikes
   })
@@ -201,16 +204,20 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
   const { userId } = req.session.auth
   console.log(userId)
 
-  // const users = await User.findByPk(userId, {
-  //   include: [Shelf, Game]
-  // });
+  const user = await User.findByPk(userId, {
+    include: [GameCleanRating, {
+      model: Game,
+      include: [Shelf, Review]
+    }]
+  });
   const shelves = await Shelf.findAll({
     where: {
       userId: req.params.id,
     }, include: Game
   })
+  // console.log
 
-  res.render('mygames', { title: 'My Games', userId, shelves })
+  res.render('mygames', { title: 'My Games', userId, shelves, user })
 }));
 
 router.post('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next) => {
@@ -226,7 +233,7 @@ router.post('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, nex
     }, include: Game
   })
 
-  res.render('mygames', { title: 'My Games', userId, shelves })
+  // res.render('mygames', { title: 'My Games', userId, shelves })
 }));
 
 //need a post route for my games for add shelf button

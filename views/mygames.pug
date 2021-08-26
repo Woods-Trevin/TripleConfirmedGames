@@ -20,6 +20,20 @@ block content
                 th Review
                 th ReleaseDate
         tbody
-            tr
-                td
+            each game in user.Games
+                tr
+                    td placeholder box art
+                    td #{game.title}
+                    td #{game.studio}
+                    td #{game.avgCleanRating}
+                    each shelf in game.Shelves
+                        td #{shelf.name}
+                    //- td #{game.}        
+                    each review in game.Reviews
+                        if review.userId === userId
+                            td #{review.content}
+                        else
+                            a(href=`/games/${userId}`) 
+                    td #{game.releaseDate}
+
             

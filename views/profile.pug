@@ -32,8 +32,8 @@ block content
                     li #{game.avgCleanRating}
                     li #{game.description}
                     each review in game.Reviews
-                        //- if review.userId === userId
-                        li #{review.content}
+                        if review.userId === userId
+                            li #{review.content}
                     select(name="shelf-names")
                         each shelf in game.Shelves
                             option(value=shelf.name)= shelf.name
@@ -41,4 +41,4 @@ block content
                 //- each review in user.Reviews
                 //-     li #{review.content}
                 //- each game in user.Games
-                //-     li #{game.name}
+                //-     li #{game.
