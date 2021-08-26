@@ -21,10 +21,11 @@ block content
         each review in games.Reviews
             li #{review.User.username}
             li #{review.content}
-            li(id= review.id) Likes: #{review.ReviewLikes.length}
+            li Likes: #{review.ReviewLikes.length}
             if user
                 form(action=`/reviews/${review.id}`, method="post")
-                    button(type="submit") Like!
+                    button(type="submit" class='likes') Like!
                 if user.id === review.userId
                     a(href=`/reviews/${review.id}/edit`) Edit
                     a(href=`/reviews/${review.id}/delete`) Delete
+    script(src="/javascripts/reviewLikes.js")
