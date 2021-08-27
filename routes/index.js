@@ -8,7 +8,7 @@ const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 
 router.get('/', asyncHandler(async (req, res, next) => {
     const allGames = await Game.findAll();
-    const { userId } = req.session.auth
+    const { userId } = req.session.auth;
     res.render('splash', { title: 'Game List', userId, games: allGames });
   }));
 

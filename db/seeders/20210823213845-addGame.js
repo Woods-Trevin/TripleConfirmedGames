@@ -12,7 +12,7 @@ module.exports = {
       createdAt: new Date(), 
       updatedAt: new Date()},
      {title: 'Sekiro: Shadows Die Twice',
-     url: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2x61.jpg',
+     url: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co2a23.jpg',
      studio:'FromSoftware',
      avgCleanRating: 5, 
      description: `"Carve your own clever path to vengeance in an all-new adventure from developer FromSoftware. Explore late 1500s Sengoku Japan, a brutal period of constant life and death conflict, as you come face to face with larger than life foes in a dark and twisted world. Unleash an arsenal of deadly prosthetic tools and powerful ninja abilities while you blend stealth, vertical traversal, and visceral head to head combat in a bloody confrontation. Take Revenge. Restore your honor. Kill Ingeniously."`, 

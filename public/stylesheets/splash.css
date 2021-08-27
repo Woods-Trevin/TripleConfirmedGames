@@ -1,0 +1,50 @@
+.container {
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.splash {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.first-txt {
+    position: absolute;
+    font-weight: 600;
+    font-size: 3rem;
+    transform: translateY(-10rem);
+    color: #fff;
+    text-shadow: #000 0px 0px 5px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.second-txt {
+    position: absolute;
+    margin-right: 12.5%;
+    margin-left: 12.5%;
+    bottom: 100px;
+    color: white;
+    font-size: 1.25rem;
+    text-shadow: #000 0px 0px 5px;
+    -webkit-font-smoothing: antialiased;
+    transform: translateY(-29rem);
+    text-align: center;
+}
+
+.splashBtn {
+    position: absolute;
+    text-decoration: none;
+    background-color: #ffa200;
+    color: white;
+    text-shadow: #000 0px 0px 3px;
+    -webkit-font-smoothing: antialiased;
+    padding: 1rem 3rem;
+    border-radius: 10rem;
+}
+
+.splashLogo {
+    position: absolute;
+    transform: translateY(10rem);
+}
