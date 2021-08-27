@@ -16,11 +16,15 @@ html
         nav.menu
           ul.menus__container
             li.menu__drawer
-              a(class='btn' href='/games') Home
+              a(class='btn' href='/') Home
             li.menu__drawer
-              a(class='btn' href=`/users/${userId}`) UserProfile
+              a(class='btn' href='/games') Browse Games
             li.menu__drawer
-              a(class='userIcon' href='/users/login') 
+              a(class='btn' href=`/users/${userId}/mygames`) My Games
+            li.menu__drawer
+              a(class='btn' href=`/users/${userId}`) User Profile
+            li.menu__drawer
+              a(class='userIcon' href='/users/login')
                 img(class='userIcon' src="/images/user.png", alt="?")
     div.container
       if locals.authenticated

@@ -1,17 +1,16 @@
 var express = require('express');
-// const app = require('../app.js');
 var router = express.Router();
 const { requireAuth } = require('../auth.js');
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js');
 const db = require('../db/models');
 const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
-// router.use(requireAuth); this applies to all routes, but we only want it for certain paths
 
 /* GET home page. */
 router.get('/', asyncHandler(async (req, res, next) => {
   const allGames = await Game.findAll();
-  res.render('games', { title: 'Game List', games: allGames });
+  const { userId } = req.session.auth
+  res.render('games', { title: 'Game List',userId, games: allGames });
 }));
 
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => {
