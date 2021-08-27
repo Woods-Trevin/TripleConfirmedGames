@@ -20,6 +20,17 @@ block content
                     option(value=4) 🧼🧼🧼🧼
                     option(value=5) 🧼🧼🧼🧼🧼
                 button(type="submit") Clean!
+
+    div
+        if slapOn
+            p This game is already on this shelf
+        form(action=`/users/${userId}/addGame/${gameId}`, method="post")
+            //- input(type="hidden", name="_csrf" value=importedToken)
+            select(name="shelfId")
+                each shelf in shelves
+                    option(value=shelf.id)= shelf.name
+            button(type='submit') Add Game to Shelf
+            button(type='submit') Delete Game from Shelf
     div= games.releaseDate
     if user
         div #{user.firstName}

@@ -41,7 +41,14 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
     include: User
   });
 
-  res.render('game-page', {title: games.title, games, reviews, reviewId, gameId, userId: currentUser, reviewNames, totalLikes, token: req.csrfToken()})
+  const shelves = await Shelf.findAll({
+    where: {
+      userId: currentUser
+    }
+  });
+  console.log(shelves);
+
+  res.render('game-page', {title: games.title, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, token: req.csrfToken()})
 }))
 
 router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHandler(async(req, res, next) => {
