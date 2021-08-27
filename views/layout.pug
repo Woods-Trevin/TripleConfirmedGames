@@ -4,15 +4,19 @@ html
       block head
         title="Express Starter App"
         link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/index.css')
+        link(rel='stylesheet' href='/stylesheets/nav.css')
   body
-    if locals.authenticated
-      span(class='navbar-text px-4') Welcome #{user.firstName}!
-        a(href=`/users/${userId}`) UserProfile
-      form(class='form-inline pr-4' action='/users/logout' method='post')
-        button(class='btn' type='submit') Logout
-    else
-      span(class='navbar-text px-4')
+    span(class='navbar-text px-4')
+      div.nav
+        div.logo
+        a(class='btn' href='/users/signup') Collection
+        a(class='btn' href=`/users/${userId}`) UserProfile
         a(class='btn' href='/users/login') Login
         a(class='btn' href='/users/signup') Register
-        a(href="/users/#{userId}") UserProfile
-    block content
+    div.container
+      if locals.authenticated
+        form(class='form-inline pr-4' action='/users/logout' method='post')
+          button(class='log' type='submit') Logout
+
+      block content
