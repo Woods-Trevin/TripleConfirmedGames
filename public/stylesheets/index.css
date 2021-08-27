@@ -3,9 +3,7 @@ h1 {
 }
 
 :root {
-    background-image: linear-gradient(to top right, #1B3743, #095779);
-    --clr-linear1: #1B3743;
-    --clr-linear2: #095779;
+    background-color: black;
     --clr-text: #d80388;
     --clr-primary: black;
     --clr-accent: white;

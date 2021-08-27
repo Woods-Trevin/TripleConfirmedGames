@@ -26,13 +26,11 @@ html
             li.menu__drawer
               a(class='userIcon' href='/users/login')
                 img(class='userIcon' src="/images/user.png", alt="?")
+            if locals.authenticated
+              li.menu__drawer
+                form(class='log' action='/users/logout' method='post')
+                  button(class='log' type='submit') Logout
     div.container
-      if locals.authenticated
-        form(class='form-inline pr-4' action='/users/logout' method='post')
-          button(class='log' type='submit') Logout
-
-
-
       block content
 
 
