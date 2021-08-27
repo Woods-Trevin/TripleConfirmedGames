@@ -31,7 +31,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
     include: [{model: Review, include: [ReviewLike, User]}, GameCleanRating, Shelf]
   })
 
-  console.log(games.Reviews);
+  // console.log(games.Reviews);
   const reviews = games.Reviews
 
   const reviewNames = await Review.findAll(
@@ -119,48 +119,93 @@ router.post('/:id(\\d+)/:reviewId(\\d+)', asyncHandler(async(req, res, next) => 
 
 
 router.post('/:id(\\d+)/rating', asyncHandler(async(req, res, next) => {
-//   const gameId = parseInt(req.params.id, 10);
-//   const currentUser = req.session.auth.userId;
+  const gameId = parseInt(req.params.id, 10);
+  const currentUser = req.session.auth.userId;
+
   console.log("IN RATING ROUTER");
-// // how do we obtain the info submitted from the pug ??
-// // pull from the request body
+
   const {soap} = req.body
+
   console.log(soap)
 
-  // const {title, content} = req.body;
-  // const games = await Game.findByPk(gameId, {
-  //   include: [Review, GameCleanRating, Shelf]
-  // })
-  // const reviews = games.Reviews
+  const findRating = await GameCleanRating.findOne({
+    where: {gameId, userId: currentUser}
+  });
 
-  // const reviewNames = await Review.findAll(
-  //   {where: {
-  //     gameId: req.params.id
-  //   },
-  //   include: User
-  // });
+  if (findRating){
+      await findRating.update({rating: soap});
 
-  // const findRating = await GameCleanRating.findOne({
-  //   where: {gameId, userId: currentUser}
-  // });
-  // if (findRating){
-  //     // await findRating.update(//newRating);
-  // } else {
-  //   await GameCleanRating.create({
-  //     // rating:
-  //     // userId: currentUser
-  //     // gameId: gameId
-  //   });
-  // }
-  // // const allRatings = await GameCleanRating.findAll({
-  //   where: {gameId}
-  // });
+      const allRatings = await GameCleanRating.findAll({
+        where: {gameId}
+      });
+      console.log('allRatings ========= >>>', allRatings);
+      console.log('FIRST RATING IN OBJECT------', allRatings[0].rating);
 
-  // const totalRatings = allRatings.length;
-  // console.log('TOTAL LIKES -------------')
-  // console.log(totalLikes);
-  // res.render('game-page', {title: games.title, games, reviews, reviewNames, token: req.csrfToken()})
-}));
+      let counter = 0;
+      allRatings.forEach(element => {
+        counter += element.rating
+      });
+
+      const rates = counter/allRatings.length
+
+      const roundedRates = parseFloat(rates.toFixed(1));
+
+      // console.log('RATES ------------>', parseFloat(roundedRates))
+
+      const game = await Game.findByPk(gameId)
+
+      await game.update({avgCleanRating: roundedRates})
+  } else {
+    await GameCleanRating.create({
+      rating: soap,
+      userId: currentUser,
+      gameId: gameId
+    });
+
+    const allRatings = await GameCleanRating.findAll({
+      where: {gameId}
+    });
+    console.log('allRatings ========= >>>', allRatings);
+    console.log('FIRST RATING IN OBJECT------', allRatings[0].rating);
+
+    let counter = 0;
+    allRatings.forEach(element => {
+      counter += element.rating
+    });
+
+    const rates = counter/allRatings.length
+
+    const roundedRates = parseFloat(rates.toFixed(1));
+
+    console.log('RATES ------------>',roundedRates);
+
+    const game = await Game.findByPk(gameId)
+
+    await game.update({avgCleanRating: roundedRates})
+
+  }
+
+//   const allRatings = await GameCleanRating.findAll({
+//     where: {gameId}
+//   });
+// console.log(allRatings);
+// // keying into allRatings wrong????
+// // what is allRatings actually giving us back in the array???
+//   const avg = () => {
+//     let counter = 0;
+//     allRatings.forEach(element => {
+//       counter += element.rating
+//     });
+//    return counter/allRatings.length
+//   }
+
+//   const game = await Game.findByPk(gameId)
+
+//   await game.update({avgCleanRating: avg})
+
+  res.redirect(`/games/${gameId}`)
+
+}))
 
 
 module.exports = router;

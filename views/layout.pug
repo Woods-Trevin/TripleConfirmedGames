@@ -31,6 +31,20 @@ html
         form(class='form-inline pr-4' action='/users/logout' method='post')
           button(class='log' type='submit') Logout
 
-          
+
 
       block content
+
+
+      
+    //- if locals.authenticated
+    //-   span(class='navbar-text px-4') Welcome #{user.firstName}!
+    //-     a(href=`/users/${user.id}`) UserProfile
+    //-   form(class='form-inline pr-4' action='/users/logout' method='post')
+    //-     button(class='btn' type='submit') Logout
+    //- else
+    //-   span(class='navbar-text px-4')
+    //-     a(class='btn' href='/users/login') Login
+    //-     a(class='btn' href='/users/signup') Register
+    //-     //- a(href="/users/#{userId}") UserProfile
+    //- block content
