@@ -12,6 +12,7 @@ block content
                 each shelf in shelves
                     li(class='shelf' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
         a(href=`/users/${userId}/addShelf`) Add Shelf
+        a(href=`/users/${userId}/deleteShelf`) Delete Shelf
         table
             thead
                 tr

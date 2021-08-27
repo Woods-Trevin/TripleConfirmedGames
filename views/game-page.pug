@@ -8,6 +8,18 @@ block content
     div= games.studio
     div= games.description
     div= games.avgCleanRating
+    div
+        form(action=`/games/${games.id}/rating`, method="post")
+            //- input(type="hidden", name="_csrf" value=importedToken)
+            label(for="soap") How Clean?
+            div
+                select(name="soap")
+                    option(value=1) 🧼
+                    option(value=2) 🧼🧼
+                    option(value=3) 🧼🧼🧼
+                    option(value=4) 🧼🧼🧼🧼
+                    option(value=5) 🧼🧼🧼🧼🧼
+                button(type="submit") Clean!
     div= games.releaseDate
     if user
         div #{user.firstName}

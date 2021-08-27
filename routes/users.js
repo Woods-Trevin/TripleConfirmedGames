@@ -248,9 +248,8 @@ router.post('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, nex
   // res.render('mygames', { title: 'My Games', userId, shelves })
 }));
 
-//need a post route for my games for add shelf button
 
-
+//add shelf page get route
 router.get('/:id(\\d+)/addShelf', requireAuth, asyncHandler(async (req, res, next) => {
   const { userId } = req.session.auth
 
@@ -263,11 +262,11 @@ router.get('/:id(\\d+)/addShelf', requireAuth, asyncHandler(async (req, res, nex
   res.render('addShelf', { title: 'My Games', userId })
 }));
 
-
+//add shelf page post route
 router.post('/:id(\\d+)/addShelf', requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
   const { userId } = req.session.auth
   const { name } = req.body
-  const shelves = await Shelf.findAll({
+  const shelves = await Shelf.findOne({
     where: {
       name: name
     }
@@ -280,7 +279,6 @@ router.post('/:id(\\d+)/addShelf', requireAuth, shelfNameValidator, asyncHandler
       })
       res.redirect(`/users/${userId}/mygames`)
     } else {
-      // const error = "This Name Is Taken"
       res.render('addShelf', {
         title: 'Add Shelf Name',
         shelves,
@@ -293,6 +291,63 @@ router.post('/:id(\\d+)/addShelf', requireAuth, shelfNameValidator, asyncHandler
   }
 
 }));
+
+
+
+//Delete shelf page get route
+router.get('/:id(\\d+)/deleteShelf', requireAuth, asyncHandler(async (req, res, next) => {
+  const { userId } = req.session.auth
+
+  // const shelves = await Shelf.findAll({
+  //   where: {
+  //     name: name
+  //   }
+  // })
+
+  res.render('deleteShelf', { title: 'Delete Shelf', userId })
+}));
+
+//Delete shelf page post route
+router.post('/:id(\\d+)/deleteShelf', requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
+  const { userId } = req.session.auth
+  const { name } = req.body
+  const shelves = await Shelf.findOne({
+    where: {
+      name: name
+    }
+  })
+  try {
+    if (!shelves) {
+      res.render('deleteShelf', {
+        title: 'Add Shelf Name',
+        shelves,
+        userId
+      })
+    } else {
+
+      await shelves.destroy();
+      res.redirect(`/users/${userId}/mygames`)
+
+    }
+  } catch (e) {
+    next(e)
+  }
+
+}));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 router.post('/:id(\\d+)/mygames/:shelfName', asyncHandler(async (req, res) => {

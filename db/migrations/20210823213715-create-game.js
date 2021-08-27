@@ -10,19 +10,23 @@ module.exports = {
       },
       title: {
         allowNull: false,
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(1000),
         unique: true
+      },
+      url: {
+        allowNull: false,
+        type: Sequelize.STRING(1000)
       },
       studio: {
         allowNull: false,
-        type: Sequelize.STRING(50)
+        type: Sequelize.STRING(100)
       },
       avgCleanRating: {
         type: Sequelize.INTEGER
       },
       description: {
         allowNull: false,
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(10000)
       },
       releaseDate: {
         allowNull: false,
