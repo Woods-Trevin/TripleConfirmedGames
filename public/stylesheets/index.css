@@ -1,3 +1,42 @@
 h1 {
     color: #555555;
 }
+
+:root {
+    background-image: linear-gradient(to top right, #1B3743, #095779);
+    --clr-linear1: #1B3743;
+    --clr-linear2: #095779;
+    --clr-text: #d80388;
+    --clr-primary: black;
+    --clr-accent: white;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    color: var(--clr-text);
+    font-size: 1.125rem;
+}
+
+body {
+    height: 100vh;
+    background-color: var(--clr-accent);
+}
+
+.container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+/* Typography */
+h1,
+h2,
+h3 {
+    color: var(--clr-primary);
+}
