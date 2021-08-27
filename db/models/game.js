@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Game = sequelize.define('Game', {
     title: DataTypes.STRING,
+    url: DataTypes.STRING,
     studio: DataTypes.STRING,
     avgCleanRating: DataTypes.INTEGER,
     description: DataTypes.STRING,
