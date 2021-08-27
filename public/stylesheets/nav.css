@@ -1,0 +1,18 @@
+.nav {
+    display:flex;
+    justify-content: space-evenly;
+    height: 2.75rem;
+    align-content: center;
+    background-color: black;
+}
+
+.btn {
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--clr-accent)
+}
+
+.btn:hover {
+    background-color: var(--clr-accent);
+    color: var(--clr-primary)
+}
