@@ -7,16 +7,26 @@ html
         link(rel='stylesheet' href='/stylesheets/index.css')
         link(rel='stylesheet' href='/stylesheets/nav.css')
   body
-    span(class='navbar-text px-4')
-      div.nav
+    div#global-nav
+      div#nav
         div.logo
-        a(class='btn' href='/users/signup') Collection
-        a(class='btn' href=`/users/${userId}`) UserProfile
-        a(class='btn' href='/users/login') Login
-        a(class='btn' href='/users/signup') Register
+          //- a(class='logo-btn')
+          //-   div.logo-btn-desktop
+          //-     img(src="/images/logo.svg", alt="")
+        nav.menu
+          ul.menus__container
+            li.menu__drawer
+              a(class='btn' href='/games') Home
+            li.menu__drawer
+              a(class='btn' href=`/users/${userId}`) UserProfile
+            li.menu__drawer
+              a(class='userIcon' href='/users/login') 
+                img(class='userIcon' src="/images/user.png", alt="?")
     div.container
       if locals.authenticated
         form(class='form-inline pr-4' action='/users/logout' method='post')
           button(class='log' type='submit') Logout
+
+          
 
       block content
