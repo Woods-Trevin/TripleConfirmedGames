@@ -22,16 +22,16 @@ block content
             li #{review.User.username}
             li #{review.content}
             li(id=`list${review.id}`) Likes: #{review.ReviewLikes.length}
-            div(id=review.id class='reviewId')
-            div(id=review.id class='reviewId')
+            //- div(id=review.id class='reviewId')
+
             //- div(id=userId class='myGamesUserId')
             //- input(type="hidden" id='myGamesUserId' value=userId)
             //- div(id=shelfName class='myGamesGameId')
             if user
                 div(id=userId class='userId')
                 div(id=gameId class='gameId')
-                form(action=`/reviews/${review.id}`, method="post")
-                    button(type="submit" class='likes') Like!
+                //- form(action=`/reviews/${review.id}`, method="post")
+                button( class=`likes` id=review.id) Like!
                 if user.id === review.userId
                     a(href=`/reviews/${review.id}/edit`) Edit
                     a(href=`/reviews/${review.id}/delete`) Delete
