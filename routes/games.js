@@ -89,9 +89,9 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
 //gets data and sends back to dom file
 router.post('/:id(\\d+)/:reviewId', asyncHandler(async(req, res, next) => {
   const reviewId = parseInt(req.params.reviewId, 10);
-  const allLikes = await ReviewLike.findAll({
-    where: {reviewId}
-  });
+  // const allLikes = await ReviewLike.findAll({
+  //   where: {reviewId}
+  // });
   const currentUser = req.session.auth.userId;
   const reviewLike = await ReviewLike.findOne({
     where: {reviewId, userId: currentUser}
@@ -105,6 +105,10 @@ router.post('/:id(\\d+)/:reviewId', asyncHandler(async(req, res, next) => {
       userId: currentUser
     });
   }
+  const allLikes = await ReviewLike.findAll({
+    where: {reviewId}
+  });
+  
   const totalLikes = allLikes.length;
   console.log('TOTAL LIKES -------------')
   console.log(totalLikes);
