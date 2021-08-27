@@ -1,0 +1,10 @@
+extends layout.pug
+
+
+block content
+    if shelves
+        p The shelf you are trying to delete does not exist
+    form(method='POST' action=`/users/${userId}/deleteShelf`)
+        label(for="name") Delete Shelf Name
+        input(type="text" name='name' placeholder='Shelf Name')
+        button(type="submit" action=`/users/${userId}/mygames`) Submit
