@@ -87,12 +87,15 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
 }));
 
 //gets data and sends back to dom file
-router.post('/:id(\\d+)/:reviewId', asyncHandler(async(req, res, next) => {
+router.post('/:id(\\d+)/:reviewId(\\d+)', asyncHandler(async(req, res, next) => {
   const reviewId = parseInt(req.params.reviewId, 10);
   // const allLikes = await ReviewLike.findAll({
   //   where: {reviewId}
   // });
   const currentUser = req.session.auth.userId;
+  console.log("--------->>>>>> IN WRONG ROUTER");
+  const {soap} = req.body
+  console.log("--------->>>>>>", soap);
   const reviewLike = await ReviewLike.findOne({
     where: {reviewId, userId: currentUser}
   });
@@ -108,13 +111,57 @@ router.post('/:id(\\d+)/:reviewId', asyncHandler(async(req, res, next) => {
   const allLikes = await ReviewLike.findAll({
     where: {reviewId}
   });
-  
+
   const totalLikes = allLikes.length;
   console.log('TOTAL LIKES -------------')
   console.log(totalLikes);
   res.json({totalLikes, reviewId})
 }));
 
+
+router.post('/:id(\\d+)/rating', asyncHandler(async(req, res, next) => {
+//   const gameId = parseInt(req.params.id, 10);
+//   const currentUser = req.session.auth.userId;
+  console.log("IN RATING ROUTER");
+// // how do we obtain the info submitted from the pug ??
+// // pull from the request body
+  const {soap} = req.body
+  console.log(soap)
+
+  // const {title, content} = req.body;
+  // const games = await Game.findByPk(gameId, {
+  //   include: [Review, GameCleanRating, Shelf]
+  // })
+  // const reviews = games.Reviews
+
+  // const reviewNames = await Review.findAll(
+  //   {where: {
+  //     gameId: req.params.id
+  //   },
+  //   include: User
+  // });
+
+  // const findRating = await GameCleanRating.findOne({
+  //   where: {gameId, userId: currentUser}
+  // });
+  // if (findRating){
+  //     // await findRating.update(//newRating);
+  // } else {
+  //   await GameCleanRating.create({
+  //     // rating:
+  //     // userId: currentUser
+  //     // gameId: gameId
+  //   });
+  // }
+  // // const allRatings = await GameCleanRating.findAll({
+  //   where: {gameId}
+  // });
+
+  // const totalRatings = allRatings.length;
+  // console.log('TOTAL LIKES -------------')
+  // console.log(totalLikes);
+  // res.render('game-page', {title: games.title, games, reviews, reviewNames, token: req.csrfToken()})
+}));
 
 
 module.exports = router;
