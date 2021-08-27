@@ -85,22 +85,18 @@ router.post('/:id(\\d+)/delete', csrfProtection, requireAuth,
 router.post('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   const reviewId = parseInt(req.params.id, 10);
   const currentUser = req.session.auth.userId;
-  const reviewLike = await ReviewLike.findOne({
-    where: {reviewId, userId: currentUser}
-  });
-  if (reviewLike){
-    // console.log(' --------------- IN IF BLOCK');
-    // if (currentUser === reviewLike.userId) {
-      await reviewLike.destroy();
-    // }
-  } else {
-    // console.log(' --------------- IN ELSE BLOCK');
-    await ReviewLike.create({
-      like: true,
-      reviewId,
-      userId: currentUser
-    });
-  }
+  // const reviewLike = await ReviewLike.findOne({
+  //   where: {reviewId, userId: currentUser}
+  // });
+  // if (reviewLike){
+  //     await reviewLike.destroy();
+  // } else {
+  //   await ReviewLike.create({
+  //     like: true,
+  //     reviewId,
+  //     userId: currentUser
+  //   });
+  // }
   //fetch all review likes from this review with findall for all review likes where review id
   // return in json format the
   //res.send (key total likes, send back review Id)

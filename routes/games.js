@@ -42,7 +42,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
     include: User
   });
 
-  res.render('game-page', {title: games.title, games, reviews, reviewNames, totalLikes, token: req.csrfToken()})
+  res.render('game-page', {title: games.title, games, reviews, reviewId, gameId, userId: currentUser, reviewNames, totalLikes, token: req.csrfToken()})
 }))
 
 router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHandler(async(req, res, next) => {
@@ -84,8 +84,31 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
   console.log(errors);
 
   // res.redirect(`/games/${gameId}`)
+}));
 
-
+//gets data and sends back to dom file
+router.post('/:id(\\d+)/:reviewId', asyncHandler(async(req, res, next) => {
+  const reviewId = parseInt(req.params.reviewId, 10);
+  const allLikes = await ReviewLike.findAll({
+    where: {reviewId}
+  });
+  const currentUser = req.session.auth.userId;
+  const reviewLike = await ReviewLike.findOne({
+    where: {reviewId, userId: currentUser}
+  });
+  if (reviewLike){
+      await reviewLike.destroy();
+  } else {
+    await ReviewLike.create({
+      like: true,
+      reviewId,
+      userId: currentUser
+    });
+  }
+  const totalLikes = allLikes.length;
+  console.log('TOTAL LIKES -------------')
+  console.log(totalLikes);
+  res.json({totalLikes, reviewId})
 }));
 
 

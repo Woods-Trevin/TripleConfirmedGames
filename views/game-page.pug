@@ -21,8 +21,15 @@ block content
         each review in games.Reviews
             li #{review.User.username}
             li #{review.content}
-            li Likes: #{review.ReviewLikes.length}
+            li(id=`list${review.id}`) Likes: #{review.ReviewLikes.length}
+            div(id=review.id class='reviewId')
+            div(id=review.id class='reviewId')
+            //- div(id=userId class='myGamesUserId')
+            //- input(type="hidden" id='myGamesUserId' value=userId)
+            //- div(id=shelfName class='myGamesGameId')
             if user
+                div(id=userId class='userId')
+                div(id=gameId class='gameId')
                 form(action=`/reviews/${review.id}`, method="post")
                     button(type="submit" class='likes') Like!
                 if user.id === review.userId
