@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.STRING(100)
       },
       avgCleanRating: {
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC(2,1)
       },
       description: {
         allowNull: false,
