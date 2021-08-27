@@ -23,15 +23,17 @@
     align-content: center;
 }
 
-.btnBox:hover {
+.btn:hover {
     background-color: var(--clr-accent);
-    font: var(--clr-primary);
+    color: var(--clr-primary);
 }
 
 .btn {
+    height: 49.5px;
     font-weight: 800;
     text-decoration: none;
     color: var(--clr-accent);
+    text-align: center;
 }
 
 .btnBox {
