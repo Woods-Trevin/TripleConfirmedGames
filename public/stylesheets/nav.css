@@ -1,7 +1,7 @@
 #nav {
     display:flex;
     justify-content: space-evenly;
-    height: 2.75rem;
+    height: 5vh;
     background-color: black;
 }
 
