@@ -6,11 +6,11 @@ const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js')
 const db = require('../db/models');
 const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 
-router.get('/', asyncHandler(async (req, res, next) => {
+router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     const allGames = await Game.findAll();
-    const { userId } = req.session.auth;
+    // const { userId } = req.session.auth;
     // userId ---------------- this was a param on line 13
-    res.render('splash', { title: 'Game List', userId, games: allGames });
+    res.render('splash', { title: 'Game List', games: allGames, token: req.csrfToken() });
   }));
   
   module.exports = router;

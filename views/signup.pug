@@ -1,6 +1,6 @@
 extends layout.pug
 
-include utils.pug
+//- include utils.pug
 
 block content
   +validationErrorSummary(errors)
@@ -16,3 +16,4 @@ block content
     div(class='py-4')
       button(type='submit' class='new-user') Sign up
       a(href='/games' class='btn btn-warning ml-2') Cancel
+  script(src='/javascripts/login.js')
