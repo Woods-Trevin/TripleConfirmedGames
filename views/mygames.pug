@@ -27,7 +27,7 @@ block content
                     th.tableHead ReleaseDate
             tbody.tableBody
                 each game in user.Games
-                    tr
+                    tr.mygamesTR
                         td.tableData
                             a(href=`/games/${game.id}`)
                                 img(src=`${game.url}` class="GameImg" alt="video game image")
@@ -36,8 +36,12 @@ block content
                                 p #{game.title}
                         td.tableData #{game.studio}
                         td.tableData #{game.avgCleanRating}
-                        each shelf in game.Shelves
-                            td(class="shelf") #{shelf.name},
+                        if game.Shelves
+                            each shelf in game.Shelves
+                                td(class="shelf") #{shelf.name},
+                            else 
+                                td(class="shelf")= "No shelves" 
+                        
                         //- td #{game.}
                         //- each review in game.Reviews
                         //-     if review.userId === userId
