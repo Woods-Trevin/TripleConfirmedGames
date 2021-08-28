@@ -7,11 +7,15 @@ const db = require('../db/models');
 const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 
 /* GET home page. */
-router.get('/', asyncHandler(async (req, res, next) => {
+router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   const allGames = await Game.findAll();
-  const { userId } = req.session.auth
+  if (req.session.auth) {
+    const { userId } = req.session.auth
+    res.render('games', { title: 'Game List', userId, games: allGames, token: req.csrfToken()});
+  } else {
+    res.render('games', { title: 'Game List', games: allGames, token: req.csrfToken()});
+  }
   //  <<<<<<--------- was in line 14
-  res.render('games', { title: 'Game List', userId, games: allGames });
 }));
 
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => {
@@ -19,40 +23,70 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
   // if (!req.session.auth) {
 
   // }
-  const currentUser = req.session.auth.userId;
-  const reviewLike = await ReviewLike.findAll({
-    where: {reviewId}
-  });
-
-  const totalLikes = reviewLike.length;
-  // console.log(`--------------->>>>>${totalLikes}`);
-  // console.log(`--------------->>>>>${reviewLike}`);
-  // console.log(`--------------->>>>>${reviewId}`);
-
-  const gameId = req.params.id;
-
-  const games = await Game.findByPk(gameId, {
-    include: [{model: Review, include: [ReviewLike, User]}, GameCleanRating, Shelf]
-  })
-
-  // console.log(games.Reviews);
-  const reviews = games.Reviews
-
-  const reviewNames = await Review.findAll(
-    {where: {
-      gameId: req.params.id
-    },
-    include: User
-  });
-
-  const shelves = await Shelf.findAll({
-    where: {
-      userId: currentUser
-    }
-  });
-  console.log(shelves);
-
-  res.render('game-page', {title: games.title, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, token: req.csrfToken()})
+  if (req.session.auth) {
+    const currentUser = req.session.auth.userId;
+    const reviewLike = await ReviewLike.findAll({
+      where: {reviewId}
+    });
+  
+    const totalLikes = reviewLike.length;
+    // console.log(`--------------->>>>>${totalLikes}`);
+    // console.log(`--------------->>>>>${reviewLike}`);
+    // console.log(`--------------->>>>>${reviewId}`);
+  
+    const gameId = req.params.id;
+  
+    const games = await Game.findByPk(gameId, {
+      include: [{model: Review, include: [ReviewLike, User]}, GameCleanRating, Shelf]
+    })
+  
+    // console.log(games.Reviews);
+    const reviews = games.Reviews
+  
+    const reviewNames = await Review.findAll(
+      {where: {
+        gameId: req.params.id
+      },
+      include: User
+    });
+  
+    const shelves = await Shelf.findAll({
+      where: {
+        userId: currentUser
+      }
+    });
+    console.log(shelves);
+  
+    res.render('game-page', {title: games.title, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, token: req.csrfToken()})
+  } else {
+    const reviewLike = await ReviewLike.findAll({
+      where: {reviewId}
+    });
+  
+    const totalLikes = reviewLike.length;
+    // console.log(`--------------->>>>>${totalLikes}`);
+    // console.log(`--------------->>>>>${reviewLike}`);
+    // console.log(`--------------->>>>>${reviewId}`);
+  
+    const gameId = req.params.id;
+  
+    const games = await Game.findByPk(gameId, {
+      include: [{model: Review, include: [ReviewLike, User]}, GameCleanRating, Shelf]
+    })
+  
+    // console.log(games.Reviews);
+    const reviews = games.Reviews
+  
+    const reviewNames = await Review.findAll(
+      {where: {
+        gameId: req.params.id
+      },
+      include: User
+    });
+  
+    res.render('game-page', {title: games.title, games, reviews, reviewId, gameId, reviewNames, totalLikes, token: req.csrfToken()})
+    
+  }
 }))
 
 router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHandler(async(req, res, next) => {

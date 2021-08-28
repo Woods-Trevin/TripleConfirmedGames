@@ -46,7 +46,7 @@
     color: white;
     text-shadow: #000 0px 0px 3px;
     -webkit-font-smoothing: antialiased;
-    padding: 1rem 3rem;
+    padding: .6rem 3rem;
     border-radius: 10rem;
     transform: translateY(1rem);
 }
