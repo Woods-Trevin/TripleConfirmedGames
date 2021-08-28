@@ -9,6 +9,7 @@ html
         link(rel='stylesheet' href='/stylesheets/mygames.css')
         link(rel='stylesheet' href='/stylesheets/deleteShelf.css')
         link(rel='stylesheet' href='/stylesheets/login.css')
+        link(rel='stylesheet' href='/stylesheets/gamePage.css')
         link(rel='stylesheet' href='/stylesheets/profile.css')
         include utils.pug
   body
@@ -25,7 +26,7 @@ html
           else
             p(id='myGame' class='btn') My Games
             p(id='userProfile' class='btn') User Profile
-            
+
           img(class='userIcon' src="/images/user.png", alt="?")
     +validationErrorSummary(error)
     .modal
@@ -37,21 +38,21 @@ html
                     //-     input(type="hidden" name="_csrf" value=token)
                     .form-control
                         label(for="username") Username
-                        input(type="text" name="username" required id="user") 
+                        input(type="text" name="username" required id="user")
                         //- changed above input tag's ID from username to user
                     div.form-control
                         label(for="password") Password
                         input(type="password" name="password" required id="pass")
                         //- changed above input tag's ID from password to pass
                     div.form-control-log
-                        button(class='login-btn' type="submit") wow! 
+                        button(class='login-btn' type="submit") wow!
                     img(class="close" src='/images/close.png' alt="close")
                 if locals.authenticated
                   .modal-footer
                     p.logText 🤡 You're already logged in 🤡
                       form(class='log' action='/users/logout' method='post')
                         button(class='login-btn' type='submit') Logout
-                else 
+                else
                   .modal-footer
                     p.logText Or log in with
                   form(action="/users/login", method="post")
@@ -63,7 +64,7 @@ html
                     p.logTexT
                       a(class='login-btna' href='/users/signup') Register
 
-                      
+
     div.container
       block content
 
