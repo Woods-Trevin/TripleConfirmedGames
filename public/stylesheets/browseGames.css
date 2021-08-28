@@ -16,22 +16,36 @@
     margin: 10px;
     width: 300px;
     background: rgba(216,216,216,0.3);
+    overflow: hidden;
+    border-radius: 10px;
 
-
+    /*  */
+    transition: box-shadow 500ms, background 900ms;
+    /*  */
 }
 
 .listedGame:hover {
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    /* background: #12A4C1; */
+    box-shadow: 0px 2px 15px #fb049c;
+    /* background: #1A251A; */
+    color: #fb049c;
 
+    /*  */
+    /* transform: scaleY(1.5);
+    transform-origin: bottom; */
+    /*  */
 }
-
 
 .gameTitle {
     display: flex;
-    padding: 10px;
+    /* padding: 10px; */
+    /* margin: 5px; */
+
+
 }
 
+h1{
+    color:#fb049c ;
+}
 .header{
     display: flex;
     justify-content: center;
@@ -53,5 +67,7 @@ img.gamePic{
 }
 
 .gameTitleText{
-    font-size: 20px;
+    font-size: 19px;
+    text-align: center;
+
 }

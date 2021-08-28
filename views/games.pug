@@ -20,7 +20,8 @@ block content
         a(href=`/games/${game.id}`, class='atag')
           img(src=`${game.url}`, alt="video game image", class='gamePic')
         div.gameTitle
-          a(href=`/games/${game.id}`, class='gameTitleText') #{game.title}
+          a(href=`/games/${game.id}`, class='gameTitleText')
+            p #{game.title} 
     //-game.image   <--- potentially add to database
   script(src='/javascripts/login.js')
 
