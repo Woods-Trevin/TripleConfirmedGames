@@ -1,0 +1,25 @@
+.flex-outer {
+    display: flex;
+    margin-top: 30px;
+}
+
+.flex-inner {
+    display: flex;
+    justify-items: center;
+
+}
+
+.inner {
+    justify-content: center;
+}
+
+.game-title {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.game-avgRating {
+    font-size: 50px;
+    background-color: pink;
+    width: 90px;
+}

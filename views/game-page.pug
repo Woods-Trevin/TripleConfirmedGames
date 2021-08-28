@@ -4,12 +4,19 @@ extends layout
 
 block content
     if locals.authenticated
-        div
-            img(src=`${games.url}`, alt="video game image", class='boxart')
-        div(class='game-title')= games.title
-        div(class='game-studio')= games.studio
-        div(class='game-avgRating')= games.avgCleanRating
+        div(class='flex-outer')
+            div(class='art-container')
+                img(src=`${games.url}`, alt="video game image", class='boxart')
+            div(class='flex-inner')
+                div(class='inner')
+                    div(class='game-title')= games.title
+                    div(class='game-studio')= games.studio
+                    div(class='game-date')= games.releaseDate
+                    div(class='game-avgRating')= games.avgCleanRating
         div(class='game-description')= games.description
+
+        if user
+            div #{user.firstName}
         div
             form(action=`/games/${games.id}/rating`, method="post")
                 //- input(type="hidden", name="_csrf" value=importedToken)
@@ -22,30 +29,27 @@ block content
                         option(value=4) 🧼🧼🧼🧼
                         option(value=5) 🧼🧼🧼🧼🧼
                     button(type="submit" class='raw-btn') Clean!
-
         div
             if slapOn
                 p(class='err-text') This game is already on this shelf
             form(action=`/users/${userId}/addGame/${gameId}`, method="post")
+                p(class='shelf-text') Add or Remove this game from your shelves
                 //- input(type="hidden", name="_csrf" value=importedToken)
                 select(name="shelfId")
                     each shelf in shelves
                         option(value=shelf.id)= shelf.name
-                button(type='submit', class='raw-btn') Add/Delete Game to Shelf
-        div= games.releaseDate
-        if user
-            div #{user.firstName}
+                button(type='submit', class='raw-btn') Add/Remove
         div.anything
             +validationErrorSummary(errors)
             form(action=`/games/${games.id}`, method="post")
                 input(type="hidden" name="_csrf" value=token)
-                textarea(name="content")
-                button(type="submit") Add A Review
+                textarea(name="content" placeholder='What did you think of this game? Was it clean?')
+                button(type="submit", class='raw-btn') Add A Review
         ul
             each review in games.Reviews
-                li #{review.User.username}
-                li #{review.content}
-                li(id=`list${review.id}`) Likes: #{review.ReviewLikes.length}
+                li(class='username') #{review.User.username}
+                li(class='content') #{review.content}
+                li(id=`list${review.id}`, class='likes') Likes: #{review.ReviewLikes.length}
                 //- div(id=review.id class='reviewId')
 
                 //- div(id=userId class='myGamesUserId')
@@ -64,11 +68,10 @@ block content
     else
         div
             img(src=`${games.url}`, alt="video game image")
-        div= games.title
-        div= games.rating
-        div= games.studio
-        div= games.description
-        div= games.avgCleanRating
+        div(class='game-title')= games.title
+        div(class='game-studio')= games.studio
+        div(class='game-avgRating')= games.avgCleanRating
+        div(class='game-description')= games.description
         div
             //- form(action=`/games/${games.id}/rating`, method="post")
             //-     //- input(type="hidden", name="_csrf" value=importedToken)
@@ -91,7 +94,7 @@ block content
         //-             each shelf in shelves
         //-                 option(value=shelf.id)= shelf.name
         //-         button(type='submit') Add/Delete Game to Shelf
-        div= games.releaseDate
+        div(class='game-date')= games.releaseDate
         //- if user
         //-     div #{user.firstName}
         //- div.anything
@@ -102,9 +105,9 @@ block content
         //-         button(type="submit") Add A Review
         ul
             each review in games.Reviews
-                li #{review.User.username}
-                li #{review.content}
-                li(id=`list${review.id}`) Likes: #{review.ReviewLikes.length}
+                li(class='username') #{review.User.username}
+                li(class='content') #{review.content}
+                li(id=`list${review.id}`, class='likes') Likes: #{review.ReviewLikes.length}
                 //- div(id=review.id class='reviewId')
 
                 //- div(id=userId class='myGamesUserId')

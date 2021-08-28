@@ -1,8 +1,9 @@
-console.log('-------------------------------')
-console.log('inside login.js')
 const modal = document.querySelector('.modal');
 const closeBtn = document.querySelector('.close');
 const userIcon = document.querySelector('.userIcon');
+const myGames = document.querySelector('#myGames');
+const myGame = document.querySelector('#myGame');
+const userProfile = document.querySelector('#userProfile');
 function openModal() {
     modal.style.display = 'block';
 }
@@ -17,7 +18,13 @@ function outsideClick(e) {
     }
 }
 
-userIcon.addEventListener('click', openModal)
+if (myGames) {
+    userIcon.addEventListener('click', openModal);
+} else {
+    userIcon.addEventListener('click', openModal);
+    myGame.addEventListener('click', openModal);
+    userProfile.addEventListener('click', openModal);
+}
+
 closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
-
