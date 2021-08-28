@@ -38,7 +38,8 @@ window.addEventListener('DOMContentLoaded', async () => {
             const tableHTML = user.Shelves[0].Games.map(
                 (game) => `
                 <tr>
-                    <td>${game.title}</td>
+                    <td><a href='/games/${game.id}'><img src=${game.url} alt="video game image"></a></td>
+                    <td><a href='/games/${game.id}'>${game.title}</a></td>
                     <td>${game.studio}</td>
                     <td>${game.avgCleanRating}</td>
                     <td>${user.Shelves[0].name}</td>

@@ -27,8 +27,11 @@ block content
                 each game in user.Games
                     tr
                         td
-                            img(src=`${game.url}`, alt="video game image")
-                        td #{game.title}
+                            a(href=`/games/${game.id}`)
+                                img(src=`${game.url}`, alt="video game image")
+                        td
+                            a(href=`/games/${game.id}`)
+                                p #{game.title}
                         td #{game.studio}
                         td #{game.avgCleanRating}
                         each shelf in game.Shelves
