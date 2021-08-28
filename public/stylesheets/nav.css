@@ -1,8 +1,9 @@
 #nav {
     display:flex;
     justify-content: space-evenly;
-    height: 2.75rem;
+    height: 50px;
     background-color: black;
+    z-index: 999;
 }
 
 .menu {
