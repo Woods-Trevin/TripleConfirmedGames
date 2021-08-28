@@ -53,12 +53,30 @@
 }
 
 .update {
-    border: 2px solid black;
+    border: 2px solid #fb049c;
+    width: 100%;
 }
 
 .gameImage {
     display: flex;
     position: relative;
+}
+
+.GameReviewsDiv{
+    /* margin: auto; */
+    padding: 30px;
+}
+
+.updateTitles {
+    color: #fb049c;
+}
+
+.profileImg {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 90px;
+    left: 130px;
 }
 
 @media screen and (max-width: 900px) {
