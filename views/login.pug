@@ -4,23 +4,30 @@ include utils.pug
 
 block content 
     +validationErrorSummary(error)
-    div 
-        form(action="/users/login", method="post")
-            input(type="hidden" name="_csrf" value=token)
-            input(type="hidden" name="username" required id="username" value='demo user1')
-            input(type="hidden" name="password" required id="password" value='Password12!')
-            button(type="submit") Demo
+    .modal
+        .modal-box
+            .modal-body
+                h3 Log In
+                form(action="/users/login", method="post")
+                    .form-control
+                        input(type="hidden" name="_csrf" value=token)
+                        input(type="hidden" name="username" required id="username" value='demo user1')
+                        input(type="hidden" name="password" required id="password" value='Password12!')
+                        button(type="submit") Demo
     form(action="/users/login", method="post")
         input(type="hidden" name="_csrf" value=token)
-        div
+        div.form-control
             label(for="username") Username
             input(type="text" name="username" required id="username")
-        div
+        div.form-control
             label(for="password") Password
             input(type="password" name="password" required id="password")
-        div
+        div.form-control
             button(type="submit") wow! 
-        a(href='/users/signup') Register
+            .modal-footer
+                p Don't have an account?
+                a(href="#") Start your free trial
+            img(class="close" src='/images/close.png' alt="close")
+
         
 
-        //-include the token when we pass it in later

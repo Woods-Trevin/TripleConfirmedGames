@@ -17,14 +17,11 @@ html
           a(class='btn' href=`/users/${userId}`) User Profile
           a(class='userIcon' href='/users/login')
             img(class='userIcon' src="/images/user.png", alt="?")
-          if locals.authenticated
-            form(class='log' action='/users/logout' method='post')
-              button(class='log' type='submit') Logout
+          //- if locals.authenticated
+          //-   form(class='log' action='/users/logout' method='post')
+          //-     button(class='log' type='submit') Logout
     div.container
       block content
-
-
-      
     //- if locals.authenticated
     //-   span(class='navbar-text px-4') Welcome #{user.firstName}!
     //-     a(href=`/users/${user.id}`) UserProfile
