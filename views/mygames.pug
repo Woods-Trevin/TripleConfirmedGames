@@ -11,35 +11,38 @@ block content
             ul
                 each shelf in shelves
                     li(class='shelf' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
-        a(href=`/users/${userId}/addShelf`) Add Shelf
-        a(href=`/users/${userId}/deleteShelf`) Delete Shelf
-        table
+                div(class="AddShelf") 
+                    a(href=`/users/${userId}/addShelf`) Add Shelf
+                div(class="DeleteShelf") 
+                    a(href=`/users/${userId}/deleteShelf`) Delete Shelf
+        table.MyGamesTable 
             thead
                 tr
-                    th Box Art
-                    th Title
-                    th Studio
-                    th AvgCleanRating
-                    th Shelves
+                    th.tableHead Box Art
+                    th.tableHead Title
+                    th.tableHead Studio
+                    th.tableHead AvgCleanRating
+                    th.tableHead Shelves
                     //- th Review
-                    th ReleaseDate
+                    th.tableHead ReleaseDate
             tbody.tableBody
                 each game in user.Games
                     tr
-                        td
+                        td.tableData
                             a(href=`/games/${game.id}`)
-                                img(src=`${game.url}`, alt="video game image")
-                        td
+                                img(src=`${game.url}` class="GameImg" alt="video game image")
+                        td.tableData
                             a(href=`/games/${game.id}`)
                                 p #{game.title}
-                        td #{game.studio}
-                        td #{game.avgCleanRating}
+                        td.tableData #{game.studio}
+                        td.tableData #{game.avgCleanRating}
                         each shelf in game.Shelves
-                            td #{shelf.name},
+                            td(class="shelf") #{shelf.name},
+                            
                         //- td #{game.}
                         //- each review in game.Reviews
                         //-     if review.userId === userId
                         //-         td #{review.content}
                         //-     a(href=`/games/${userId}`) Write a Review
-                        td #{game.releaseDate}
+                        td.tableData #{game.releaseDate}
     script(src="/javascripts/mygamesDOM.js")
