@@ -20,6 +20,36 @@
 
 .game-avgRating {
     font-size: 50px;
-    background-color: pink;
+    background-color:#fb049c;
     width: 90px;
+}
+
+.pink {
+    color:#fb049c;
+}
+
+.bold {
+    font-weight: bold;
+
+}
+
+.raw-btn {
+    background-color: white;
+    color: #fb049c;
+    font-weight: bold;
+    border: 2px solid #fb049c;
+    border-radius: 10px;
+    padding: 3px 5px;
+    /* box-shadow: 2px 2px 3px 2px #a1909a; */
+
+
+}
+
+.raw-btn:hover {
+    background-color: #fb049c;
+    color: white;
+}
+
+.box-art {
+
 }

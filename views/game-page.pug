@@ -9,9 +9,9 @@ block content
                 img(src=`${games.url}`, alt="video game image", class='boxart')
             div(class='flex-inner')
                 div(class='inner')
-                    div(class='game-title')= games.title
-                    div(class='game-studio')= games.studio
-                    div(class='game-date')= games.releaseDate
+                    div(class='game-title pink')= games.title
+                    div(class='game-studio bold')= games.studio
+                    div(class='game-date bold')= games.releaseDate
                     div(class='game-avgRating')= games.avgCleanRating
         div(class='game-description')= games.description
 
@@ -20,7 +20,7 @@ block content
         div
             form(action=`/games/${games.id}/rating`, method="post")
                 //- input(type="hidden", name="_csrf" value=importedToken)
-                label(for="soap", class='rating-text') How Clean is this Game?
+                label(for="soap", class='rating-text pink bold') How Clean is this Game?
                 div
                     select(name="soap", class='dropbox')
                         option(value=1) 🧼
@@ -33,7 +33,7 @@ block content
             if slapOn
                 p(class='err-text') This game is already on this shelf
             form(action=`/users/${userId}/addGame/${gameId}`, method="post")
-                p(class='shelf-text') Add or Remove this game from your shelves
+                p(class='shelf-text' class='pink bold') Add or Remove this game from your shelves
                 //- input(type="hidden", name="_csrf" value=importedToken)
                 select(name="shelfId")
                     each shelf in shelves
