@@ -1,6 +1,4 @@
-* {
-    background-color: black;
-}
+
 
 .GameImg {
     width: 100px;
@@ -8,6 +6,7 @@
 
 .MyGamesTable {
     position: absolute;
+    background-color: black;
     float: right;
     width: 300px;
     left: 300px;
@@ -41,9 +40,14 @@
 }
 
 .tableHead {
-    
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
+    margin-right: 0px;
     border: 2px solid white;
-    width: 10px;
+
+   
 }
 
 .tableData {
