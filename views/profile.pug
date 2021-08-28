@@ -3,21 +3,24 @@ extends layout.pug
 
 
 block content
-    div
-        h2 #{user.username}
-    div
-        h3 Details
-        ul
-            li #{user.firstName}
-            li #{user.lastName}
-            li #{user.email}
-    div
-        h3 Activity
-        ul
-            li Joined In #{user.createdAt}
-            li Total Reviews: #{totalReviews}
-            li Total Review Likes: #{totalReviewLikes}
-    div
+    div.topHalfProfile
+        h1 Profile 
+        img(src="/public/images/user.png" alt="")
+        div.username
+            h2 #{user.username}'s Profile  
+        div.details
+            h3 Details:
+            ul.detailsList
+                li #{user.firstName}
+                li #{user.lastName}
+                li #{user.email}
+        div.activity
+            h3 Activity: 
+            ul.activitiesList
+                li.activities Joined In #{user.createdAt}
+                li.activities Total Reviews: #{totalReviews}
+                li.activities Total Review Likes: #{totalReviewLikes}
+    div.profileShelves
         h3 #{user.firstName}'s GAME SHELVES
         each shelf in shelves
             ul
@@ -27,7 +30,7 @@ block content
             ul
                 each game in user.Games
                     p -----------------------
-                    li
+                    li.gameImage 
                         img(src=`${game.url}`, alt="video game image")
                     li #{game.title}
                     li #{game.studio}
@@ -39,9 +42,9 @@ block content
                     select(name="shelf-names")
                         each shelf in game.Shelves
                             option(value=shelf.name)= shelf.name
-                //- if user.Games.id === user.Reviews.
-                //- each review in user.Reviews
-                //-     li #{review.content}
-                //- each game in user.Games
-                //-     li #{game.
+                    //- if user.Games.id === user.Reviews.
+                    //- each review in user.Reviews
+                    //-     li #{review.content}
+                    //- each game in user.Games
+                    //-     li #{game}
     script(src='/javascripts/login.js')

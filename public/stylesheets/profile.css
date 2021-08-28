@@ -1,0 +1,54 @@
+.username {
+    display: flex;
+    position: relative;
+    left: 300px;
+    border-bottom: 2px solid lightgray;
+    width: 725px;
+
+    
+}
+
+.details {
+    display: flex;
+    /* flex-direction: column; */
+    position: relative;
+    padding-bottom: 10px;
+    left: 300px;
+    width: 200px;
+    flex-wrap: nowrap;
+}
+
+.activity {
+    display: flex;
+    position: relative;
+    left: 300px;
+    width: 200px;
+}
+
+.activitiesList {
+    padding-left: 50px;
+}
+
+.detailsList {
+    /* margin-right: 50px; */
+    padding-left: 50px;
+}
+
+.activities {
+    width: 600px;
+}
+
+.topHalfProfile {
+    border-bottom: 2px solid lightgray;
+}
+
+
+.profileShelves {
+    border-bottom: 2px solid lightgray;
+    
+
+}
+
+.gameImage {
+
+}

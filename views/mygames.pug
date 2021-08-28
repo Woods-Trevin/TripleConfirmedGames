@@ -1,4 +1,4 @@
-npm stextends layout.pug
+extends layout.pug
 
 
 block content
@@ -16,7 +16,7 @@ block content
                 div(class="DeleteShelf") 
                     a(href=`/users/${userId}/deleteShelf`) Delete Shelf
         table.MyGamesTable 
-            thead
+            thead.tableHead
                 tr
                     th.tableHead Box Art
                     th.tableHead Title
