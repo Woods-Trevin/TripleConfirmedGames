@@ -3,8 +3,8 @@ extends layout.pug
 
 block content
     if !shelves
-        p The shelf you are trying to delete does not exist
-    form(method='POST' action=`/users/${userId}/deleteShelf`)
-        label(for="name") Delete Shelf Name
-        input(type="text" name='name' placeholder='Shelf Name')
-        button(type="submit" action=`/users/${userId}/mygames`) Submit
+        p.deleteShelfErrorMsg shelf you are trying to delete does not exist
+    form(method='POST' class="deleteShelfForm" action=`/users/${userId}/deleteShelf`)
+        label(for="name" class="deleteShelfForm") Delete Shelf Name
+        input(type="text" class="deleteShelfForm" name='name' placeholder='Shelf Name')
+        button(type="submit" class="deleteShelfBtn" action=`/users/${userId}/mygames`) Submit
