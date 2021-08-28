@@ -21,7 +21,7 @@ block content
                     th Studio
                     th AvgCleanRating
                     th Shelves
-                    th Review
+                    //- th Review
                     th ReleaseDate
             tbody.tableBody
                 each game in user.Games
@@ -33,9 +33,9 @@ block content
                         each shelf in game.Shelves
                             td #{shelf.name},
                         //- td #{game.}
-                        each review in game.Reviews
-                            if review.userId === userId
-                                td #{review.content}
-                            a(href=`/games/${userId}`) Write a Review
+                        //- each review in game.Reviews
+                        //-     if review.userId === userId
+                        //-         td #{review.content}
+                        //-     a(href=`/games/${userId}`) Write a Review
                         td #{game.releaseDate}
     script(src="/javascripts/mygamesDOM.js")

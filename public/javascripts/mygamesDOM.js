@@ -42,10 +42,10 @@ window.addEventListener('DOMContentLoaded', async () => {
                     <td>${game.studio}</td>
                     <td>${game.avgCleanRating}</td>
                     <td>${user.Shelves[0].name}</td>
-                    <td>${user.Reviews[0].content}</td>
                     <td>${game.releaseDate}</td>
-                </tr>
-                `
+                    </tr>
+                    `
+                    // <td>${user.Reviews[0].content}</td> this was on line 45
             );
             tableBody.innerHTML = tableHTML.join('')
             } catch (e) {
