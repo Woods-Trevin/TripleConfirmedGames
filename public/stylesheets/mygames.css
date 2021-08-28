@@ -6,12 +6,13 @@
 
 .MyGamesTable {
     display: block;
-    position: absolute;
+    position: relative;
     background-color: black;
     float: right;
-    width: 800px;
-    left: 300px;
-    bottom: -105px;
+    width: 900px;
+    left: 50px;
+    /* right: 10px; */
+    bottom: 320px;
     overflow: hidden;
 }
 
