@@ -10,11 +10,15 @@ const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 router.get('/', asyncHandler(async (req, res, next) => {
   const allGames = await Game.findAll();
   const { userId } = req.session.auth
-  res.render('games', { title: 'Game List',userId, games: allGames });
+  //  <<<<<<--------- was in line 14
+  res.render('games', { title: 'Game List', userId, games: allGames });
 }));
 
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => {
   const reviewId = parseInt(req.params.id, 10);
+  // if (!req.session.auth) {
+
+  // }
   const currentUser = req.session.auth.userId;
   const reviewLike = await ReviewLike.findAll({
     where: {reviewId}

@@ -103,6 +103,22 @@ router.post('/signup', csrfProtection, userValidators,
         hashedPassword
       });
       loginUser(req, res, user)
+
+      // find newly registered users id
+      const userObject = await User.findOne({
+        where: {username: username}
+      });
+      // create default shelves
+      await Shelf.create(
+        {name: 'Currently Playing', userId: userObject.id},
+      );
+      await Shelf.create(
+        {name: 'Wishlist', userId: userObject.id}
+      );
+      await Shelf.create(
+        {name: 'Completed', userId: userObject.id}
+      );
+      //--------------
       res.redirect('/games');
     } else {
       console.log("ERROR HERE");
@@ -199,6 +215,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
     totalReviews,
     totalReviewLikes
   })
+
 }))
 
 router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next) => {
@@ -227,7 +244,7 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
   //     userId: req.params.id,
   //   }, include: Game
   // })
-  console.log(shelves)
+  console.log('SHELVES ON USERSJS ROUTE ------->>>>>>>',userId)
 
   res.render('mygames', { title: 'My Games', userId, shelves, user })
 }));
@@ -356,7 +373,7 @@ router.post('/:id(\\d+)/mygames/:shelfName', asyncHandler(async (req, res) => {
 
        }, Review]
   });
-  console.log('OOOOOOOOOOOOOOOO');
+  console.log('OOOOOOOOOOOOOOOO', shelfName);
   console.log(user.Shelves);
 
   // const shelf = await Shelf.findAll({
