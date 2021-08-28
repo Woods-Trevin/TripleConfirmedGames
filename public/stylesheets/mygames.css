@@ -5,10 +5,11 @@
 }
 
 .MyGamesTable {
+    display: block;
     position: absolute;
     background-color: black;
     float: right;
-    width: 300px;
+    width: 800px;
     left: 300px;
     bottom: -105px;
     overflow: hidden;
@@ -63,4 +64,7 @@
     word-wrap: break-word;
     /* border-right: 2px solid white; */
 
+}
+.mygamesTR {
+    justify-content: center;
 }
