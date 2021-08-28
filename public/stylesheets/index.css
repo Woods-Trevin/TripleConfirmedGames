@@ -18,7 +18,7 @@ ul {
 }
 
 :root {
-    --clr-text: #d80388;
+    --clr-text: black;
     --clr-primary: black;
     --clr-accent: white;
 }
