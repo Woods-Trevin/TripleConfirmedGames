@@ -133,7 +133,7 @@ router.post('/signup', csrfProtection, userValidators,
       });
     }
   }));
-
+//
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const { userId } = req.session.auth;
   const user = await User.findByPk(req.params.id, {
