@@ -6,8 +6,8 @@ block content
     div(id=userId class='myGamesUserId')
         input(type="hidden" id='myGamesUserId' value=userId)
     div(id=shelfName class='myGamesGameId')
-    div.sideBar
-        h3 Gameshelves
+    div
+        h3.sideBar Gameshelves
             ul
                 each shelf in shelves
                     li(class='shelf' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
@@ -16,7 +16,7 @@ block content
                 div(class="DeleteShelf") 
                     a(href=`/users/${userId}/deleteShelf`) Delete Shelf
         table.MyGamesTable 
-            thead
+            thead.tableHead
                 tr
                     th.tableHead Box Art
                     th.tableHead Title

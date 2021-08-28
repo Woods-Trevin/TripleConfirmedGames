@@ -1,0 +1,89 @@
+.username {
+    display: flex;
+    position: relative;
+    left: 300px;
+    border-bottom: 2px solid lightgray;
+    width: 75%;
+
+    
+}
+
+.details {
+    display: flex;
+    /* flex-direction: column; */
+    position: relative;
+    padding-bottom: 10px;
+    left: 300px;
+    width: 80%;
+    flex-wrap: nowrap;
+}
+
+.activity {
+    display: flex;
+    position: relative;
+    left: 300px;
+    width: 80%;
+}
+
+.activitiesList {
+    padding-left: 50px;
+}
+
+.detailsList {
+    /* margin-right: 50px; */
+    padding-left: 50px;
+}
+
+.activities {
+    width: 80%;
+}
+
+.topHalfProfile {
+    border-bottom: 2px solid lightgray;
+}
+
+
+.profileShelves {
+    display: flex;
+    border-bottom: 2px solid lightgray;
+    flex-direction: column;
+
+
+
+}
+
+.update {
+    border: 2px solid black;
+}
+
+.gameImage {
+    display: flex;
+    position: relative;
+}
+
+@media screen and (max-width: 900px) {
+    .username {
+      width: 75%;
+    }
+
+    .details {
+        width: 50%; 
+    }
+
+    .activity {
+        width: 80%;
+    }
+
+    .activities {
+        width: 80%;
+    }
+
+    .update {
+        border: 2px solid black;
+        width: 80%;
+    }
+
+    .GameReviewsDiv {
+        width: 80%;
+    }
+}

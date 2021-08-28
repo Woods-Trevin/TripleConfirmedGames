@@ -3,32 +3,35 @@ extends layout.pug
 
 
 block content
-    div
-        h2 #{user.username}
-    div
-        h3 Details
-        ul
-            li #{user.firstName}
-            li #{user.lastName}
-            li #{user.email}
-    div
-        h3 Activity
-        ul
-            li Joined In #{user.createdAt}
-            li Total Reviews: #{totalReviews}
-            li Total Review Likes: #{totalReviewLikes}
-    div
-        h3 #{user.firstName}'s GAME SHELVES
+    div.topHalfProfile
+        h1 Profile 
+        div.username
+            h2 #{user.username}'s Profile  
+        div.details
+            h3 Details:
+            ul.detailsList
+                li #{user.firstName}
+                li #{user.lastName}
+                li #{user.email}
+        div.activity
+            h3 Activity: 
+            ul.activitiesList
+                li.activities Joined In #{user.createdAt}
+                li.activities Total Reviews: #{totalReviews}
+                li.activities Total Review Likes: #{totalReviewLikes}
+    div.profileShelves
+        h3 #{user.firstName}'s GAME SHELVES:
         each shelf in shelves
             ul
                 li #{shelf.name}(#{shelf.Games.length})
     div
         h3 #{user.username.toUpperCase()}'s RECENT UPDATES
-            ul
+            ul.GameReviewsDiv
                 each game in user.Games
-                    p -----------------------
-                    li
-                        img(src=`${game.url}`, alt="video game image")
+                    p.update 
+                    div.gameImage
+                        li
+                            img(src=`${game.url}`, alt="video game image")
                     li #{game.title}
                     li #{game.studio}
                     li #{game.avgCleanRating}
@@ -39,9 +42,9 @@ block content
                     select(name="shelf-names")
                         each shelf in game.Shelves
                             option(value=shelf.name)= shelf.name
-                //- if user.Games.id === user.Reviews.
-                //- each review in user.Reviews
-                //-     li #{review.content}
-                //- each game in user.Games
-                //-     li #{game.
+                    //- if user.Games.id === user.Reviews.
+                    //- each review in user.Reviews
+                    //-     li #{review.content}
+                    //- each game in user.Games
+                    //-     li #{game}
     script(src='/javascripts/login.js')
