@@ -8,8 +8,9 @@ const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 
 router.get('/', asyncHandler(async (req, res, next) => {
     const allGames = await Game.findAll();
-    const { userId } = req.session.auth;
-    res.render('splash', { title: 'Game List', userId, games: allGames });
+    // const { userId } = req.session.auth;
+    // userId ---------------- this was a param on line 13
+    res.render('splash', { title: 'Game List', games: allGames });
   }));
 
   module.exports = router;
