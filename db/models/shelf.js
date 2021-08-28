@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "shelfId"
     }
     Shelf.belongsToMany(models.Game, columnMapping);
+    Shelf.hasMany(models.SlapOn, {foreignKey: 'shelfId', onDelete: 'CASCADE', hooks: true })
   };
   return Shelf;
 };
