@@ -27,6 +27,8 @@ block content
             ul
                 each game in user.Games
                     p -----------------------
+                    li
+                        img(src=`${game.url}`, alt="video game image")
                     li #{game.title}
                     li #{game.studio}
                     li #{game.avgCleanRating}

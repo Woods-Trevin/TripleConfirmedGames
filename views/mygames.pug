@@ -26,7 +26,8 @@ block content
             tbody.tableBody
                 each game in user.Games
                     tr
-                        td placeholder box art
+                        td
+                            img(src=`${game.url}`, alt="video game image")
                         td #{game.title}
                         td #{game.studio}
                         td #{game.avgCleanRating}
