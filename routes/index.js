@@ -8,9 +8,14 @@ const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     const allGames = await Game.findAll();
-    // const { userId } = req.session.auth;
+    if (req.session.auth) {
+      const { userId } = req.session.auth;
+      
+      res.render('splash', { title: 'Game List', userId, games: allGames, token: req.csrfToken() });
+    } else {
+      res.render('splash', { title: 'Game List', games: allGames, token: req.csrfToken() });
+    }
     // userId ---------------- this was a param on line 13
-    res.render('splash', { title: 'Game List', games: allGames, token: req.csrfToken() });
   }));
   
   module.exports = router;
