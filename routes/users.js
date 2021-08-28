@@ -393,144 +393,15 @@ router.post('/:id(\\d+)/addGame/:gameId(\\d+)', requireAuth, shelfNameValidator,
       res.redirect(`/games/${gameId}`)
     } else {
 
-      const reviewId = parseInt(req.params.id, 10);
-      const currentUser = req.session.auth.userId;
-      const reviewLike = await ReviewLike.findAll({
-        where: {reviewId}
-      });
-
-      const totalLikes = reviewLike.length;
-
-
-      const gameId = req.params.id;
-
-      const games = await Game.findByPk(gameId, {
-        include: [{model: Review, include: [ReviewLike, User]}, GameCleanRating, Shelf]
-      })
-
-      const reviews = games.Reviews
-
-      const reviewNames = await Review.findAll(
-        {where: {
-          gameId: req.params.id
-        },
-        include: User
-      });
-
-      const shelves = await Shelf.findAll({
-        where: {
-          userId: currentUser
-        }
-      });
-      console.log(shelves);
-
-      res.render('game-page', {title: games.title, slapOn, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes})
-
-
-
-      // res.render('game-page', {
-      //   title: 'Add Shelf Name',
-      //   slapOn
-
-      // })
-    }
-  } catch (e) {
-    next(e)
-  }
-
-}));
-
-
-
-//Delete game from shelf post route
-router.post('/:id(\\d+)/deleteGame/:shelfId(\\d+)', requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
-  const { shelfId } = req.body
-  const gameId = req.params.gameId
-  const slapOn = await SlapOn.findOne({
-    where: {
-      shelfId: shelfId,
-      gameId: gameId
-    }
-  })
-  try {
-    if (!slapOn) {
-      await SlapOn.create({
-        shelfId: shelfId,
-        gameId: gameId
-      })
+      await slapOn.destroy();
       res.redirect(`/games/${gameId}`)
-    } else {
-
-      const reviewId = parseInt(req.params.id, 10);
-      const currentUser = req.session.auth.userId;
-      const reviewLike = await ReviewLike.findAll({
-        where: {reviewId}
-      });
-
-      const totalLikes = reviewLike.length;
-
-
-      const gameId = req.params.id;
-
-      const games = await Game.findByPk(gameId, {
-        include: [{model: Review, include: [ReviewLike, User]}, GameCleanRating, Shelf]
-      })
-
-      const reviews = games.Reviews
-
-      const reviewNames = await Review.findAll(
-        {where: {
-          gameId: req.params.id
-        },
-        include: User
-      });
-
-      const shelves = await Shelf.findAll({
-        where: {
-          userId: currentUser
-        }
-      });
-      console.log(shelves);
-
-      res.render('game-page', {title: games.title, slapOn, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes})
-
-
-
-      // res.render('game-page', {
-      //   title: 'Add Shelf Name',
-      //   slapOn
-
-      // })
     }
   } catch (e) {
     next(e)
   }
 
-  // const { userId } = req.session.auth
-  // const { name } = req.body
-  // const shelves = await Shelf.findOne({
-  //   where: {
-  //     name: name
-  //   }
-  // })
-  // try {
-  //   if (!shelves) {
-  //     res.render('deleteShelf', {
-  //       title: 'Add Shelf Name',
-  //       shelves,
-  //       userId
-  //     })
-  //   } else {
-
-  //     await shelves.destroy();
-  //     res.redirect(`/users/${userId}/mygames`)
-
-  //   }
-  // } catch (e) {
-  //   next(e)
-  // }
-
 }));
+
 
 
 module.exports = router;

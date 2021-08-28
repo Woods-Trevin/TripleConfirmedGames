@@ -29,8 +29,7 @@ block content
             select(name="shelfId")
                 each shelf in shelves
                     option(value=shelf.id)= shelf.name
-            button(type='submit') Add Game to Shelf
-            button(type='submit') Delete Game from Shelf
+            button(type='submit') Add/Delete Game to Shelf
     div= games.releaseDate
     if user
         div #{user.firstName}
