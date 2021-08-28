@@ -3,6 +3,8 @@ extends layout
 include utils.pug
 
 block content
+    div
+        img(src=`${games.url}`, alt="video game image")
     div= games.title
     div= games.rating
     div= games.studio
