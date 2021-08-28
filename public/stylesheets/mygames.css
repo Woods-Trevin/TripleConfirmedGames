@@ -1,0 +1,52 @@
+* {
+    background-color: black;
+}
+
+.GameImg {
+    width: 100px;
+}
+
+.MyGamesTable {
+    position: absolute;
+    float: right;
+    width: 200px;
+    left: 300px;
+    bottom: -105px;
+}
+
+.AddShelf{
+    display: flex;
+    width: 105px;
+    margin-right: 20px;
+    margin: 10px;
+    border: 5px solid grey;
+    
+}  
+
+.DeleteShelf {
+    display: flex;
+    width: 105px;
+    margin-right: 20px;
+    border: 2px solid black;
+}
+
+.tableHead {
+    
+    border: 2px solid white;
+    width: 10px;
+}
+
+.tableData {
+    /* display: block; */
+    /* flex-direction: column; */
+    border-right: 2px solid white;
+}
+
+.shelf {
+
+    display: flex;
+    /* width: 40px; */
+    word-wrap: break-word;
+    /* border-right: 2px solid white; */
+
+}
