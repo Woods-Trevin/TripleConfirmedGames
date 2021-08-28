@@ -12,5 +12,5 @@ router.get('/', asyncHandler(async (req, res, next) => {
     // userId ---------------- this was a param on line 13
     res.render('splash', { title: 'Game List', userId, games: allGames });
   }));
-  //
+  
   module.exports = router;
