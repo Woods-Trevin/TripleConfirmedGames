@@ -5,7 +5,6 @@ extends layout.pug
 block content
     div.topHalfProfile
         h1 Profile 
-        img(src="/public/images/user.png" alt="")
         div.username
             h2 #{user.username}'s Profile  
         div.details
@@ -21,17 +20,18 @@ block content
                 li.activities Total Reviews: #{totalReviews}
                 li.activities Total Review Likes: #{totalReviewLikes}
     div.profileShelves
-        h3 #{user.firstName}'s GAME SHELVES
+        h3 #{user.firstName}'s GAME SHELVES:
         each shelf in shelves
             ul
                 li #{shelf.name}(#{shelf.Games.length})
     div
         h3 #{user.username.toUpperCase()}'s RECENT UPDATES
-            ul
+            ul.GameReviewsDiv
                 each game in user.Games
-                    p -----------------------
-                    li.gameImage 
-                        img(src=`${game.url}`, alt="video game image")
+                    p.update 
+                    div.gameImage
+                        li
+                            img(src=`${game.url}`, alt="video game image")
                     li #{game.title}
                     li #{game.studio}
                     li #{game.avgCleanRating}

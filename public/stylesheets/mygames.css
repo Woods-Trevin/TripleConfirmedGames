@@ -4,12 +4,17 @@
     width: 100px;
 }
 
+.sidebar {
+    display: flex;
+
+}
+
 .MyGamesTable {
     display: block;
     position: relative;
-    background-color: black;
+    background-color: white;
     float: right;
-    width: 900px;
+    width: 80%;
     left: 100px;
     /* right: 10px; */
     bottom: 320px;
@@ -72,4 +77,15 @@
 }
 .mygamesTR {
     justify-content: center;
+}
+
+
+@media screen and (max-width: 900px) {
+    .MyGamesTable {
+      width: 80%;
+    }
+
+    .sidebar {
+        width: 50%; 
+    }
 }

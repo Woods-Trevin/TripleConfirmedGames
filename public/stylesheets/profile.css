@@ -3,7 +3,7 @@
     position: relative;
     left: 300px;
     border-bottom: 2px solid lightgray;
-    width: 725px;
+    width: 75%;
 
     
 }
@@ -14,7 +14,7 @@
     position: relative;
     padding-bottom: 10px;
     left: 300px;
-    width: 200px;
+    width: 80%;
     flex-wrap: nowrap;
 }
 
@@ -22,7 +22,7 @@
     display: flex;
     position: relative;
     left: 300px;
-    width: 200px;
+    width: 80%;
 }
 
 .activitiesList {
@@ -35,7 +35,7 @@
 }
 
 .activities {
-    width: 600px;
+    width: 80%;
 }
 
 .topHalfProfile {
@@ -44,11 +44,46 @@
 
 
 .profileShelves {
+    display: flex;
     border-bottom: 2px solid lightgray;
-    
+    flex-direction: column;
+
+
 
 }
 
-.gameImage {
+.update {
+    border: 2px solid black;
+}
 
+.gameImage {
+    display: flex;
+    position: relative;
+}
+
+@media screen and (max-width: 900px) {
+    .username {
+      width: 75%;
+    }
+
+    .details {
+        width: 50%; 
+    }
+
+    .activity {
+        width: 80%;
+    }
+
+    .activities {
+        width: 80%;
+    }
+
+    .update {
+        border: 2px solid black;
+        width: 80%;
+    }
+
+    .GameReviewsDiv {
+        width: 80%;
+    }
 }
