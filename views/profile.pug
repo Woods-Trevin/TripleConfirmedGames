@@ -4,13 +4,8 @@ extends layout.pug
 
 block content
     div.topHalfProfile
-<<<<<<< HEAD
-        h1.updateMainTitle Profile
-            img(class="profileImg" src="/images/user.png" alt="") 
-=======
         h1.updateTitles Profile
             img(class="profileImg" src="/images/user.png" alt="")
->>>>>>> 8316ff3352c655729cd221c5c576648b3afd72d2
         div.username
             h2.updateTitles #{user.username}'s Profile
         div.details
@@ -34,21 +29,6 @@ block content
         h3.updateTitles #{user.username.toUpperCase()}'s GAMES AND REVIEWS
         ul.GameReviewsDiv
             each game in user.Games
-<<<<<<< HEAD
-                div.gameImage
-                    li
-                        img(src=`${game.url}`, alt="video game image")
-                li #{game.title}
-                li #{game.studio}
-                li Avg Clean Rating: #{game.avgCleanRating}
-                li #{game.description}
-                each review in game.Reviews
-                    if review.userId === userId
-                        li #{review.content}
-                select(name="shelf-names")
-                    each shelf in game.Shelves
-                        option(value=shelf.name)= shelf.name
-=======
                 div.profileFlex
                     div.gameImage
                         li
@@ -66,7 +46,6 @@ block content
                         select(name="shelf-names")
                             each shelf in game.Shelves
                                 option(value=shelf.name)= shelf.name
->>>>>>> 8316ff3352c655729cd221c5c576648b3afd72d2
                 p.pTag
                         //- if user.Games.id === user.Reviews.
                         //- each review in user.Reviews
