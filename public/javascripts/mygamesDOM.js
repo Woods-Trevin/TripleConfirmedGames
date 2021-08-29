@@ -19,27 +19,27 @@ window.addEventListener('DOMContentLoaded', async () => {
     shelf.forEach(element => {
         element.addEventListener('click', async (event) => {
             try {
-            console.log("This works!")
-            console.log(event.target.id)
-            shelfName = event.target.id
-            const games = await fetch(`/users/${userId}/mygames/${shelfName}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" }
-            })
-            if (!games.ok) {
-                throw games
-            }
+                console.log("This works!")
+                console.log(event.target.id)
+                shelfName = event.target.id
+                const games = await fetch(`/users/${userId}/mygames/${shelfName}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                })
+                if (!games.ok) {
+                    throw games
+                }
 
-            const { user } = await games.json()
-            // console.log(`---------${user.Shelves[0].Games[0].title}`);
-            console.log(`---------${user.Shelves[0]}`);
+                const { user } = await games.json()
+                // console.log(`---------${user.Shelves[0].Games[0].title}`);
+                console.log(`---------${user.Shelves[0]}`);
 
-            const tableBody = document.querySelector('.tableBody');
-            const tableHTML = user.Shelves[0].Games.map(
-                (game) => `
+                const tableBody = document.querySelector('.tableBody');
+                const tableHTML = user.Shelves[0].Games.map(
+                    (game) => `
                 <tr>
-                    <td><a href='/games/${game.id}'><img src=${game.url} alt="video game image"></a></td>
-                    <td><a href='/games/${game.id}'>${game.title}</a></td>
+                    <td><a href='/games/${game.id}'><img src=${game.url} class="GameImg accessibleHLink" alt="video game image"></a></td>
+                    <td><a href='/games/${game.id}' class="accessibleHLink">${game.title}</a></td>
                     <td>${game.studio}</td>
                     <td>${game.avgCleanRating}</td>
                     <td>${user.Shelves[0].name}</td>
@@ -47,8 +47,8 @@ window.addEventListener('DOMContentLoaded', async () => {
                     </tr>
                     `
                     // <td>${user.Reviews[0].content}</td> this was on line 45
-            );
-            tableBody.innerHTML = tableHTML.join('')
+                );
+                tableBody.innerHTML = tableHTML.join('')
             } catch (e) {
                 console.error(e);
             }
