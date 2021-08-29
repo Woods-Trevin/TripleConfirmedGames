@@ -136,13 +136,26 @@ router.post('/signup', csrfProtection, userValidators,
 
 router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const { userId } = req.session.auth;
-  const user = await User.findByPk(req.params.id, {
+  // const user = await User.findByPk(req.params.id, {
+  //   include: [GameCleanRating, {
+  //     model: Game,
+  //     // where: {userId: req.params.id},
+  //     include: [Shelf, Review]
+  //   }]
+  // });
+
+  const user = await User.findByPk(userId, {
     include: [GameCleanRating, {
       model: Game,
-      // where: {userId: req.params.id},
-      include: [Shelf, Review]
+      include: [{
+        model: Shelf,
+        where: {userId: userId}
+      }, Review]
     }]
   });
+
+
+
 
   // const user = await User.findByPk(userId, {
   //   include: [GameCleanRating, {
@@ -241,7 +254,10 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
   const user = await User.findByPk(userId, {
     include: [GameCleanRating, {
       model: Game,
-      include: [Shelf, Review]
+      include: [{
+        model: Shelf,
+        where: {userId: userId}
+      }, Review]
     }]
   });
 
@@ -444,6 +460,48 @@ router.post('/:id(\\d+)/addGame/:gameId(\\d+)', requireAuth, shelfNameValidator,
   }
 
 }));
+
+
+
+router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
+  const { userId } = req.session.auth
+  const { name } = req.body
+  const shelves = await Shelf.findOne({
+    where: {
+      name: name
+    }
+  })
+  try {
+    if (!shelves) {
+      await Shelf.create({
+        name,
+        userId
+      })
+      const message = `Created ${name} shelf!`
+      res.json({name, message})
+    } else {
+      // res.render('addShelf', {
+      //   title: 'Add Shelf Name',
+      //   shelves,
+      //   userId
+
+      // })
+      await shelves.destroy();
+      const message = `Deleted ${name} shelf!`
+      res.json({name, message})
+
+    }
+  } catch (e) {
+    next(e)
+  }
+
+}));
+
+
+
+
+
+
 
 
 
