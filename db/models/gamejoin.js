@@ -4,8 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     gameId: DataTypes.INTEGER
   }, {});
-  GameJoin.associate = function(models) {
+  GameJoin.associate = function (models) {
     // associations can be defined here
+    GameJoin.belongsTo(models.Game, { foreignKey: "gameId" })
+    GameJoin.belongsTo(models.User, { foreignKey: "userId" })
   };
   return GameJoin;
 };
