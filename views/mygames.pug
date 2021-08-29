@@ -30,9 +30,9 @@ block content
                     tr.mygamesTR
                         td.tableData
                             a(href=`/games/${game.id}`)
-                                img(src=`${game.url}` class="GameImg" alt="video game image")
+                                img(src=`${game.url}` class="GameImg accessibleHLink" alt="video game image")
                         td.tableData
-                            a(href=`/games/${game.id}`)
+                            a(href=`/games/${game.id}` class="accessibleHLink")
                                 p #{game.title}
                         td.tableData #{game.studio}
                         td.tableData #{game.avgCleanRating}

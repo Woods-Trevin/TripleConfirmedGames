@@ -106,17 +106,17 @@ router.post('/signup', csrfProtection, userValidators,
 
       // find newly registered users id
       const userObject = await User.findOne({
-        where: {username: username}
+        where: { username: username }
       });
       // create default shelves
       await Shelf.create(
-        {name: 'Currently Playing', userId: userObject.id},
+        { name: 'Currently Playing', userId: userObject.id },
       );
       await Shelf.create(
-        {name: 'Wishlist', userId: userObject.id}
+        { name: 'Wishlist', userId: userObject.id }
       );
       await Shelf.create(
-        {name: 'Completed', userId: userObject.id}
+        { name: 'Completed', userId: userObject.id }
       );
       //--------------
       res.redirect('/games');
@@ -220,7 +220,23 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
 
 router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next) => {
   const { userId } = req.session.auth
-  console.log(userId)
+  // console.log(userId)
+
+
+  const userGames = await GameJoin.findAll({
+    where: {
+      userId
+    }, include: Game
+  })
+
+  userGamesArr = [];
+  for (key in userGames) {
+    console.log("Here!!")
+    userGamesArr.push(userGames[key].Game)
+  }
+
+  console.log(userGamesArr);
+
 
   const user = await User.findByPk(userId, {
     include: [GameCleanRating, {
@@ -228,6 +244,8 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
       include: [Shelf, Review]
     }]
   });
+
+
   const shelves = await Shelf.findAll({
     where: {
       userId: req.params.id,
@@ -244,26 +262,28 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
   //     userId: req.params.id,
   //   }, include: Game
   // })
-  console.log('SHELVES ON USERSJS ROUTE ------->>>>>>>',userId)
+  console.log('SHELVES ON USERSJS ROUTE ------->>>>>>>', userId)
 
   res.render('mygames', { title: 'My Games', userId, shelves, user })
 }));
 
-router.post('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next) => {
-  const { userId } = req.session.auth
-  console.log(userId)
 
-  // const users = await User.findByPk(userId, {
-  //   include: [Shelf, Game]
-  // });
-  const shelves = await Shelf.findAll({
-    where: {
-      userId: req.params.id,
-    }, include: Game
-  })
 
-  // res.render('mygames', { title: 'My Games', userId, shelves })
-}));
+// router.post('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next) => {
+//   // const { userId } = req.session.auth
+//   // console.log(userId)
+
+//   // const users = await User.findByPk(userId, {
+//   //   include: [Shelf, Game]
+//   // });
+//   // const shelves = await Shelf.findAll({
+//   //   where: {
+//   //     userId: req.params.id,
+//   //   }, include: Game
+//   // })
+
+//   // res.render('mygames', { title: 'My Games', userId, shelves })
+// }));
 
 
 //add shelf page get route
@@ -364,14 +384,14 @@ router.post('/:id(\\d+)/mygames/:shelfName', asyncHandler(async (req, res) => {
 
   const user = await User.findByPk(userId, {
     include: [GameCleanRating, {
-        model: Shelf,
-        where: {
-          name: shelfName,
-          userId: userId
-        },
-        include: Game,
+      model: Shelf,
+      where: {
+        name: shelfName,
+        userId: userId
+      },
+      include: Game,
 
-       }, Review]
+    }, Review]
   });
   console.log('OOOOOOOOOOOOOOOO', shelfName);
   console.log(user.Shelves);
@@ -385,14 +405,14 @@ router.post('/:id(\\d+)/mygames/:shelfName', asyncHandler(async (req, res) => {
   // })
   // console.log(shelf);
 
-  res.json({user})
+  res.json({ user })
 
 }))
 
 
 //add game to shelf
 router.post('/:id(\\d+)/addGame/:gameId(\\d+)', requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
-  // const { userId } = req.session.auth
+  const { userId } = req.session.auth
   const { shelfId } = req.body
   const gameId = req.params.gameId
   const slapOn = await SlapOn.findOne({
@@ -401,6 +421,12 @@ router.post('/:id(\\d+)/addGame/:gameId(\\d+)', requireAuth, shelfNameValidator,
       gameId: gameId
     }
   })
+
+  await GameJoin.create({
+    userId,
+    gameId
+  })
+
   try {
     if (!slapOn) {
       await SlapOn.create({

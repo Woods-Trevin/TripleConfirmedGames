@@ -6,6 +6,12 @@
     width: 100px;
 }
 
+.accessibleHLink:hover {
+    font-size: x-large;
+    width: 5em;
+    text-decoration: underline;
+}
+
 .sidebar {
     display: flex;
 
