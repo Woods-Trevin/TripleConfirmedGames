@@ -20,7 +20,7 @@
     border-radius: 10px;
 
     /*  */
-    transition: box-shadow 500ms, background 900ms;
+    transition: box-shadow 500ms, transform 500ms;
     /*  */
 }
 
@@ -28,7 +28,7 @@
     box-shadow: 0px 2px 15px #fb049c;
     /* background: #1A251A; */
     color: #fb049c;
-
+    transform:scale(1.05);
     /*  */
     /* transform: scaleY(1.5);
     transform-origin: bottom; */
