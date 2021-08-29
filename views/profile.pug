@@ -4,7 +4,7 @@ extends layout.pug
 
 block content
     div.topHalfProfile
-        h1.updateTitles Profile
+        h1.updateMainTitle Profile
             img(class="profileImg" src="/images/user.png" alt="") 
         div.username
             h2.updateTitles #{user.username}'s Profile  
@@ -34,7 +34,7 @@ block content
                         img(src=`${game.url}`, alt="video game image")
                 li #{game.title}
                 li #{game.studio}
-                li #{game.avgCleanRating}
+                li Avg Clean Rating: #{game.avgCleanRating}
                 li #{game.description}
                 each review in game.Reviews
                     if review.userId === userId
