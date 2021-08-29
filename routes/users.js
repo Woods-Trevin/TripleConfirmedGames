@@ -223,19 +223,19 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
   // console.log(userId)
 
 
-  const userGames = await GameJoin.findAll({
-    where: {
-      userId
-    }, include: Game
-  })
+  // const userGames = await GameJoin.findAll({
+  //   where: {
+  //     userId
+  //   }, include: Game
+  // })
 
-  userGamesArr = [];
-  for (key in userGames) {
-    console.log("Here!!")
-    userGamesArr.push(userGames[key].Game)
-  }
+  // userGamesArr = [];
+  // for (key in userGames) {
+  //   console.log("Here!!")
+  //   userGamesArr.push(userGames[key].Game)
+  // }
 
-  console.log(userGamesArr);
+  // console.log(userGamesArr);
 
 
   const user = await User.findByPk(userId, {
