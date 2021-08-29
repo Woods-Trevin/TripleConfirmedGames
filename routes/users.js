@@ -105,18 +105,21 @@ router.post('/signup', csrfProtection, userValidators,
       loginUser(req, res, user)
 
       // find newly registered users id
-      const userObject = await User.findOne({
-        where: { username: username }
-      });
+      // const userObject = await User.findOne({
+      //   where: { username: username }
+      // });
       // create default shelves
       await Shelf.create(
-        { name: 'Currently Playing', userId: userObject.id },
+        // { name: 'Currently Playing', userId: userObject.id },
+        { name: 'Currently Playing', userId: user.id },
       );
       await Shelf.create(
-        { name: 'Wishlist', userId: userObject.id }
+        // { name: 'Wishlist', userId: userObject.id }
+        { name: 'Wishlist', userId: user.id }
       );
       await Shelf.create(
-        { name: 'Completed', userId: userObject.id }
+        // { name: 'Completed', userId: userObject.id }
+        { name: 'Completed', userId: user.id }
       );
       //--------------
       res.redirect('/games');

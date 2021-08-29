@@ -27,6 +27,7 @@
     display: block;
     position: relative;
     background-color: white;
+    /* color: white; */
     float: right;
     width: 80%;
     left: 100px;
@@ -80,6 +81,7 @@
     /* display: block; */
     /* flex-direction: column; */
     /* border-right: 2px solid white; */
+    /* border-bottom: 2px solid black; */
 }
 
 .shelf {
@@ -87,8 +89,7 @@
     display: flex;
     /* width: 40px; */
     word-wrap: break-word;
-    /* border-right: 2px solid white; */
-
+    
 }
 .mygamesTR {
     justify-content: center;

@@ -36,12 +36,11 @@ block content
                                 p #{game.title}
                         td.tableData #{game.studio}
                         td.tableData #{game.avgCleanRating}
-                        if game.Shelves
+                        if game.Shelves && (user.id === userId)
                             each shelf in game.Shelves
                                 td(class="shelf") #{shelf.name},
                             else 
                                 td(class="shelf")= "No shelves" 
-                        
                         //- td #{game.}
                         //- each review in game.Reviews
                         //-     if review.userId === userId
