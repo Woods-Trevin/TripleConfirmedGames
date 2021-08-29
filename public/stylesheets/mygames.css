@@ -1,4 +1,6 @@
-
+.title {
+    font-size: xx-large;
+}
 
 .GameImg {
     width: 100px;
@@ -7,6 +9,12 @@
 .sidebar {
     display: flex;
 
+}
+
+.tableContainer {
+    position: relative;
+    top: 60px;
+    right: 30px;
 }
 
 .MyGamesTable {
@@ -56,7 +64,8 @@
     /* justify-content: center; */
     /* flex-wrap: wrap; */
     margin-right: 0px;
-    border: 2px solid white;
+    /* border: 2px solid black; */
+    /* border-bottom: 2px solid black; */
 
    
 }

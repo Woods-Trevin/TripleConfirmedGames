@@ -2,11 +2,11 @@ extends layout.pug
 
 
 block content
-    h2 #{title}
+    h2.title #{title}
     div(id=userId class='myGamesUserId')
         input(type="hidden" id='myGamesUserId' value=userId)
     div(id=shelfName class='myGamesGameId')
-    div
+    div.tableContainer
         h3.sideBar Gameshelves
             ul
                 each shelf in shelves
