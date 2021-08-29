@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     reviewLikeButton.forEach(element => {
         element.addEventListener('click', async (event) => {
-           
+
             let singleReviewId = event.target.id;
             console.log(singleReviewId);
             const likeData = await fetch(`/games/${gameId}/${singleReviewId}/`, {
@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
             const { totalLikes, reviewId} = await likeData.json()
             const likeLength = document.querySelector(`#list${reviewId}`)
-            likeLength.innerHTML = `Likes: ${totalLikes}`
+            likeLength.innerHTML = `Wow's: ${totalLikes}`
             // console.log(userId)
             // console.log(totalLikes);
         })

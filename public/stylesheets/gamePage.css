@@ -1,21 +1,30 @@
 .flex-outer {
     display: flex;
     margin-top: 30px;
+    justify-content: space-evenly;
 }
 
 .flex-inner {
     display: flex;
-    justify-items: center;
+    justify-content: center;
+    margin-left: 20px;
+
 
 }
 
 .inner {
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: space-between;
 }
 
 .game-title {
     font-size: 50px;
     font-weight: bold;
+}
+.marginbot {
+    margin-bottom: 40px;
 }
 
 .game-avgRating {
@@ -51,5 +60,36 @@
 }
 
 .box-art {
+
+}
+
+.midshelf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropbox1 {
+    margin-right: 80px;
+}
+
+.dropbox2 {
+    margin-right: 30px;
+}
+
+.textarea {
+    margin-right: 20px;
+}
+
+.usernamerev {
+    font-size: 15px;
+}
+
+.likebtn {
+    margin-bottom: 30px;
+}
+
+.likes {
+    font-size: 15px;
 
 }
