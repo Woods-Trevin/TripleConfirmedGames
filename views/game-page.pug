@@ -17,7 +17,7 @@ block content
         div(class='game-description')= games.description
 
         if user
-            div #{user.firstName}
+            //- div #{user.firstName}
         div(class='midshelf pink bold')
             p How Clean is this Game?
             form(action=`/games/${games.id}/rating`, method="post")
