@@ -43,6 +43,7 @@ block content
                         each review in game.Reviews
                             if review.userId === userId
                                 li <span class='pink'>Your Review: </span> #{review.content}
+                        label(for="shelf-names") On Shelves: 
                         select(name="shelf-names")
                             each shelf in game.Shelves
                                 option(value=shelf.name)= shelf.name

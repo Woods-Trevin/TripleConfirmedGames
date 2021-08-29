@@ -11,6 +11,9 @@ block content
             ul
                 each shelf in shelves
                     li(class='shelf dynamic' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
+                form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
+                    input(type="text" class="addDeleteShelf" name='name' placeholder='Add/Delete Shelf')
+                    button(type="submit" class="addDeleteShelf raw-btn" action=`/users/${userId}/mygames`) Submit
                 div(class="AddShelf")
                     a(href=`/users/${userId}/addShelf` class='raw-btn') Add Shelf
                 div(class="DeleteShelf")

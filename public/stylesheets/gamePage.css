@@ -1,13 +1,14 @@
 .flex-outer {
     display: flex;
     margin-top: 30px;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .flex-inner {
     display: flex;
     justify-content: center;
-    margin-left: 20px;
+    /* margin-left: 20px; */
+    width: 100%;
 
 
 }
