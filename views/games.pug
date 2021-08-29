@@ -3,6 +3,10 @@ extends layout
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
+
+  link(rel="preconnect" href="https://fonts.googleapis.com")
+  link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+  link(href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet")
   //- add page specific js
 
   script(src="/javascripts/games.js" type="module" defer)
@@ -21,7 +25,7 @@ block content
           img(src=`${game.url}`, alt="video game image", class='gamePic')
         div.gameTitle
           a(href=`/games/${game.id}`, class='gameTitleText')
-            p #{game.title} 
+            p #{game.title}
     //-game.image   <--- potentially add to database
   script(src='/javascripts/login.js')
 

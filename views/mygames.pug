@@ -10,12 +10,12 @@ block content
         h3.sideBar Gameshelves
             ul
                 each shelf in shelves
-                    li(class='shelf' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
-                div(class="AddShelf") 
-                    a(href=`/users/${userId}/addShelf`) Add Shelf
-                div(class="DeleteShelf") 
-                    a(href=`/users/${userId}/deleteShelf`) Delete Shelf
-        table.MyGamesTable 
+                    li(class='shelf dynamic' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
+                div(class="AddShelf")
+                    a(href=`/users/${userId}/addShelf` class='raw-btn') Add Shelf
+                div(class="DeleteShelf")
+                    a(href=`/users/${userId}/deleteShelf` class='raw-btn') Delete Shelf
+        table.MyGamesTable
             thead.tableHead
                 tr
                     th.tableHead Box Art
@@ -29,18 +29,19 @@ block content
                 each game in user.Games
                     tr.mygamesTR
                         td.tableData
-                            a(href=`/games/${game.id}`)
+                            a(href=`/games/${game.id}` class='test')
                                 img(src=`${game.url}` class="GameImg accessibleHLink" alt="video game image")
                         td.tableData
-                            a(href=`/games/${game.id}` class="accessibleHLink")
-                                p #{game.title}
+                            a(href=`/games/${game.id}`)
+                                p(class='scale dynamic') #{game.title}
                         td.tableData #{game.studio}
                         td.tableData #{game.avgCleanRating}
                         if game.Shelves && (user.id === userId)
                             each shelf in game.Shelves
                                 td(class="shelf") #{shelf.name},
-                            else 
-                                td(class="shelf")= "No shelves" 
+                            else
+                                td(class="shelf")= "No shelves"
+
                         //- td #{game.}
                         //- each review in game.Reviews
                         //-     if review.userId === userId
@@ -49,4 +50,3 @@ block content
                         td.tableData #{game.releaseDate}
     script(src="/javascripts/mygamesDOM.js")
     script(src='/javascripts/login.js')
-
