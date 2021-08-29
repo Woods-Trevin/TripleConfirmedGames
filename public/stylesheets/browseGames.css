@@ -67,7 +67,8 @@ img.gamePic{
 }
 
 .gameTitleText{
-    font-size: 19px;
+    /* font-size: 19px; */
+    font-size: 25px;
     text-align: center;
-
+    font-family: 'Bebas Neue', cursive;
 }

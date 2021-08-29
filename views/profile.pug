@@ -5,9 +5,9 @@ extends layout.pug
 block content
     div.topHalfProfile
         h1.updateTitles Profile
-            img(class="profileImg" src="/images/user.png" alt="") 
+            img(class="profileImg" src="/images/user.png" alt="")
         div.username
-            h2.updateTitles #{user.username}'s Profile  
+            h2.updateTitles #{user.username}'s Profile
         div.details
             h3.updateTitles Details:
             ul.detailsList
@@ -15,7 +15,7 @@ block content
                 li #{user.lastName}
                 li #{user.email}
         div.activity
-            h3.updateTitles Activity: 
+            h3.updateTitles Activity:
             ul.activitiesList
                 li.activities Joined In #{user.createdAt}
                 li.activities Total Reviews: #{totalReviews}
@@ -26,26 +26,30 @@ block content
             ul
                 li #{shelf.name}(#{shelf.Games.length})
     div
-        h3.updateTitles #{user.username.toUpperCase()}'s RECENT UPDATES
+        h3.updateTitles #{user.username.toUpperCase()}'s GAMES AND REVIEWS
         ul.GameReviewsDiv
             each game in user.Games
-                div.gameImage
-                    li
-                        img(src=`${game.url}`, alt="video game image")
-                li #{game.title}
-                li #{game.studio}
-                li #{game.avgCleanRating}
-                li #{game.description}
-                each review in game.Reviews
-                    if review.userId === userId
-                        li #{review.content}
-                select(name="shelf-names")
-                    each shelf in game.Shelves
-                        option(value=shelf.name)= shelf.name
+                div.profileFlex
+                    div.gameImage
+                        li
+                            a(href=`/games/${game.id}`)
+                                img(src=`${game.url}`, alt="video game image")
+                    div.detailsFlex
+                        li
+                            a(href=`/games/${game.id}` class='dynamic profileTitle') #{game.title}
+                        li #{game.studio}
+                        li #{game.avgCleanRating}
+                        li #{game.description}
+                        each review in game.Reviews
+                            if review.userId === userId
+                                li <span class='pink'>Your Review: </span> #{review.content}
+                        select(name="shelf-names")
+                            each shelf in game.Shelves
+                                option(value=shelf.name)= shelf.name
                 p.pTag
-                //- if user.Games.id === user.Reviews.
-                //- each review in user.Reviews
-                //-     li #{review.content}
-                //- each game in user.Games
-                //-     li #{game}
+                        //- if user.Games.id === user.Reviews.
+                        //- each review in user.Reviews
+                        //-     li #{review.content}
+                        //- each game in user.Games
+                        //-     li #{game}
     script(src='/javascripts/login.js')
