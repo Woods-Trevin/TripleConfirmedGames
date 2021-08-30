@@ -96,7 +96,7 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
   const { title, content } = req.body;
   const userId = res.locals.user.id
   const games = await Game.findByPk(gameId, {
-    include: [Review, GameCleanRating, Shelf]
+    include: [{ model: Review, include: [ReviewLike, User] }, GameCleanRating, Shelf]
   })
   const reviews = games.Reviews
 
@@ -107,6 +107,12 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
       },
       include: User
     });
+
+  const shelves = await Shelf.findAll({
+    where: {
+      userId: userId
+    }
+  });
 
   let errors = [];
   const validatorErrors = validationResult(req);
@@ -130,7 +136,7 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
   } else {
     console.log("Error creating review");
     errors = validatorErrors.array().map((error) => error.msg);
-    res.render('game-page', { title: games.title, games, reviews, reviewNames, errors, token: req.csrfToken() })
+    res.render('game-page', { title: games.title, games, reviews, reviewNames, shelves, errors, token: req.csrfToken() })
     // const user = User.build();
   }
   console.log('---------------------------------------------------------------------------')
