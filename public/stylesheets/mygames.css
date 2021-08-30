@@ -19,7 +19,11 @@
 
 .sidebar {
     display: flex;
+}
 
+#Gameshelves {
+    font-size: 36px;
+    font-weight: 600;
 }
 
 .tableContainer {
