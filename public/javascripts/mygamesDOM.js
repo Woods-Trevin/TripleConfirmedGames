@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const tableBody = document.querySelector('.tableBody');
                 const tableHTML = user.Shelves[0].Games.map(
                     (game) => `
-                <tr>
+                    <tr>
                     <td><a href='/games/${game.id}'><img src=${game.url} class="GameImg accessibleHLink" alt="video game image"></a></td>
                     <td><a href='/games/${game.id}' class="accessibleHLink">${game.title}</a></td>
                     <td>${game.studio}</td>
@@ -54,6 +54,13 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
         })
     });
+
+
+    const addShelfForm = document.querySelectorAll(".addDeleteShelf");
+    addShelfForm.addEventListener('click', event => {
+
+        const shelf = document.querySelectorAll(".shelf")
+    })
 
 
 

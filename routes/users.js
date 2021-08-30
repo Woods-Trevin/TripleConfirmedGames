@@ -152,7 +152,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
       model: Game,
       include: [{
         model: Shelf,
-        where: {userId: userId}
+        where: { userId: userId }
       }, Review]
     }]
   });
@@ -259,7 +259,7 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
       model: Game,
       include: [{
         model: Shelf,
-        where: {userId: userId}
+        where: { userId: userId }
       }, Review]
     }]
   });
@@ -481,7 +481,7 @@ router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncH
         userId
       })
       const message = `Created ${name} shelf!`
-      res.json({name, message})
+      res.json({ name, message })
     } else {
       // res.render('addShelf', {
       //   title: 'Add Shelf Name',
@@ -491,7 +491,7 @@ router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncH
       // })
       await shelves.destroy();
       const message = `Deleted ${name} shelf!`
-      res.json({name, message})
+      res.json({ name, message })
 
     }
   } catch (e) {
@@ -499,6 +499,35 @@ router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncH
   }
 
 }));
+
+router.post('/:id(\\d+)/addDeleteShelf', asyncHandler(async (req, res) => {
+  const { userId } = req.session.auth
+  const { name } = req.body
+  const shelves = await Shelf.findAll({
+    where: {
+      userId: userId
+    }
+  })
+
+  try {
+    await Shelf.create({
+      name,
+      userId
+    })
+
+    res.redirect(`/users/${userId}/mygames`)
+  } else {
+    res.render('addShelf', {
+      title: 'Add Shelf Name',
+      shelves,
+      userId
+
+    })
+  }
+} catch (e) {
+  next(e)
+}
+}))
 
 
 
