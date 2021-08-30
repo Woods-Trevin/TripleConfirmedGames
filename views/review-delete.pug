@@ -1,14 +1,14 @@
 extends layout.pug
 
 block content
-
-    h3 Are you sure you want to delete this?
-     div
-        p #{review.content}
-    div
-        form(action=`/reviews/${review.id}/delete`, method="post")
-            input(type="hidden" name="_csrf" value=token)
-            button(type="submit") Delete
-        form(action=`/games/${review.gameId}`, method="get")
-            button(type="submit") Cancel
+    div.delete
+        h3 Are you sure you want to delete this?
+        div
+            p #{review.content}
+        div
+            form(action=`/reviews/${review.id}/delete`, method="post")
+                input(type="hidden" name="_csrf" value=token)
+                button(type="submit" class='raw-btn') Delete
+            form(action=`/games/${review.gameId}`, method="get")
+                button(type="submit" class='raw-btn') Cancel
     script(src='/javascripts/login.js')

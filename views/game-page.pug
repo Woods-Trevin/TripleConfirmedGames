@@ -47,7 +47,7 @@ block content
                 p(class='shelf-text' class='pink bold') Write a Review
                 form(action=`/games/${games.id}`, method="post" class='midshelf')
                     input(type="hidden" name="_csrf" value=token)
-                    textarea(name="content" class='textarea' rows='3' cols='30' placeholder='Let the world know what you think')
+                    textarea(name="content" class='textarea' rows='4' cols='40' placeholder='Let the world know what you think')
                     button(type="submit", class='raw-btn') Add A Review
         ul
             each review in games.Reviews
