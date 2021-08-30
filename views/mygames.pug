@@ -12,10 +12,10 @@ block content
                 div.shelfNames
                     each shelf in shelves
                         li(class='shelf dynamic shelfList' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
-                div.responseShelf
-                    form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
-                    input(type="text" class="addDeleteShelfInput" name='name' placeholder='Add/Delete Shelf')
-                    button(class="addDeleteShelfBtn raw-btn") Submit
+                //- div.responseShelf
+                //- form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
+                //-     input(type="text" class="addDeleteShelfInput" name='name' placeholder='Add/Delete Shelf')
+                //-     button(class="addDeleteShelfBtn raw-btn") Submit
                 div(class="AddShelf")
                     a(href=`/users/${userId}/addShelf`)
                         button(class='raw-btn') Add Shelf

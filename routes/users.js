@@ -467,39 +467,51 @@ router.post('/:id(\\d+)/addGame/:gameId(\\d+)', requireAuth, shelfNameValidator,
 
 
 
-router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
-  const { userId } = req.session.auth
-  const { name } = req.body
-  // const name = JSON.parse(nameNotParsed)
+// router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
+//   const { userId } = req.session.auth
+//   const { name } = req.body
+//   // const name = JSON.parse(nameNotParsed)
 
-  console.log('---------------- in router', name)
-  const shelves = await Shelf.findOne({
-    where: {
-      name: name,
-      // userId: userId
-    }
-  })
-  try {
-    console.log('---------------- in try')
-    if (!shelves) {
-      console.log('---------------- in if')
-      await Shelf.create({
-        name,
-        userId
-      })
-      const message = `Created ${name} shelf!`
+//   console.log('---------------- in router', name)
+//   const shelves = await Shelf.findOne({
+//     where: {
+//       name: name,
+//       // userId: userId
+//     }
+//   })
 
-    } else {
+//   const shelf = await Shelf.findAll({
+//     where: {
+//       userId: userId,
+//     }, include: Game
+//   })
 
-      await shelves.destroy();
-      const message = `Deleted ${name} shelf!`
+//   try {
+//     console.log('---------------- in try')
+//     if (!shelves) {
+//       console.log('---------------- in if')
+//       const newShelf = await Shelf.create({
+//         name,
+//         userId
+//       })
+//       const shelfName = newShelf.name
+//       const message = `Created ${name} shelf!`;
+//       res.redirect(`users/${userId}/mygames`)
+//       // res.json({ shelfName, message, shelf });
 
-    }
-  } catch (e) {
-    next(e)
-  }
+//     } else {
 
-}));
+//       const newShelf = await shelves.destroy();
+//       const message = `Deleted ${name} shelf!`;
+//       res.redirect(`users/${userId}/mygames`)
+//       // res.json({ message });
+
+//     }
+//   } catch (e) {
+//     next(e)
+//   }
+
+// }));
 
 
 
