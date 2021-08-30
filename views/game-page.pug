@@ -40,7 +40,7 @@ block content
                 select(name="shelfId" class='dropbox2')
                     each shelf in shelves
                         option(value=shelf.id)= shelf.name
-                button(type='submit', class='raw-btn') Add/Remove
+                button(type='submit', class='raw-btn dropDown') Add/Remove
         div.anything
             +validationErrorSummary(errors)
             .midshelf
