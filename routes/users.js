@@ -4,6 +4,7 @@ const db = require('../db/models');
 const { User, Shelf, Game, Review, ReviewLike, GameCleanRating, GameJoin, SlapOn } = db;
 const bcrypt = require('bcryptjs');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
+// const fs = require('fs');
 
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, userValidators, loginValidator, shelfNameValidator } = require('../utils.js');
@@ -463,39 +464,40 @@ router.post('/:id(\\d+)/addGame/:gameId(\\d+)', requireAuth, shelfNameValidator,
 
 
 
-router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
-  const { userId } = req.session.auth
-  const { name } = req.body
-  const shelves = await Shelf.findOne({
-    where: {
-      name: name
-    }
-  })
-  try {
-    if (!shelves) {
-      await Shelf.create({
-        name,
-        userId
-      })
-      const message = `Created ${name} shelf!`
-      res.json({name, message})
-    } else {
-      // res.render('addShelf', {
-      //   title: 'Add Shelf Name',
-      //   shelves,
-      //   userId
+// router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
+//   const { userId } = req.session.auth
+//   const { nameNotParsed } = req.body
+//   const name = JSON.parse(nameNotParsed)
 
-      // })
-      await shelves.destroy();
-      const message = `Deleted ${name} shelf!`
-      res.json({name, message})
+//   console.log('---------------- in router', name)
+//   const shelves = await Shelf.findOne({
+//     where: {
+//       name: name,
+//       // userId: userId
+//     }
+//   })
+//   try {
+//     console.log('---------------- in try')
+//     if (!shelves) {
+//       console.log('---------------- in if')
+//       await Shelf.create({
+//         name,
+//         userId
+//       })
+//       const message = `Created ${name} shelf!`
+//       res.json({message})
+//     } else {
 
-    }
-  } catch (e) {
-    next(e)
-  }
+//       await shelves.destroy();
+//       const message = `Deleted ${name} shelf!`
+//       res.json({message})
 
-}));
+//     }
+//   } catch (e) {
+//     next(e)
+//   }
+
+// }));
 
 
 
