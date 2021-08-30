@@ -119,7 +119,7 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
 
   const gameExists = await GameJoin.findOne({
     where: {
-      userID: userId,
+      userId: userId,
       gameId: gameId
     }
   })
@@ -143,10 +143,11 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
 
     } else {
       console.log('deleted game')
-      GameJoin.delete({
-        userId,
-        gameId
-      })
+      // GameJoin.delete({
+      //   userId,
+      //   gameId
+      // })
+      gameExists.destroy()
     }
 
     res.redirect(`/games/${gameId}`);
