@@ -19,8 +19,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     shelf.forEach(element => {
         element.addEventListener('click', async (event) => {
             try {
-                console.log("This works!")
-                console.log(event.target.id)
+                // console.log("This works!")
+                // console.log(event.target.id)
                 shelfName = event.target.id
                 const games = await fetch(`/users/${userId}/mygames/${shelfName}`, {
                     method: "POST",
@@ -37,13 +37,13 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const tableBody = document.querySelector('.tableBody');
                 const tableHTML = user.Shelves[0].Games.map(
                     (game) => `
-                    <tr>
-                    <td><a href='/games/${game.id}'><img src=${game.url} class="GameImg accessibleHLink" alt="video game image"></a></td>
-                    <td><a href='/games/${game.id}' class="accessibleHLink">${game.title}</a></td>
-                    <td>${game.studio}</td>
-                    <td>${game.avgCleanRating}</td>
-                    <td>${user.Shelves[0].name}</td>
-                    <td>${game.releaseDate}</td>
+                <tr class='mygamesTR'>
+                    <td class='tableData'><a href='/games/${game.id}'><img src=${game.url} class="GameImg accessibleHLink" alt="video game image"></a></td>
+                    <td class='tableData'><a href='/games/${game.id}' class="accessibleHLink"><p class='scale dynamic'>${game.title}</p></a></td>
+                    <td class='tableData'>${game.studio}</td>
+                    <td class='tableData'>${game.avgCleanRating}</td>
+                    <td class='shelf'>${user.Shelves[0].name}</td>
+                    <td class='tableData'>${game.releaseDate}</td>
                     </tr>
                     `
                     // <td>${user.Reviews[0].content}</td> this was on line 45
@@ -55,24 +55,42 @@ window.addEventListener('DOMContentLoaded', async () => {
         })
     });
 
+    element.addEventListener('click', async (event) => {
+        try {
+            // console.log("This works!")
+            // console.log(event.target.id)
+            shelfName = event.target.id
+            const games = await fetch(`/users/${userId}/addDeleteShelf`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" }
+            })
+            if (!games.ok) {
+                throw games
+            }
 
-    // const addShelfForm = document.querySelectorAll(".addDeleteShelf");
-    // addShelfForm.addEventListener('click', event => {
+            const { user } = await games.json()
+            // console.log(`---------${user.Shelves[0].Games[0].title}`);
+            console.log(`---------${user.Shelves[0]}`);
 
-    //     const shelf = document.querySelectorAll(".shelf")
-    // })
-
-
-
-    // addEventListener('click', async (event) => {
-    //     console.log("This works!")
-    // })
-    // document.getElementsByClassName("tableBody");
-    // const userId = document.querySelector('.myGamesUserId')
-
-
-    // console.log(games)
-
+            const tableBody = document.querySelector('.tableBody');
+            const tableHTML = user.Shelves[0].Games.map(
+                (game) => `
+            <tr class='mygamesTR'>
+                <td class='tableData'><a href='/games/${game.id}'><img src=${game.url} class="GameImg accessibleHLink" alt="video game image"></a></td>
+                <td class='tableData'><a href='/games/${game.id}' class="accessibleHLink"><p class='scale dynamic'>${game.title}</p></a></td>
+                <td class='tableData'>${game.studio}</td>
+                <td class='tableData'>${game.avgCleanRating}</td>
+                <td class='shelf'>${user.Shelves[0].name}</td>
+                <td class='tableData'>${game.releaseDate}</td>
+                </tr>
+                `
+                // <td>${user.Reviews[0].content}</td> this was on line 45
+            );
+            tableBody.innerHTML = tableHTML.join('')
+        } catch (e) {
+            console.error(e);
+        }
+    })
 
 
     // const newGameTableHTML = '

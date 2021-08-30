@@ -39,6 +39,7 @@
     /* right: 10px; */
     bottom: 320px;
     overflow: hidden;
+    margin-right: 30px;
 }
 
 .tableHead {
@@ -107,6 +108,10 @@
     justify-content: center;
 }
 
+.sidebar {
+    margin-left: 50px;
+}
+
 
 @media screen and (max-width: 900px) {
     .MyGamesTable {
@@ -123,11 +128,13 @@
     scale: 2;
     color: #fb049c;
     cursor: pointer;
-
+    text-align: center;
 }
 
-.scale:hover{
+/* .scale:hover{
     transform:scale(1.001);
     font-size: x-large;
     width: 5em;
-}
+    text-align: center;
+
+} */

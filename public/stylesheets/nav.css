@@ -1,3 +1,7 @@
+.container {
+    /* overflow: hidden; */
+}
+
 #nav {
     display:flex;
     justify-content: space-evenly;
@@ -9,7 +13,7 @@
 .menu {
     width: 100%;
     margin-left: 5%;
-    margin-right: 5%;
+    margin-right: 25%;
     display:flex;
     justify-content: space-evenly;
     align-items: center;
@@ -27,9 +31,23 @@
     text-decoration: none;
     color: var(--clr-accent);
     text-align: center;
+    transform: translateX(5vw);
 }
 
 .userIcon {
-    height: 2rem;
-    width: auto;
+    cursor: pointer;
+    transform: translateX(25vw);
+}
+
+#nav img {
+    cursor: pointer;
+    height: 4vh;
+    margin-left: 20px;
+    transform: translateY(.5vh);
+}
+
+@media screen and (max-width: 1700px) {
+    .userIcon {
+        transform: translateX(22vw);
+    }
 }

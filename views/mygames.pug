@@ -9,15 +9,19 @@ block content
     div.tableContainer
         h3.sideBar Gameshelves
             ul
-                each shelf in shelves
-                    li(class='shelf dynamic' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
-                form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
-                    input(type="text" class="addDeleteShelf" name='name' placeholder='Add/Delete Shelf')
-                    button(type="submit" class="addDeleteShelf raw-btn" action=`/users/${userId}/mygames`) Submit
+                div.shelfNames
+                    each shelf in shelves
+                        li(class='shelf dynamic shelfList' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
+                div.responseShelf
+                    form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
+                    input(type="text" class="addDeleteShelfInput" name='name' placeholder='Add/Delete Shelf')
+                    button(class="addDeleteShelfBtn raw-btn") Submit
                 div(class="AddShelf")
-                    a(href=`/users/${userId}/addShelf` class='raw-btn') Add Shelf
+                    a(href=`/users/${userId}/addShelf`)
+                        button(class='raw-btn') Add Shelf
                 div(class="DeleteShelf")
-                    a(href=`/users/${userId}/deleteShelf` class='raw-btn') Delete Shelf
+                    a(href=`/users/${userId}/deleteShelf`)
+                        button(class='raw-btn') Delete Shelf
         table.MyGamesTable
             thead.tableHead
                 tr
@@ -35,7 +39,7 @@ block content
                             a(href=`/games/${game.id}` class='test')
                                 img(src=`${game.url}` class="GameImg accessibleHLink" alt="video game image")
                         td.tableData
-                            a(href=`/games/${game.id}`)
+                            a(href=`/games/${game.id}` class='scale dynamic')
                                 p(class='scale dynamic') #{game.title}
                         td.tableData #{game.studio}
                         td.tableData #{game.avgCleanRating}
