@@ -19,8 +19,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     shelf.forEach(element => {
         element.addEventListener('click', async (event) => {
             try {
-                console.log("This works!")
-                console.log(event.target.id)
+                // console.log("This works!")
+                // console.log(event.target.id)
                 shelfName = event.target.id
                 const games = await fetch(`/users/${userId}/mygames/${shelfName}`, {
                     method: "POST",
@@ -37,13 +37,13 @@ window.addEventListener('DOMContentLoaded', async () => {
                 const tableBody = document.querySelector('.tableBody');
                 const tableHTML = user.Shelves[0].Games.map(
                     (game) => `
-                <tr>
-                    <td><a href='/games/${game.id}'><img src=${game.url} class="GameImg accessibleHLink" alt="video game image"></a></td>
-                    <td><a href='/games/${game.id}' class="accessibleHLink">${game.title}</a></td>
-                    <td>${game.studio}</td>
-                    <td>${game.avgCleanRating}</td>
-                    <td>${user.Shelves[0].name}</td>
-                    <td>${game.releaseDate}</td>
+                <tr class='mygamesTR'>
+                    <td class='tableData'><a href='/games/${game.id}'><img src=${game.url} class="GameImg accessibleHLink" alt="video game image"></a></td>
+                    <td class='tableData'><a href='/games/${game.id}' class="accessibleHLink"><p class='scale dynamic'>${game.title}</p></a></td>
+                    <td class='tableData'>${game.studio}</td>
+                    <td class='tableData'>${game.avgCleanRating}</td>
+                    <td class='shelf'>${user.Shelves[0].name}</td>
+                    <td class='tableData'>${game.releaseDate}</td>
                     </tr>
                     `
                     // <td>${user.Reviews[0].content}</td> this was on line 45
@@ -54,6 +54,46 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
         })
     });
+
+    // const addDeleteBtn = document.querySelector('.addDeleteShelfBtn');
+
+    // addDeleteBtn.addEventListener('click', async (event) => {
+    //     try {
+    //         console.log('---------------- in event listener')
+
+    //         const name = document.querySelector('.addDeleteShelfInput').value;
+    //         console.log('name value in DOM file', name)
+
+    //         const obj = {"name": `${name}`};
+    //         const jsonObj = JSON.stringify(obj);
+
+    //         const shelf = await fetch(`/users/${userId}/addDeleteShelf`, {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: jsonObj
+    //         })
+    //         if (!shelf.ok) {
+    //             throw shelf
+    //         }
+    //         console.log('---------------- after fetch')
+
+    //         const { message } = await shelf.json()
+
+    //         if (message === `Created ${name} shelf!`) {
+    //             const shelfNames = document.querySelector('.shelfNames')
+    //             const responseShelf = document.querySelector('.responseShelf')
+
+    //             const newShelf = `<li class='shelf dynamic' id=${name}>${name}(0)</li>`
+
+    //             shelfNames.innerHTML += newShelf;
+    //             responseShelf.innerHTML = message;
+    //         }
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // })
+
+
 
 
 
