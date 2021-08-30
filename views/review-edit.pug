@@ -1,12 +1,13 @@
 extends layout
 
-//- include utils.pug 
+//- include utils.pug
 
 block content
-    div
+    div.textBox
         +validationErrorSummary(errors)
         form(action=`/reviews/${review.id}/edit`, method="post")
             input(type="hidden" name="_csrf" value=token)
-            textarea(name="content") #{review.content}
-            button(type="submit") Update Review
+            textarea(name="content" class='newText' rows='10' cols='50') #{review.content}
+            div
+                button(type="submit" class='raw-btn') Update Review
     script(src='/javascripts/login.js')

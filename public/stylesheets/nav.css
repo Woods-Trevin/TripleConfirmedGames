@@ -5,7 +5,7 @@
 #nav {
     display:flex;
     justify-content: space-evenly;
-    height: 5vh;
+    height: 50px;
     background-color: black;
     z-index: 999;
 }
@@ -26,7 +26,7 @@
 
 .btn {
     box-sizing: border-box;
-    padding: 1em;
+    padding: .55em 1em;
     font-weight: 800;
     text-decoration: none;
     color: var(--clr-accent);
@@ -41,9 +41,9 @@
 
 #nav img {
     cursor: pointer;
-    height: 4vh;
+    height: 35px;
     margin-left: 20px;
-    transform: translateY(.5vh);
+    margin-top: 7px;
 }
 
 @media screen and (max-width: 1700px) {

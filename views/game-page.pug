@@ -47,83 +47,51 @@ block content
                 p(class='shelf-text' class='pink bold') Write a Review
                 form(action=`/games/${games.id}`, method="post" class='midshelf')
                     input(type="hidden" name="_csrf" value=token)
-                    textarea(name="content" class='textarea' rows='3' cols='30' placeholder='Let the world know what you think')
+                    textarea(name="content" class='textarea' rows='4' cols='40' placeholder='Let the world know what you think')
                     button(type="submit", class='raw-btn') Add A Review
         ul
             each review in games.Reviews
-                li(class='usernamerev pink bold') #{review.User.username}'s Review
-                li(class='content') #{review.content}
-                li(id=`list${review.id}`, class='likes') Wow's: #{review.ReviewLikes.length}
-                //- div(id=review.id class='reviewId')
+                div.fav
+                    img(src="/images/profile.png", alt="")
+                    li(class='usernamerev pink bold') #{review.User.username}'s Review
+                div.allRevContainer
+                    li(class='content') #{review.content}
+                    li(id=`list${review.id}`, class='likes') Wow's: #{review.ReviewLikes.length}
+                    //- div(id=review.id class='reviewId')
 
-                //- div(id=userId class='myGamesUserId')
-                //- input(type="hidden" id='myGamesUserId' value=userId)
-                //- div(id=shelfName class='myGamesGameId')
-                if user
-                    div(id=userId class='userId')
-                    div(id=gameId class='gameId')
-                    //- form(action=`/reviews/${review.id}`, method="post")
-                    button( class=`likes` id=review.id class='raw-btn likebtn') Wow!
-                    if user.id === review.userId
-                        a(href=`/reviews/${review.id}/edit`, class='raw-btn') Edit
-                        a(href=`/reviews/${review.id}/delete`, class='raw-btn') Delete
+                    //- div(id=userId class='myGamesUserId')
+                    //- input(type="hidden" id='myGamesUserId' value=userId)
+                    //- div(id=shelfName class='myGamesGameId')
+                    if user
+                        div(id=userId class='userId')
+                        div(id=gameId class='gameId')
+                        //- form(action=`/reviews/${review.id}`, method="post")
+                        button( class=`likes` id=review.id class='raw-btn likebtn') Wow!
+                        if user.id === review.userId
+                            a(href=`/reviews/${review.id}/edit`, class='raw-btn') Edit
+                            a(href=`/reviews/${review.id}/delete`, class='raw-btn') Delete
         script(src="/javascripts/reviewLikes.js")
         script(src='/javascripts/login.js')
     else
-        div
-            img(src=`${games.url}`, alt="video game image")
-        div(class='game-title')= games.title
-        div(class='game-studio')= games.studio
-        div(class='game-avgRating')= games.avgCleanRating
+        div(class='flex-outer')
+            div(class='art-container')
+                img(src=`${games.url}`, alt="video game image", class='boxart')
+            div(class='flex-inner')
+                div(class='inner')
+                    div(class='game-title pink')= games.title
+                    div(class='game-studio bold flex-inner marginbot') Studio: #{games.studio}
+                    div(class='game-date bold flex-inner marginbot') Released: #{games.releaseDate}
+                    div(class='flex-inner')
+                        div(class='game-avgRating flex-inner')= games.avgCleanRating
         div(class='game-description')= games.description
-        div
-            //- form(action=`/games/${games.id}/rating`, method="post")
-            //-     //- input(type="hidden", name="_csrf" value=importedToken)
-            //-     label(for="soap") How Clean?
-            //-     div
-            //-         select(name="soap")
-            //-             option(value=1) 🧼
-            //-             option(value=2) 🧼🧼
-            //-             option(value=3) 🧼🧼🧼
-            //-             option(value=4) 🧼🧼🧼🧼
-            //-             option(value=5) 🧼🧼🧼🧼🧼
-            //-         button(type="submit") Clean!
-
-        //- div
-        //-     if slapOn
-        //-         p This game is already on this shelf
-        //-     form(action=`/users/${userId}/addGame/${gameId}`, method="post")
-        //-         //- input(type="hidden", name="_csrf" value=importedToken)
-        //-         select(name="shelfId")
-        //-             each shelf in shelves
-        //-                 option(value=shelf.id)= shelf.name
-        //-         button(type='submit') Add/Delete Game to Shelf
-        div(class='game-date')= games.releaseDate
-        //- if user
-        //-     div #{user.firstName}
-        //- div.anything
-        //-     +validationErrorSummary(errors)
-        //-     form(action=`/games/${games.id}`, method="post")
-        //-         input(type="hidden" name="_csrf" value=token)
-        //-         textarea(name="content")
-        //-         button(type="submit") Add A Review
+     
         ul
             each review in games.Reviews
-                li(class='username') #{review.User.username}
-                li(class='content') #{review.content}
-                li(id=`list${review.id}`, class='likes') Likes: #{review.ReviewLikes.length}
-                //- div(id=review.id class='reviewId')
-
-                //- div(id=userId class='myGamesUserId')
-                //- input(type="hidden" id='myGamesUserId' value=userId)
-                //- div(id=shelfName class='myGamesGameId')
-                //- if user
-                //-     div(id=userId class='userId')
-                //-     div(id=gameId class='gameId')
-                //-     //- form(action=`/reviews/${review.id}`, method="post")
-                //-     button( class=`likes` id=review.id) Like!
-                //-     if user.id === review.userId
-                //-         a(href=`/reviews/${review.id}/edit`) Edit
-                //-         a(href=`/reviews/${review.id}/delete`) Delete
+                div.fav
+                    img(src="/images/profile.png", alt="")
+                    li(class='usernamerev pink bold') #{review.User.username}'s Review
+                div.allRevContainer
+                    li(class='content') #{review.content}
+                    li(id=`list${review.id}`, class='likes') Wow's: #{review.ReviewLikes.length}
         //- script(src="/javascripts/reviewLikes.js")
         script(src='/javascripts/login.js')
