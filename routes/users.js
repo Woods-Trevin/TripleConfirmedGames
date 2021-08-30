@@ -8,7 +8,7 @@ const { loginUser, logoutUser, requireAuth } = require('../auth');
 
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, userValidators, loginValidator, shelfNameValidator } = require('../utils.js');
-const { ResultWithContext } = require('express-validator/src/chain');
+// const { ResultWithContext } = require('express-validator/src/chain');
 
 
 
@@ -106,18 +106,21 @@ router.post('/signup', csrfProtection, userValidators,
       loginUser(req, res, user)
 
       // find newly registered users id
-      const userObject = await User.findOne({
-        where: { username: username }
-      });
+      // const userObject = await User.findOne({
+      //   where: { username: username }
+      // });
       // create default shelves
       await Shelf.create(
-        { name: 'Currently Playing', userId: userObject.id },
+        // { name: 'Currently Playing', userId: userObject.id },
+        { name: 'Currently Playing', userId: user.id },
       );
       await Shelf.create(
-        { name: 'Wishlist', userId: userObject.id }
+        // { name: 'Wishlist', userId: userObject.id }
+        { name: 'Wishlist', userId: user.id }
       );
       await Shelf.create(
-        { name: 'Completed', userId: userObject.id }
+        // { name: 'Completed', userId: userObject.id }
+        { name: 'Completed', userId: user.id }
       );
       //--------------
       res.redirect('/games');
@@ -150,7 +153,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
       model: Game,
       include: [{
         model: Shelf,
-        where: {userId: userId}
+        where: { userId: userId }
       }, Review]
     }]
   });
@@ -257,7 +260,7 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
       model: Game,
       include: [{
         model: Shelf,
-        where: {userId: userId}
+        where: { userId: userId }
       }, Review]
     }]
   });
@@ -466,8 +469,8 @@ router.post('/:id(\\d+)/addGame/:gameId(\\d+)', requireAuth, shelfNameValidator,
 
 // router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncHandler(async (req, res, next) => {
 //   const { userId } = req.session.auth
-//   const { nameNotParsed } = req.body
-//   const name = JSON.parse(nameNotParsed)
+//   const { name } = req.body
+//   // const name = JSON.parse(nameNotParsed)
 
 //   console.log('---------------- in router', name)
 //   const shelves = await Shelf.findOne({
@@ -476,21 +479,32 @@ router.post('/:id(\\d+)/addGame/:gameId(\\d+)', requireAuth, shelfNameValidator,
 //       // userId: userId
 //     }
 //   })
+
+//   const shelf = await Shelf.findAll({
+//     where: {
+//       userId: userId,
+//     }, include: Game
+//   })
+
 //   try {
 //     console.log('---------------- in try')
 //     if (!shelves) {
 //       console.log('---------------- in if')
-//       await Shelf.create({
+//       const newShelf = await Shelf.create({
 //         name,
 //         userId
 //       })
-//       const message = `Created ${name} shelf!`
-//       res.json({message})
+//       const shelfName = newShelf.name
+//       const message = `Created ${name} shelf!`;
+//       res.redirect(`users/${userId}/mygames`)
+//       // res.json({ shelfName, message, shelf });
+
 //     } else {
 
-//       await shelves.destroy();
-//       const message = `Deleted ${name} shelf!`
-//       res.json({message})
+//       const newShelf = await shelves.destroy();
+//       const message = `Deleted ${name} shelf!`;
+//       res.redirect(`users/${userId}/mygames`)
+//       // res.json({ message });
 
 //     }
 //   } catch (e) {

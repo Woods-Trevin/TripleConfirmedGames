@@ -12,9 +12,9 @@ block content
             ul
                 div.shelfNames
                     each shelf in shelves
-                        li(class='shelf dynamic' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
+                        li(class='shelf dynamic shelfList' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
                 //- div.responseShelf
-                //-     form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
+                //- form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
                 //-     input(type="text" class="addDeleteShelfInput" name='name' placeholder='Add/Delete Shelf')
                 //-     button(class="addDeleteShelfBtn raw-btn") Submit
                 div(class="AddShelf")
@@ -44,7 +44,7 @@ block content
                                 p(class='scale dynamic') #{game.title}
                         td.tableData #{game.studio}
                         td.tableData #{game.avgCleanRating}
-                        if game.Shelves
+                        if game.Shelves && (user.id === userId)
                             each shelf in game.Shelves
                                 td(class="shelf") #{shelf.name},
                             else

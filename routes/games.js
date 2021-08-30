@@ -117,6 +117,13 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
   let errors = [];
   const validatorErrors = validationResult(req);
 
+  const gameExists = await GameJoin.findOne({
+    where: {
+      userID: userId,
+      gameId: gameId
+    }
+  })
+
 
   if (validatorErrors.isEmpty()) {
     const user = {
@@ -127,10 +134,20 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
     }
     console.log(user);
     await Review.create(user);
-    await GameJoin.create({
-      userId,
-      gameId
-    })
+    if (!gameExists) {
+      console.log('added game')
+      await GameJoin.create({
+        userId,
+        gameId
+      })
+
+    } else {
+      console.log('deleted game')
+      GameJoin.delete({
+        userId,
+        gameId
+      })
+    }
 
     res.redirect(`/games/${gameId}`);
   } else {

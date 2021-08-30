@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     // event.currentTarget.value
     console.log("hey-----------------")
 
-    document.getElementsByClassName
+    // document.getElementsByClassName
 
     const userId = document.querySelector('.myGamesUserId').id
     console.log(userId)
@@ -55,73 +55,5 @@ window.addEventListener('DOMContentLoaded', async () => {
         })
     });
 
-    // const addDeleteBtn = document.querySelector('.addDeleteShelfBtn');
 
-    // addDeleteBtn.addEventListener('click', async (event) => {
-    //     try {
-    //         console.log('---------------- in event listener')
-
-    //         const name = document.querySelector('.addDeleteShelfInput').value;
-    //         console.log('name value in DOM file', name)
-
-    //         const obj = {"name": `${name}`};
-    //         const jsonObj = JSON.stringify(obj);
-
-    //         const shelf = await fetch(`/users/${userId}/addDeleteShelf`, {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: jsonObj
-    //         })
-    //         if (!shelf.ok) {
-    //             throw shelf
-    //         }
-    //         console.log('---------------- after fetch')
-
-    //         const { message } = await shelf.json()
-
-    //         if (message === `Created ${name} shelf!`) {
-    //             const shelfNames = document.querySelector('.shelfNames')
-    //             const responseShelf = document.querySelector('.responseShelf')
-
-    //             const newShelf = `<li class='shelf dynamic' id=${name}>${name}(0)</li>`
-
-    //             shelfNames.innerHTML += newShelf;
-    //             responseShelf.innerHTML = message;
-    //         }
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-    // })
-
-
-
-
-
-    // addEventListener('click', async (event) => {
-    //     console.log("This works!")
-    // })
-    // document.getElementsByClassName("tableBody");
-    // const userId = document.querySelector('.myGamesUserId')
-
-
-    // console.log(games)
-
-
-
-    // const newGameTableHTML = '
-    // each game in user.Games
-    // tr
-    // td placeholder box art
-    // td #{ game.title }
-    // td #{ game.studio }
-    // td #{ game.avgCleanRating }
-    // each shelf in game.Shelves
-    // td #{ shelf.name },
-    // //- td #{game.}
-    // each review in game.Reviews
-    // if review.userId === userId
-    //             td #{ review.content }
-    // a(href = `/games/${userId}`) Write a Review
-    // td #{ game.releaseDate }
-    // '
 })

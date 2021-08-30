@@ -73,6 +73,11 @@
     font-size: x-large;
 }
 
+.updateMainTitle {
+    color: #fb049c;
+    font-size: xx-large;
+}
+
 .profileImg {
     position: absolute;
     width: 250px;
