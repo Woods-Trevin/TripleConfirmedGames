@@ -128,11 +128,13 @@
     scale: 2;
     color: #fb049c;
     cursor: pointer;
-
+    text-align: center;
 }
 
-.scale:hover{
+/* .scale:hover{
     transform:scale(1.001);
     font-size: x-large;
     width: 5em;
-}
+    text-align: center;
+
+} */

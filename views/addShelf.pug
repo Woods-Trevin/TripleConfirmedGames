@@ -4,7 +4,7 @@ extends layout.pug
 block content
     if shelves
         p.addShelfErrorMsg This shelf already exists
-    form(method='POST' class="addShelfForm" action=`/users/${userId}/addShelf`)
+    form(method='POST' class="addShelfFormb" action=`/users/${userId}/addShelf`)
         label(for="name" class="addShelfForm") Add Shelf Name
         input(type="text" class="addShelfForm" name='name' placeholder='Shelf Name')
-        button(type="submit" class="addShelfForm" action=`/users/${userId}/mygames`) Submit
+        button(type="submit" class="addShelfForm raw-btn" action=`/users/${userId}/mygames`) Submit

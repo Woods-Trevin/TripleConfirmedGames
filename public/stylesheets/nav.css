@@ -1,5 +1,5 @@
 .container {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #nav {
@@ -51,4 +51,3 @@
         transform: translateX(22vw);
     }
 }
-
