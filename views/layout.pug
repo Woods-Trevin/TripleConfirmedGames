@@ -15,19 +15,22 @@ html
   body
     div#global-nav
       div#nav
-        if locals.authenticated
-        div.logo
+        a(href="/") 
+          img(src="/images/logo.png", alt="")
         nav.menu
           a(class='btn' href='/') Home
           a(class='btn' href='/games') Browse Games
           if locals.authenticated
             a(id='myGames' class='btn' href=`/users/${userId}/mygames`) My Games
             a(class='btn' href=`/users/${userId}`) User Profile
+            p(class='btn userIcon') Login
+
           else
             p(id='myGame' class='btn') My Games
             p(id='userProfile' class='btn') User Profile
+            p(class='btn userIcon') Login
 
-          img(class='userIcon' src="/images/user.png", alt="?")
+
     +validationErrorSummary(error)
     .modal
         .modal-box
