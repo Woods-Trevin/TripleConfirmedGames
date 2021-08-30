@@ -80,11 +80,26 @@
 
 .textarea {
     margin-right: 20px;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-left: 10px;
 }
 
 .usernamerev {
-    font-size: 15px;
+    font-size: 22px;
+    margin-top: 5px;
 }
+
+.fav{
+    display: flex;
+}
+
+.fav img{
+    display: inline-block;
+    height: 50px;
+    padding-right: 2em;
+}
+
 
 .likebtn {
     margin-bottom: 30px;
@@ -93,4 +108,15 @@
 .likes {
     font-size: 15px;
 
+}
+
+.allRevContainer{
+    background-color: #fff0f2;
+    margin-bottom: 100px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.reviewMargin{
 }

@@ -51,22 +51,25 @@ block content
                     button(type="submit", class='raw-btn') Add A Review
         ul
             each review in games.Reviews
-                li(class='usernamerev pink bold') #{review.User.username}'s Review
-                li(class='content') #{review.content}
-                li(id=`list${review.id}`, class='likes') Wow's: #{review.ReviewLikes.length}
-                //- div(id=review.id class='reviewId')
+                div.fav
+                    img(src="/images/profile.png", alt="")
+                    li(class='usernamerev pink bold') #{review.User.username}'s Review
+                div.allRevContainer
+                    li(class='content') #{review.content}
+                    li(id=`list${review.id}`, class='likes') Wow's: #{review.ReviewLikes.length}
+                    //- div(id=review.id class='reviewId')
 
-                //- div(id=userId class='myGamesUserId')
-                //- input(type="hidden" id='myGamesUserId' value=userId)
-                //- div(id=shelfName class='myGamesGameId')
-                if user
-                    div(id=userId class='userId')
-                    div(id=gameId class='gameId')
-                    //- form(action=`/reviews/${review.id}`, method="post")
-                    button( class=`likes` id=review.id class='raw-btn likebtn') Wow!
-                    if user.id === review.userId
-                        a(href=`/reviews/${review.id}/edit`, class='raw-btn') Edit
-                        a(href=`/reviews/${review.id}/delete`, class='raw-btn') Delete
+                    //- div(id=userId class='myGamesUserId')
+                    //- input(type="hidden" id='myGamesUserId' value=userId)
+                    //- div(id=shelfName class='myGamesGameId')
+                    if user
+                        div(id=userId class='userId')
+                        div(id=gameId class='gameId')
+                        //- form(action=`/reviews/${review.id}`, method="post")
+                        button( class=`likes` id=review.id class='raw-btn likebtn') Wow!
+                        if user.id === review.userId
+                            a(href=`/reviews/${review.id}/edit`, class='raw-btn') Edit
+                            a(href=`/reviews/${review.id}/delete`, class='raw-btn') Delete
         script(src="/javascripts/reviewLikes.js")
         script(src='/javascripts/login.js')
     else
