@@ -500,35 +500,6 @@ router.post(`/:id(\\d+)/addDeleteShelf`, requireAuth, shelfNameValidator, asyncH
 
 }));
 
-router.post('/:id(\\d+)/addDeleteShelf', asyncHandler(async (req, res) => {
-  const { userId } = req.session.auth
-  const { name } = req.body
-  const shelves = await Shelf.findAll({
-    where: {
-      userId: userId
-    }
-  })
-
-  try {
-    await Shelf.create({
-      name,
-      userId
-    })
-
-    res.redirect(`/users/${userId}/mygames`)
-  } else {
-    res.render('addShelf', {
-      title: 'Add Shelf Name',
-      shelves,
-      userId
-
-    })
-  }
-} catch (e) {
-  next(e)
-}
-}))
-
 
 
 

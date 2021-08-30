@@ -56,11 +56,11 @@ window.addEventListener('DOMContentLoaded', async () => {
     });
 
 
-    const addShelfForm = document.querySelectorAll(".addDeleteShelf");
-    addShelfForm.addEventListener('click', event => {
+    // const addShelfForm = document.querySelectorAll(".addDeleteShelf");
+    // addShelfForm.addEventListener('click', event => {
 
-        const shelf = document.querySelectorAll(".shelf")
-    })
+    //     const shelf = document.querySelectorAll(".shelf")
+    // })
 
 
 
