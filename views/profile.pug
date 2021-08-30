@@ -4,7 +4,7 @@ extends layout.pug
 
 block content
     div.topHalfProfile
-        h1.updateTitles Profile
+        h1.updateTitles #{user.username}
             img(class="profileImg" src="/images/profile.png" alt="")
         div.username
             h2.updateTitles #{user.username}'s Profile
