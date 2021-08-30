@@ -42,9 +42,10 @@ block content
                         option(value=shelf.id)= shelf.name
                 button(type='submit', class='raw-btn dropDown') Add/Remove
         div.anything
-            +validationErrorSummary(errors)
+            //- +validationErrorSummary(errors)
             .midshelf
                 p(class='shelf-text' class='pink bold') Write a Review
+                +validationErrorSummary(errors)
                 form(action=`/games/${games.id}`, method="post" class='midshelf')
                     input(type="hidden" name="_csrf" value=token)
                     textarea(name="content" class='textarea' rows='4' cols='40' placeholder='Let the world know what you think')
@@ -84,7 +85,7 @@ block content
                     div(class='flex-inner')
                         div(class='game-avgRating flex-inner')= games.avgCleanRating
         div(class='game-description')= games.description
-     
+
         ul
             each review in games.Reviews
                 div.fav
