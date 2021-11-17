@@ -85,6 +85,28 @@
     top: 90px;
     left: 130px;
 }
+.on-shelves {
+    color: #fb049c;
+}
+
+.shelf-name {
+    margin-left: 10px;
+    color: black;
+}
+
+.none {
+    color: black;
+    margin-left: 10px;
+}
+
+.rating-margin-top {
+    margin-top: 10px;
+}
+
+.review-margin {
+    margin-bottom: 10px;
+}
+
 
 @media screen and (max-width: 900px) {
     .username {

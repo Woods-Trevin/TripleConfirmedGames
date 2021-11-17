@@ -11,7 +11,7 @@ const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js')
 
 router.get('/:id(\\d+)/edit', csrfProtection, requireAuth, asyncHandler(async (req, res) => {
   const reviewId = parseInt(req.params.id, 10);
-  console.log(reviewId);
+  // console.log(reviewId);
   const review = await Review.findByPk(reviewId);
   res.render('review-edit', {
     title: 'Edit Review',
@@ -55,8 +55,8 @@ router.post('/:id(\\d+)/edit', csrfProtection, requireAuth, reviewValidator, asy
 router.get('/:id(\\d+)/delete', csrfProtection, requireAuth, asyncHandler(async (req, res) => {
   const reviewId = parseInt(req.params.id, 10);
   const gameId = req.params.id;
-  console.log(req.params);
-  console.log(reviewId);
+  // console.log(req.params);
+  // console.log(reviewId);
 
   const oldReview = await Review.findByPk(reviewId);
 
