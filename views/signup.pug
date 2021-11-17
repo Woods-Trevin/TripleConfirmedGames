@@ -4,16 +4,18 @@ extends layout.pug
 
 block content
   +validationErrorSummary(errors)
-  form(action='/users/signup' method='post')
-    input(type='hidden' name='_csrf' value=csrfToken)
-    +field('First Name', 'firstName', user.firstName, 'text')
-    +field('Last Name', 'lastName', user.lastName, 'text')
-    +field('Username', 'username', user.username, 'text')
-    +field('Email Address', 'email', user.email, 'email')
-    //- input(type="email" name="email" required placeholder="email")
-    +field('Password', 'password', user.password, 'password', 'password')
-    +field('Confirm Password', 'confirmPassword', '', 'password', 'password')
-    div(class='py-4')
-      button(type='submit' class='raw-btn') Sign up
-      a(href='/games' class='raw-btn') Cancel
-  script(src='/javascripts/login.js')
+  div.centerform
+    div.formPageGeneral
+      form(action='/users/signup' method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        +field('First Name', 'firstName', user.firstName, 'text')
+        +field('Last Name', 'lastName', user.lastName, 'text')
+        +field('Username', 'username', user.username, 'text')
+        +field('Email Address', 'email', user.email, 'email')
+        //- input(type="email" name="email" required placeholder="email")
+        +field('Password', 'password', user.password, 'password', 'password')
+        +field('Confirm Password', 'confirmPassword', '', 'password', 'password')
+        div(class='py-4 signupbtncontain')
+          button(type='submit' class='raw-btn signupbtnstyle') Sign up
+          a(href='/games' class='raw-btn') Cancel
+      script(src='/javascripts/login.js')

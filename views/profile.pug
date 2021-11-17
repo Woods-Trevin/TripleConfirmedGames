@@ -38,11 +38,14 @@ block content
                         li
                             a(href=`/games/${game.id}` class='dynamic profileTitle') #{game.title}
                         li #{game.studio}
-                        li #{game.avgCleanRating}
+                        li Average Rating: #{game.avgCleanRating}
                         li #{game.description}
                         each review in game.Reviews
                             if review.userId === userId
                                 li <span class='pink'>Your Review: </span> #{review.content}
+                                each rating in user.GameCleanRatings
+                                    if rating.userId === userId && rating.gameId === game.id
+                                        li <span class='pink'>Your Clean Rating: </span> #{rating.rating}
                         label(for="shelf-names") On Shelves:
                         select(name="shelf-names")
                             each shelf in game.Shelves

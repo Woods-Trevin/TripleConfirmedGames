@@ -154,7 +154,8 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
       include: [{
         model: Shelf,
         where: { userId: userId }
-      }, Review]
+      },
+      Review]
     }]
   });
 
@@ -162,74 +163,75 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
 
 
   // const user = await User.findByPk(userId, {
-  //   include: [GameCleanRating, {
-  //     model: Game,
-  //     include: [Shelf, Review]
-  //   }]
-  // });
+    //   include: [GameCleanRating, {
+      //     model: Game,
+      //     include: [Shelf, Review]
+      //   }]
+      // });
 
 
 
-  const games = await Game.findAll({
-    include: [Review, Shelf]
-  })
+      const games = await Game.findAll({
+        include: [Review, Shelf]
+      })
 
-  // const shelvesObj = []
+      // const shelvesObj = []
 
-  const shelves = await Shelf.findAll({
-    where: {
-      userId: req.params.id,
-    }, include: Game
-  })
-  // console.log(shelves)
-  //grabbing number of games tied to a certain shelf through query above and adding them to an
-  //array.
-  // const numOfGames = []
-  // shelves.forEach(element => {
-  //   const num = element.Games
-  //   numOfGames.push(num.length)
-  // })
+      const shelves = await Shelf.findAll({
+        where: {
+          userId: req.params.id,
+        }, include: Game
+      })
+      // console.log(shelves)
+      //grabbing number of games tied to a certain shelf through query above and adding them to an
+      //array.
+      // const numOfGames = []
+      // shelves.forEach(element => {
+        //   const num = element.Games
+        //   numOfGames.push(num.length)
+        // })
 
-  // console.log(numOfGames)
+        // console.log(numOfGames)
 
-  // const shelves = await Shelf.findAll()
-  //Cleaaaan
-
-
-  // const namedShelves = []
-  // shelves.forEach(element => {
-  //   namedShelves.push(element.name)
-  // });
+        // const shelves = await Shelf.findAll()
+        //Cleaaaan
 
 
-
-  const review = await Review.findAll({
-    where: {
-      userId: req.params.id
-    }
-  })
-  console.log(user.Games)
-
-  const reviewLikes = await ReviewLike.findAll({
-    where: {
-      userId: req.params.id
-    }
-  });
-
-  const totalReviewLikes = reviewLikes.length;
-
-  const totalReviews = review.length;
-  // console.log(use)
+        // const namedShelves = []
+        // shelves.forEach(element => {
+          //   namedShelves.push(element.name)
+          // });
 
 
 
-  res.render('profile', {
-    title: 'This is a profile page',
-    review,
-    shelves,
-    user,
-    userId,
-    totalReviews,
+          const review = await Review.findAll({
+            where: {
+              userId: req.params.id
+            }
+          })
+          // console.log(user.Games)
+
+          const reviewLikes = await ReviewLike.findAll({
+            where: {
+              userId: req.params.id
+            }
+          });
+
+          const totalReviewLikes = reviewLikes.length;
+
+          const totalReviews = review.length;
+          // console.log(use)
+
+
+          console.log('=========@@@===>', user.Games[3])
+
+          res.render('profile', {
+            title: 'This is a profile page',
+            review,
+            shelves,
+            user,
+            userId,
+            totalReviews,
     totalReviewLikes
   })
 
@@ -282,7 +284,7 @@ router.get('/:id(\\d+)/mygames', requireAuth, asyncHandler(async (req, res, next
   //     userId: req.params.id,
   //   }, include: Game
   // })
-  console.log('SHELVES ON USERSJS ROUTE ------->>>>>>>', userId)
+  // console.log('SHELVES ON USERSJS ROUTE ------->>>>>>>', userId)
 
   res.render('mygames', { title: 'My Games', userId, shelves, user })
 }));

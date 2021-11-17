@@ -2,10 +2,11 @@ extends layout.pug
 
 
 block content
-    div.deleteShelf
-        if !shelves
-            p.deleteShelfErrorMsg Place exact shelf name
-        form(method='POST' class="deleteShelfForm" action=`/users/${userId}/deleteShelf`)
-            label(for="name" class="deleteShelfForm") Delete Shelf Name
-            input(type="text" class="deleteShelfForm" name='name' placeholder='Shelf Name')
-            button(type="submit" class="deleteShelfBtn raw-btn" action=`/users/${userId}/mygames`) Submit
+    div.backofform
+        div.deleteShelf
+            if !shelves
+                p.deleteShelfErrorMsg Place exact shelf name
+            form(method='POST' class="deleteShelfForm" action=`/users/${userId}/deleteShelf`)
+                label(for="name" class="deleteShelfForm") Delete Shelf Name
+                input(type="text" class="deleteShelfForm" name='name' placeholder='Shelf Name')
+                button(type="submit" class="deleteShelfBtn raw-btn" action=`/users/${userId}/mygames`) Submit
