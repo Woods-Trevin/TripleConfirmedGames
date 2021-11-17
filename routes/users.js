@@ -245,9 +245,8 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
           const dateArr = [...dateString.split(" ")];
           const newDateArr = dateArr.slice(0,4)
           const formattedDate = newDateArr.join(' ')
-          // const monthIndex = month - 1;
-          // const formattedDate = new Date(year, month, day);
-          console.log('=======>', formattedDate)
+
+          // console.log('=======>', formattedDate)
 
 
           // console.log('=========@@@===>', user.Games)
