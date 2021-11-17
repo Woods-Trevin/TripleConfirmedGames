@@ -5,16 +5,16 @@
 
 window.addEventListener('DOMContentLoaded', async () => {
     // event.currentTarget.value
-    console.log("hey-----------------")
+    // console.log("hey-----------------")
 
     // document.getElementsByClassName
 
     const userId = document.querySelector('.myGamesUserId').id
-    console.log(userId)
+    // console.log(userId)
 
     const shelf = document.querySelectorAll(".shelf")
 
-    console.log(shelf)
+    // console.log(shelf)
 
     shelf.forEach(element => {
         element.addEventListener('click', async (event) => {

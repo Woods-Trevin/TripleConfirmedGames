@@ -24,22 +24,22 @@ router.get('/login', csrfProtection, asyncHandler(async (req, res, next) => {
 }));
 
 router.post('/login', loginValidator, csrfProtection, asyncHandler(async (req, res, next) => {
-  console.log("Literally Anything!")
+  // console.log("Literally Anything!")
   // res.send('respond with a resource');
   const { username, password } = req.body
 
   let errors = [];
   const validatorErrors = validationResult(req);
-  console.log("before validator")
+  // console.log("before validator")
 
   if (validatorErrors.isEmpty()) {
     const user = await db.User.findOne({ where: { username } });
-    console.log("below user query")
+    // console.log("below user query")
     if (user !== null) {
-      console.log("in user if")
+      // console.log("in user if")
       const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString())
       if (passwordMatch) {
-        console.log("password match if")
+        // console.log("password match if")
 
         //TODO login the user.
         loginUser(req, res, user);
@@ -125,7 +125,7 @@ router.post('/signup', csrfProtection, userValidators,
       //--------------
       res.redirect('/games');
     } else {
-      console.log("ERROR HERE");
+      // console.log("ERROR HERE");
       const errors = validatorErrors.array().map((error) => error.msg);
       const user = User.build();
 
@@ -223,7 +223,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
           // console.log(use)
 
 
-          console.log('=========@@@===>', user.Games[3])
+          console.log('=========@@@===>', user.Games)
 
           res.render('profile', {
             title: 'This is a profile page',
@@ -401,8 +401,8 @@ router.post('/:id(\\d+)/deleteShelf', requireAuth, shelfNameValidator, asyncHand
 router.post('/:id(\\d+)/mygames/:shelfName', asyncHandler(async (req, res) => {
   const shelfName = req.params.shelfName
   const userId = parseInt(req.params.id, 10);
-  console.log('@@@@@@@@@@', userId)
-  console.log(shelfName)
+  // console.log('@@@@@@@@@@', userId)
+  // console.log(shelfName)
 
   const user = await User.findByPk(userId, {
     include: [GameCleanRating, {
@@ -415,8 +415,8 @@ router.post('/:id(\\d+)/mygames/:shelfName', asyncHandler(async (req, res) => {
 
     }, Review]
   });
-  console.log('OOOOOOOOOOOOOOOO', shelfName);
-  console.log(user.Shelves);
+  // console.log('OOOOOOOOOOOOOOOO', shelfName);
+  // console.log(user.Shelves);
 
   // const shelf = await Shelf.findAll({
   //   where: {

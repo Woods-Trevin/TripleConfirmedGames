@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', async () => {
     // event.currentTarget.value
-    console.log("hey-----------------")
+    // console.log("hey-----------------")
 
     document.getElementsByClassName
 
@@ -10,13 +10,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     const gameId = document.querySelector('.gameId').id
     // const singleReviewId = document.querySelector('.reviewId').id
 
-    console.log(reviewLikeButton)
+    // console.log(reviewLikeButton)
 
     reviewLikeButton.forEach(element => {
         element.addEventListener('click', async (event) => {
 
             let singleReviewId = event.target.id;
-            console.log(singleReviewId);
+            // console.log(singleReviewId);
             const likeData = await fetch(`/games/${gameId}/${singleReviewId}/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" }
