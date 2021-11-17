@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
                 const { user } = await games.json()
                 // console.log(`---------${user.Shelves[0].Games[0].title}`);
-                console.log(`---------${user.Shelves[0]}`);
+                // console.log(`---------${user.Shelves[0]}`);
 
                 const tableBody = document.querySelector('.tableBody');
                 const tableHTML = user.Shelves[0].Games.map(

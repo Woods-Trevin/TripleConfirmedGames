@@ -172,8 +172,24 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
 
 
       const games = await Game.findAll({
-        include: [Review, Shelf]
+        include: [Review, Shelf, GameCleanRating]
       })
+
+      const gamesOnShelvesOrReviews = {}
+      games.forEach(game => {
+        game.Shelves.forEach(shelf => {
+          if (shelf.userId === userId) {
+            gamesOnShelvesOrReviews[game.id] = game
+          }
+        })
+        game.Reviews.forEach(review => {
+          if (review.userId === userId) {
+            gamesOnShelvesOrReviews[game.id] = game
+          }
+        })
+      })
+
+      userGamesArr = Object.values(gamesOnShelvesOrReviews)
 
       // const shelvesObj = []
 
@@ -220,10 +236,21 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
           const totalReviewLikes = reviewLikes.length;
 
           const totalReviews = review.length;
-          // console.log(use)
+
+          const totalShelves = shelves.length
+          const gamesInteractedWith = userGamesArr.length
+          //games interacted with doesnt account for likes so I decided to not include it
+          const dateString = user.createdAt.toString()
+
+          const dateArr = [...dateString.split(" ")];
+          const newDateArr = dateArr.slice(0,4)
+          const formattedDate = newDateArr.join(' ')
+          // const monthIndex = month - 1;
+          // const formattedDate = new Date(year, month, day);
+          console.log('=======>', formattedDate)
 
 
-          console.log('=========@@@===>', user.Games)
+          // console.log('=========@@@===>', user.Games)
 
           res.render('profile', {
             title: 'This is a profile page',
@@ -232,7 +259,11 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
             user,
             userId,
             totalReviews,
-    totalReviewLikes
+            totalReviewLikes,
+            userGamesArr,
+            totalShelves,
+            gamesInteractedWith,
+            formattedDate
   })
 
 }))
