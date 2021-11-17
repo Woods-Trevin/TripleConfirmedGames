@@ -56,9 +56,23 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
         userId: currentUser
       }
     });
-    console.log(shelves);
 
-    res.render('game-page', { title: games.title, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, token: req.csrfToken() })
+    const usersReviewLikesArr = await ReviewLike.findAll(
+      {
+        where: {
+          userId: currentUser
+        }
+      }
+    );
+
+    let usersWowsArr = [];
+    
+    usersReviewLikesArr.forEach(element => {
+      usersWowsArr.push(element.dataValues.reviewId)
+    });
+
+
+    res.render('game-page', { title: games.title, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, usersWowsArr, token: req.csrfToken() })
   } else {
     const reviewLike = await ReviewLike.findAll({
       where: { reviewId }

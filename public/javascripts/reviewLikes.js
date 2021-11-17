@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', async () => {
     // event.currentTarget.value
-    console.log("hey-----------------")
 
     document.getElementsByClassName
 
@@ -10,13 +9,11 @@ window.addEventListener('DOMContentLoaded', async () => {
     const gameId = document.querySelector('.gameId').id
     // const singleReviewId = document.querySelector('.reviewId').id
 
-    console.log(reviewLikeButton)
 
     reviewLikeButton.forEach(element => {
         element.addEventListener('click', async (event) => {
 
             let singleReviewId = event.target.id;
-            console.log(singleReviewId);
             const likeData = await fetch(`/games/${gameId}/${singleReviewId}/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" }
@@ -26,7 +23,13 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
             const { totalLikes, reviewId} = await likeData.json()
             const likeLength = document.querySelector(`#list${reviewId}`)
+            const wow = document.querySelector(`.likebtn${reviewId}`)
             likeLength.innerHTML = `Wow's: ${totalLikes}`
+            if (wow.innerHTML === 'Wow!') {
+                wow.innerHTML = 'Un-Wow!'
+            } else{
+                wow.innerHTML = 'Wow!'
+            }
             // console.log(userId)
             // console.log(totalLikes);
         })
