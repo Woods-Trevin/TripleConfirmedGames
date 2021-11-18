@@ -1,0 +1,155 @@
+.username {
+    display: flex;
+    position: relative;
+    left: 300px;
+    border-bottom: 2px solid lightgray;
+    width: 75%;
+
+
+}
+
+.details {
+    display: flex;
+    /* flex-direction: column; */
+    position: relative;
+    padding-bottom: 10px;
+    left: 300px;
+    width: 80%;
+    flex-wrap: nowrap;
+}
+
+.activity {
+    display: flex;
+    position: relative;
+    left: 300px;
+    width: 80%;
+}
+
+.activitiesList {
+    padding-left: 50px;
+}
+
+.detailsList {
+    /* margin-right: 50px; */
+    padding-left: 50px;
+}
+
+.activities {
+    width: 80%;
+}
+
+.topHalfProfile {
+    border-bottom: 2px solid lightgray;
+}
+
+
+.profileShelves {
+    display: flex;
+    border-bottom: 2px solid lightgray;
+    flex-direction: column;
+
+
+
+}
+
+.pTag {
+    border: 2px solid #fb049c;
+    width: 100%;
+
+}
+
+.gameImage {
+    display: flex;
+    position: relative;
+}
+
+.GameReviewsDiv{
+    /* margin: auto; */
+    padding: 30px;
+}
+
+.updateTitles {
+    color: #fb049c;
+    font-size: x-large;
+}
+
+.updateMainTitle {
+    color: #fb049c;
+    font-size: xx-large;
+}
+
+.profileImg {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 90px;
+    left: 130px;
+}
+.on-shelves {
+    color: #fb049c;
+}
+
+.shelf-name {
+    margin-left: 10px;
+    color: black;
+}
+
+.none {
+    color: black;
+    margin-left: 10px;
+}
+
+.rating-margin-top {
+    margin-top: 10px;
+}
+
+.review-margin {
+    margin-bottom: 10px;
+}
+
+
+@media screen and (max-width: 900px) {
+    .username {
+      width: 75%;
+    }
+
+    .details {
+        width: 50%;
+    }
+
+    .activity {
+        width: 80%;
+    }
+
+    .activities {
+        width: 80%;
+    }
+
+    .update {
+        border: 2px solid black;
+        width: 100%;
+    }
+
+    .GameReviewsDiv {
+        width: 80%;
+    }
+}
+
+.profileFlex{
+    display: flex;
+
+}
+
+.profileTitle{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.detailsFlex{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 100px;
+    width: 100%;
+}

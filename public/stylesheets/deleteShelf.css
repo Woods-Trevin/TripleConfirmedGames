@@ -1,0 +1,15 @@
+/* .deleteShelfBtn {
+    color: white;
+} */
+
+.deleteShelfErrorMsg{
+    background-color: white;
+}
+
+.deleteShelfForm {
+    background-color: white;
+}
+
+.deleteShelf {
+    margin-top: 9.5vh;
+}

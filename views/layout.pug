@@ -2,7 +2,91 @@ doctype html
 html
   head
       block head
-        title="Express Starter App"
+        title="Triple Confirmed Games"
+        meta(name="title" property="og:title" content="Triple Confirmed Games")
+        meta(property="og:type" content="Website")
+        meta(name="image" property="og:image" content="https://i.ibb.co/YBSfPDm/Screen-Shot-2021-11-17-at-2-54-58-PM.png")
+        meta(name="description" property="og:description" content="TripleConfirmedGames is an Express-server based app utilizing PostgreSQL for the database and Pug for the frontend. TripleConfirmedGames allows users to browse a variety of games and share their thoughts on it via reviews and a 1-5 soap rating based on how 'clean' (i.e. good) they think the game is. In addition to that, users are also able to create shelves to add their games to and keep track of them that way.")
+        meta(name="author" content="Rawaha Memon, Trevin Woods, Basel Hassan, Arnold Cabang")
         link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/index.css')
+        link(rel='stylesheet' href='/stylesheets/nav.css')
+        link(rel='stylesheet' href='/stylesheets/mygames.css')
+        link(rel='stylesheet' href='/stylesheets/deleteShelf.css')
+        link(rel='stylesheet' href='/stylesheets/login.css')
+        link(rel='stylesheet' href='/stylesheets/gamePage.css')
+        link(rel='stylesheet' href='/stylesheets/profile.css')
+        link(rel='stylesheet' href='/stylesheets/textArea.css')
+        link(rel='stylesheet' href='/stylesheets/addShelf.css')
+        link(rel='stylesheet' href='/stylesheets/signupPage.css')
+        include utils.pug
   body
-    block content
+    div#global-nav
+      div#nav
+        a(href="/")
+          img(src="/images/logo.png", alt="")
+        nav.menu
+          a(class='btn' href='/') Home
+          a(class='btn' href='/games') Browse Games
+          if locals.authenticated
+            a(id='myGames' class='btn' href=`/users/${userId}/mygames`) My Games
+            a(class='btn' href=`/users/${userId}`) User Profile
+            p(class='btn userIcon') Login
+
+          else
+            p(id='myGame' class='btn') My Games
+            p(id='userProfile' class='btn') User Profile
+            p(class='btn userIcon') Login
+
+
+    +validationErrorSummary(error)
+    .modal
+        .modal-box
+            .modal-body
+                h3 Log In
+                form(action="/users/login", method="post")
+                    input(type="hidden" name="_csrf" value=token)
+                    //- .form-control
+                    .form-control
+                        label(for="username") Username
+                        input(type="text" name="username" required id="user")
+                        //- changed above input tag's ID from username to user
+                    div.form-control
+                        label(for="password") Password
+                        input(type="password" name="password" required id="pass")
+                        //- changed above input tag's ID from password to pass
+                    div.form-control-log
+                        button(class='login-btn' type="submit") wow!
+                    img(class="close" src='/images/close.png' alt="close")
+                if locals.authenticated
+                  .modal-footer
+                    p.logText 🤡 You're already logged in 🤡
+                      form(class='log' action='/users/logout' method='post')
+                        button(class='login-btn' type='submit') Logout
+                else
+                  .modal-footer
+                    p.logText Or log in with
+                  form(action="/users/login", method="post")
+                    .form-control-log
+                      input(type="hidden" name="_csrf" value=token)
+                      input(type="hidden" name="username" required id="username" value='demo user1')
+                      input(type="hidden" name="password" required id="password" value='Password12!')
+                      button(class='login-btn' type="submit") Demo
+                    p.logTexT
+                      a(class='login-btna' href='/users/signup') Register
+
+
+    div.container
+      block content
+
+    //- if locals.authenticated
+    //-   span(class='navbar-text px-4') Welcome #{user.firstName}!
+    //-     a(href=`/users/${user.id}`) UserProfile
+    //-   form(class='form-inline pr-4' action='/users/logout' method='post')
+    //-     button(class='btn' type='submit') Logout
+    //- else
+    //-   span(class='navbar-text px-4')
+    //-     a(class='btn' href='/users/login') Login
+    //-     a(class='btn' href='/users/signup') Register
+    //-     //- a(href="/users/#{userId}") UserProfile
+    //- block content

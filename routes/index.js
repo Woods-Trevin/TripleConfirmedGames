@@ -1,9 +1,21 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const { requireAuth } = require('../auth.js');
+const { check, validationResult } = require('express-validator');
+const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js');
+const db = require('../db/models');
+const { Game, Review, GameCleanRating, Shelf, User, ReviewLike } = db;
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'a/A Express Skeleton Home' });
-});
-
-module.exports = router;
+router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
+    const allGames = await Game.findAll();
+    if (req.session.auth) {
+      const { userId } = req.session.auth;
+      
+      res.render('splash', { title: 'Game List', userId, games: allGames, token: req.csrfToken() });
+    } else {
+      res.render('splash', { title: 'Game List', games: allGames, token: req.csrfToken() });
+    }
+    // userId ---------------- this was a param on line 13
+  }));
+  
+  module.exports = router;

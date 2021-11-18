@@ -1,3 +1,47 @@
-h1 {
-    color: #555555;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&display=swap');
+
+html,
+body {
+    font-family: 'Rubik', sans-serif;
+    background: white;
+    color: var(--clr-text);
+    line-height: 1.7;
+    /* overflow-x: hidden; */
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+:root {
+    --clr-text: black;
+    --clr-primary: black;
+    --clr-accent: white;
+}
+
+html {
+    box-sizing: border-box;
+    color: var(--clr-text);
+    font-size: 1.125rem;
+}
+
+body {
+    background-color: var(--clr-accent);
+}
+
+.container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+/* Typography */
+h1,
+h2,
+h3 {
+    color: var(--clr-primary);
 }
