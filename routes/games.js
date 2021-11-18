@@ -4,7 +4,7 @@ const { requireAuth } = require('../auth.js');
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler, reviewValidator } = require('../utils.js');
 const db = require('../db/models');
-const { Game, Review, GameCleanRating, Shelf, User, GameJoin, ReviewLike } = db;
+const { Game, Review, GameCleanRating, Shelf, Shelves, User, GameJoin, ReviewLike, SlapOn } = db;
 
 /* GET home page. */
 router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
@@ -56,9 +56,35 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
         userId: currentUser
       }
     });
-    console.log(shelves);
+    // console.log(shelves);
 
-    res.render('game-page', { title: games.title, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, token: req.csrfToken() })
+    const GamesOnShelf = await SlapOn.findAll(
+      {
+        where: {
+          gameId: req.params.id
+        }, include: Shelves,
+      });
+
+    // console.log(GamesOnShelf);
+    let shelfIds = []
+    for (let i = 0; i < GamesOnShelf.length; i++) {
+      // console.log(GamesOnShelf[i].shelfId, "GAMES------------------------------------");
+      shelfIds.push(GamesOnShelf[i].shelfId);
+    }
+
+    const GameCurrentShelves = await Shelf.findAll({
+      where: {
+        id: shelfIds
+      }
+    })
+
+    // console.log(GameCurrentShelves)
+    // for (let i = 0; i < GameCurrentShelves.length; i++) {
+    //   console.log(GameCurrentShelves[i].name)
+    // }
+
+
+    res.render('game-page', { title: games.title, games, reviews, GameCurrentShelves, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, token: req.csrfToken() })
   } else {
     const reviewLike = await ReviewLike.findAll({
       where: { reviewId }

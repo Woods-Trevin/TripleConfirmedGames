@@ -2,6 +2,7 @@
     display: flex;
     margin-top: 30px;
     justify-content: space-between;
+    /* border: 2px solid red; */
 }
 
 .flex-inner {
@@ -9,6 +10,7 @@
     justify-content: center;
     /* margin-left: 20px; */
     width: 100%;
+    /* border: 2px solid blue; */
 
 
 }
@@ -18,11 +20,13 @@
     flex-direction: column;
     /* justify-content: center; */
     align-items: space-between;
+    /* border: 2px solid green; */
 }
 
 .game-title {
     font-size: 50px;
     font-weight: bold;
+    
 }
 .marginbot {
     margin-bottom: 40px;
@@ -36,6 +40,7 @@
 
 .pink {
     color:#fb049c;
+    /* border: 2px solid red; */
 }
 
 .bold {
@@ -67,6 +72,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* border: 2px solid blue; */
 }
 
 .dropbox1 {
@@ -120,4 +126,19 @@
 
 .dropDown {
     padding: .5em 2em;
+}
+
+
+.currentShelves_label {
+    /* border: 2px solid red; */
+    color: #fb049c;
+    font-size: 30px;
+}
+
+.currentShelvesForGame {
+    border: 2px solid #fb049c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
