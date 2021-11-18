@@ -19,8 +19,15 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
   }));
 
 router.get('/aboutus', csrfProtection, asyncHandler(async (req, res, next) => {
-  const { userId } = req.session.auth
-  res.render('aboutus', { userId, token: req.csrfToken() });
+  if (req.session.auth) {
+    const { userId } = req.session.auth
+    res.render('aboutus', { userId, token: req.csrfToken() });
+  } else {
+    res.render('aboutus', {token: req.csrfToken() });
+  }
+
+
+
 }));
 
   module.exports = router;
