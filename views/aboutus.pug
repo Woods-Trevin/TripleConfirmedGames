@@ -1,0 +1,67 @@
+extends layout
+
+append head
+  //- add page specific styles by appending to the head
+  link(rel="stylesheet" href="/stylesheets/index.css")
+  link(rel="stylesheet" href="/stylesheets/aboutus.css")
+
+  link(rel="preconnect" href="https://fonts.googleapis.com")
+  link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+  link(href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet")
+  //- add page specific js
+
+  script(src="/javascripts/games.js" type="module" defer)
+
+block content
+  link(rel='stylesheet' href='/stylesheets/browseGames.css')
+  div.header
+    h1= title
+
+
+  div.parentContainer
+    div.listedGame
+      div(class='atag')
+        img(src=`https://avatars.githubusercontent.com/u/32443199?v=4`, alt="img", class='gamePic')
+      div.gameTitle
+        div(class='gameTitleText')
+          p Trevin Woods
+          div(class='links')
+            a(href="https://github.com/Woods-Trevin" target="_blank" rel="noopener noreferrer")
+                img(src="https://i.ibb.co/0JJKZSS/github-PNG83-2.png", alt="githubico" class="ico")
+            a(href="https://www.linkedin.com/in/trevinwoods4778661aa/" target="_blank" rel="noopener noreferrer")
+                img(src="https://i.ibb.co/QYMDGZj/Screen-Shot-2021-11-17-at-9-09-44-PM-1.png", alt="linkedinico" class="ico")
+    div.listedGame
+      div(class='atag')
+        img(src=`https://avatars.githubusercontent.com/u/84748545?v=4`, alt="img", class='gamePic')
+      div.gameTitle
+        div(class='gameTitleText')
+          p Rawaha Memon
+          div(class='links')
+            a(href="https://github.com/RawaMem" target="_blank" rel="noopener noreferrer")
+                img(src="https://i.ibb.co/0JJKZSS/github-PNG83-2.png", alt="githubico" class="ico")
+            a(href="https://www.linkedin.com/in/rawaha-m-b280a4204/" target="_blank" rel="noopener noreferrer")
+                img(src="https://i.ibb.co/QYMDGZj/Screen-Shot-2021-11-17-at-9-09-44-PM-1.png", alt="linkedinico" class="ico")
+    div.listedGame
+      div(class='atag')
+        img(src=`https://avatars.githubusercontent.com/u/80736421?v=4`, alt="img", class='gamePic')
+      div.gameTitle
+        div(class='gameTitleText')
+          p Basel Hassan
+          div(class='links')
+            a(href="https://github.com/BaselHassan8" target="_blank" rel="noopener noreferrer")
+                img(src="https://i.ibb.co/0JJKZSS/github-PNG83-2.png", alt="githubico" class="ico")
+            a(href="https://www.linkedin.com/in/basel-hassan-993359199/" target="_blank" rel="noopener noreferrer")
+                img(src="https://i.ibb.co/QYMDGZj/Screen-Shot-2021-11-17-at-9-09-44-PM-1.png", alt="linkedinico" class="ico")
+    div.listedGame
+      div(class='atag')
+        img(src=`https://avatars.githubusercontent.com/u/73568041?v=4`, alt="img", class='gamePic')
+      div.gameTitle
+        div(class='gameTitleText')
+          p Arnold Cabang
+          div(class='links')
+            a(href="https://github.com/heyarnold23" target="_blank" rel="noopener noreferrer")
+                img(src="https://i.ibb.co/0JJKZSS/github-PNG83-2.png", alt="githubico" class="ico")
+            a(href="https://www.linkedin.com/in/arnold-cabang-jr-615932216/" target="_blank" rel="noopener noreferrer")
+                img(src="https://i.ibb.co/QYMDGZj/Screen-Shot-2021-11-17-at-9-09-44-PM-1.png", alt="linkedinico" class="ico")
+
+  script(src='/javascripts/login.js')
