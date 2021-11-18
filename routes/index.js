@@ -10,12 +10,17 @@ router.get('/', csrfProtection, asyncHandler(async (req, res, next) => {
     const allGames = await Game.findAll();
     if (req.session.auth) {
       const { userId } = req.session.auth;
-      
+
       res.render('splash', { title: 'Game List', userId, games: allGames, token: req.csrfToken() });
     } else {
       res.render('splash', { title: 'Game List', games: allGames, token: req.csrfToken() });
     }
     // userId ---------------- this was a param on line 13
   }));
-  
+
+router.get('/aboutus', csrfProtection, asyncHandler(async (req, res, next) => {
+  const { userId } = req.session.auth
+  res.render('aboutus', { userId, token: req.csrfToken() });
+}));
+
   module.exports = router;
