@@ -56,6 +56,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
         userId: currentUser
       }
     });
+
     // console.log(shelves);
 
     const GamesOnShelf = await SlapOn.findAll(
@@ -85,6 +86,24 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
 
 
     res.render('game-page', { title: games.title, games, reviews, GameCurrentShelves, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, token: req.csrfToken() })
+
+    const usersReviewLikesArr = await ReviewLike.findAll(
+      {
+        where: {
+          userId: currentUser
+        }
+      }
+    );
+
+    let usersWowsArr = [];
+    
+    usersReviewLikesArr.forEach(element => {
+      usersWowsArr.push(element.dataValues.reviewId)
+    });
+
+
+    res.render('game-page', { title: games.title, games, reviews, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, usersWowsArr, token: req.csrfToken() })
+
   } else {
     const reviewLike = await ReviewLike.findAll({
       where: { reviewId }
@@ -158,17 +177,17 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
       content,
       gameId
     }
-    console.log(user);
+    // console.log(user);
     await Review.create(user);
     if (!gameExists) {
-      console.log('added game')
+      // console.log('added game')
       await GameJoin.create({
         userId,
         gameId
       })
 
     } else {
-      console.log('deleted game')
+      // console.log('deleted game')
       // GameJoin.delete({
       //   userId,
       //   gameId
@@ -178,13 +197,13 @@ router.post('/:id(\\d+)', csrfProtection, reviewValidator, requireAuth, asyncHan
 
     res.redirect(`/games/${gameId}`);
   } else {
-    console.log("Error creating review");
+    // console.log("Error creating review");
     errors = validatorErrors.array().map((error) => error.msg);
     res.render('game-page', { title: games.title, games, reviews, reviewNames, shelves, errors, token: req.csrfToken() })
     // const user = User.build();
   }
-  console.log('---------------------------------------------------------------------------')
-  console.log(errors);
+  // console.log('---------------------------------------------------------------------------')
+  // console.log(errors);
 
   // res.redirect(`/games/${gameId}`)
 }));
@@ -196,9 +215,9 @@ router.post('/:id(\\d+)/:reviewId(\\d+)', asyncHandler(async (req, res, next) =>
   //   where: {reviewId}
   // });
   const currentUser = req.session.auth.userId;
-  console.log("--------->>>>>> IN WRONG ROUTER");
+  // console.log("--------->>>>>> IN WRONG ROUTER");
   const { soap } = req.body
-  console.log("--------->>>>>>", soap);
+  // console.log("--------->>>>>>", soap);
   const reviewLike = await ReviewLike.findOne({
     where: { reviewId, userId: currentUser }
   });
@@ -216,8 +235,8 @@ router.post('/:id(\\d+)/:reviewId(\\d+)', asyncHandler(async (req, res, next) =>
   });
 
   const totalLikes = allLikes.length;
-  console.log('TOTAL LIKES -------------')
-  console.log(totalLikes);
+  // console.log('TOTAL LIKES -------------')
+  // console.log(totalLikes);
   res.json({ totalLikes, reviewId })
 }));
 
@@ -226,11 +245,11 @@ router.post('/:id(\\d+)/rating', asyncHandler(async (req, res, next) => {
   const gameId = parseInt(req.params.id, 10);
   const currentUser = req.session.auth.userId;
 
-  console.log("IN RATING ROUTER");
+  // console.log("IN RATING ROUTER");
 
   const { soap } = req.body
 
-  console.log(soap)
+  // console.log(soap)
 
   const findRating = await GameCleanRating.findOne({
     where: { gameId, userId: currentUser }
@@ -242,8 +261,8 @@ router.post('/:id(\\d+)/rating', asyncHandler(async (req, res, next) => {
     const allRatings = await GameCleanRating.findAll({
       where: { gameId }
     });
-    console.log('allRatings ========= >>>', allRatings);
-    console.log('FIRST RATING IN OBJECT------', allRatings[0].rating);
+    // console.log('allRatings ========= >>>', allRatings);
+    // console.log('FIRST RATING IN OBJECT------', allRatings[0].rating);
 
     let counter = 0;
     allRatings.forEach(element => {
@@ -269,8 +288,8 @@ router.post('/:id(\\d+)/rating', asyncHandler(async (req, res, next) => {
     const allRatings = await GameCleanRating.findAll({
       where: { gameId }
     });
-    console.log('allRatings ========= >>>', allRatings);
-    console.log('FIRST RATING IN OBJECT------', allRatings[0].rating);
+    // console.log('allRatings ========= >>>', allRatings);
+    // console.log('FIRST RATING IN OBJECT------', allRatings[0].rating);
 
     let counter = 0;
     allRatings.forEach(element => {
@@ -281,7 +300,7 @@ router.post('/:id(\\d+)/rating', asyncHandler(async (req, res, next) => {
 
     const roundedRates = parseFloat(rates.toFixed(1));
 
-    console.log('RATES ------------>', roundedRates);
+    // console.log('RATES ------------>', roundedRates);
 
     const game = await Game.findByPk(gameId)
 

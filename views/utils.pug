@@ -8,5 +8,5 @@ mixin validationErrorSummary(errors)
 
 mixin field(labelText, fieldName, fieldValue, inputType)
   div(class='form-group')
-    label(for=fieldName)= labelText
-    input(type=inputType id=fieldName name=fieldName value=fieldValue class='form-control')
+    //- label(type='hidden' for=fieldName)= labelText
+    input(type=inputType id=fieldName name=fieldName value=fieldValue placeholder=labelText class='form-control')

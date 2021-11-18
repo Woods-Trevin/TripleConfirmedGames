@@ -17,18 +17,49 @@ block content
         div.activity
             h3.updateTitles Activity:
             ul.activitiesList
-                li.activities Joined In #{user.createdAt}
+                li.activities Joined On #{formattedDate}
                 li.activities Total Reviews: #{totalReviews}
                 li.activities Total Review Likes: #{totalReviewLikes}
+                li.activities Total Amount of Shelves: #{totalShelves}
+
     div.profileShelves
         h3.updateTitles #{user.firstName}'s GAME SHELVES:
         each shelf in shelves
             ul
                 li #{shelf.name}(#{shelf.Games.length})
+    //- div
+    //-     h3.updateTitles #{user.username.toUpperCase()}'s GAMES AND REVIEWS
+    //-     ul.GameReviewsDiv
+    //-         each game in user.Games
+    //-             div.profileFlex
+    //-                 div.gameImage
+    //-                     li
+    //-                         a(href=`/games/${game.id}`)
+    //-                             img(src=`${game.url}`, alt="video game image")
+    //-                 div.detailsFlex
+    //-                     li
+    //-                         a(href=`/games/${game.id}` class='dynamic profileTitle') #{game.title}
+    //-                     li #{game.studio}
+    //-                     li Average Rating: #{game.avgCleanRating}
+    //-                     li #{game.description}
+    //-                     each review in game.Reviews
+    //-                         if review.userId === userId
+    //-                             li <span class='pink'>Your Review: </span> #{review.content}
+    //-                             each rating in user.GameCleanRatings
+    //-                                 if rating.userId === userId && rating.gameId === game.id
+    //-                                     li <span class='pink'>Your Clean Rating: </span> #{rating.rating}
+    //-                     label(for="shelf-names") On Shelves:
+    //-                     select(name="shelf-names")
+    //-                         each shelf in game.Shelves
+    //-                             option(value=shelf.name)= shelf.name
+
+
+
+
     div
         h3.updateTitles #{user.username.toUpperCase()}'s GAMES AND REVIEWS
         ul.GameReviewsDiv
-            each game in user.Games
+            each game in userGamesArr
                 div.profileFlex
                     div.gameImage
                         li
@@ -38,16 +69,31 @@ block content
                         li
                             a(href=`/games/${game.id}` class='dynamic profileTitle') #{game.title}
                         li #{game.studio}
-                        li #{game.avgCleanRating}
+                        li Average Rating: #{game.avgCleanRating}
                         li #{game.description}
                         each review in game.Reviews
                             if review.userId === userId
-                                li <span class='pink'>Your Review: </span> #{review.content}
-                        label(for="shelf-names") On Shelves:
-                        select(name="shelf-names")
+                                li <span class='pink review-margin'>Your Review: </span> #{review.content}
+                        each rating in game.GameCleanRatings
+                            if rating.userId === userId && rating.gameId === game.id
+                                li <span class='pink rating-margin-top'>Your Clean Rating: </span> #{rating.rating}
+                        p.on-shelves On Shelves:
+                            if game.Shelves.length === 0
+                                span.none None
+
+
                             each shelf in game.Shelves
-                                option(value=shelf.name)= shelf.name
+                                if shelf.userId === userId
+                                    span.shelf-name #{shelf.name}
+
+
+                        //- label(for="shelf-names") On Shelves:
+                        //- select(name="shelf-names")
+                        //-     each shelf in game.Shelves
+                        //-         option(value=shelf.name)= shelf.name
                 p.pTag
+
+
                         //- if user.Games.id === user.Reviews.
                         //- each review in user.Reviews
                         //-     li #{review.content}

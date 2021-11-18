@@ -5,16 +5,16 @@
 
 window.addEventListener('DOMContentLoaded', async () => {
     // event.currentTarget.value
-    console.log("hey-----------------")
+    // console.log("hey-----------------")
 
     // document.getElementsByClassName
 
     const userId = document.querySelector('.myGamesUserId').id
-    console.log(userId)
+    // console.log(userId)
 
     const shelf = document.querySelectorAll(".shelf")
 
-    console.log(shelf)
+    // console.log(shelf)
 
     shelf.forEach(element => {
         element.addEventListener('click', async (event) => {
@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
                 const { user } = await games.json()
                 // console.log(`---------${user.Shelves[0].Games[0].title}`);
-                console.log(`---------${user.Shelves[0]}`);
+                // console.log(`---------${user.Shelves[0]}`);
 
                 const tableBody = document.querySelector('.tableBody');
                 const tableHTML = user.Shelves[0].Games.map(
