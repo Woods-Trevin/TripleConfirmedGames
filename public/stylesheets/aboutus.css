@@ -1,0 +1,14 @@
+.links{
+    display: flex;
+    gap:50px;
+}
+
+.ico{
+    width: 40px;
+    height: 40px;
+    transition: transform 300ms;
+}
+
+.ico:hover{
+    transform: scale(1.1);
+}
