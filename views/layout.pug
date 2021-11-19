@@ -38,45 +38,49 @@ html
             p(id='myGame' class='btn') My Games
             p(id='userProfile' class='btn') User Profile
             a(class='btn' href='/aboutus') About Us
+        if locals.authenticated
+          form(class='log' action='/users/logout' method='post')
+            button(class='btn userIcon2' type='submit') Logout
+        else 
+          p(class='btn userIcon') Login
 
-        p(class='btn userIcon') Login
 
 
     +validationErrorSummary(error)
-    .modal
-        .modal-box
-            .modal-body
-                h3 Log In
-                form(action="/users/login", method="post")
-                    input(type="hidden" name="_csrf" value=token)
-                    //- .form-control
-                    .form-control
-                        label(for="username") Username
-                        input(type="text" name="username" required id="user")
-                        //- changed above input tag's ID from username to user
-                    div.form-control
-                        label(for="password") Password
-                        input(type="password" name="password" required id="pass")
-                        //- changed above input tag's ID from password to pass
-                    div.form-control-log
-                        button(class='login-btn' type="submit") wow!
-                    img(class="close" src='/images/close.png' alt="close")
-                if locals.authenticated
-                  .modal-footer
-                    p.logText 🤡 You're already logged in 🤡
+    if !locals.authenticated
+      .modal
+          .modal-box
+              .modal-body
+                  h3 Log In
+                  form(action="/users/login", method="post")
+                      input(type="hidden" name="_csrf" value=token)
+                      //- .form-control
+                      .form-control
+                          label(for="username") Username
+                          input(type="text" name="username" required id="user")
+                          //- changed above input tag's ID from username to user
+                      div.form-control
+                          label(for="password") Password
+                          input(type="password" name="password" required id="pass")
+                          //- changed above input tag's ID from password to pass
+                      div.form-control-log
+                          button(class='login-btn' type="submit") wow!
+                      img(class="close" src='/images/close.png' alt="close")
+                  if locals.authenticated
+                    .modal-footer
                       form(class='log' action='/users/logout' method='post')
                         button(class='login-btn' type='submit') Logout
-                else
-                  .modal-footer
-                    p.logText Or log in with
-                  form(action="/users/login", method="post")
-                    .form-control-log
-                      input(type="hidden" name="_csrf" value=token)
-                      input(type="hidden" name="username" required id="username" value='demo user1')
-                      input(type="hidden" name="password" required id="password" value='Password12!')
-                      button(class='login-btn' type="submit") Demo
-                    p.logTexT
-                      a(class='login-btna' href='/users/signup') Register
+                  else
+                    .modal-footer
+                      p.logText Or log in with
+                    form(action="/users/login", method="post")
+                      .form-control-log
+                        input(type="hidden" name="_csrf" value=token)
+                        input(type="hidden" name="username" required id="username" value='demo user1')
+                        input(type="hidden" name="password" required id="password" value='Password12!')
+                        button(class='login-btn' type="submit") Demo
+                      p.logTexT
+                        a(class='login-btna' href='/users/signup') Register
 
 
     div.container

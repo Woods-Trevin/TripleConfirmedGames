@@ -34,6 +34,19 @@
     right: 35px;
     margin: 0;
 }
+.userIcon2 {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 35px;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 18px;
+    font-weight: 800;
+    font-family: 'Rubik', sans-serif;
+    padding: .8em 1em;
+}
 
 #global-nav img {
     position: absolute;
