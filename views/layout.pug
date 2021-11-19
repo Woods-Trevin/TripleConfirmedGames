@@ -22,9 +22,9 @@ html
         include utils.pug
   body
     div#global-nav
+      a(href="/")
+        img(src="/images/logo.png", alt="")
       div#nav
-        a(href="/")
-          img(src="/images/logo.png", alt="")
         nav.menu
           a(class='btn' href='/') Home
           a(class='btn' href='/games') Browse Games
@@ -33,14 +33,13 @@ html
             a(class='btn' href=`/users/${userId}`) User Profile
             a(class='btn' href='/aboutus') About Us
 
-            p(class='btn userIcon') Login
 
           else
             p(id='myGame' class='btn') My Games
             p(id='userProfile' class='btn') User Profile
             a(class='btn' href='/aboutus') About Us
 
-            p(class='btn userIcon') Login
+        p(class='btn userIcon') Login
 
 
     +validationErrorSummary(error)
