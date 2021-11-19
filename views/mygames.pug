@@ -12,7 +12,7 @@ block content
             ul
                 div.shelfNames
                     each shelf in shelves
-                        li(class='shelf dynamic shelfList' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
+                        li(class='shelflist dynamic' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
                 //- div.responseShelf
                 //- form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
                 //-     input(type="text" class="addDeleteShelfInput" name='name' placeholder='Add/Delete Shelf')
@@ -36,9 +36,10 @@ block content
             tbody.tableBody
                 each game in user.Games
                     tr.mygamesTR
-                        td.tableData
-                            a(href=`/games/${game.id}` class='test')
-                                img(src=`${game.url}` class="GameImg accessibleHLink" alt="video game image")
+                        td.tableDataImage
+                            a(href=`/games/${game.id}` )
+                                //- div( style=`background-image : url(${game.url}) ` class="GameImg")
+                                img( src= `${game.url}` class="GameImg")
                         td.tableData
                             a(href=`/games/${game.id}` class='scale dynamic')
                                 p(class='scale dynamic') #{game.title}
