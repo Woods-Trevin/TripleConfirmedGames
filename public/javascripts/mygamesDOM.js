@@ -15,13 +15,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     const shelf = document.querySelectorAll(".shelflist")
 
     // console.log(shelf)
+    const shelves = document.querySelectorAll(".shelflist")
 
     shelf.forEach(element => {
         element.addEventListener('click', async (event) => {
             try {
-                // const shelves = document.querySelectorAll(".shelflist")
-                // shelves.map(shelf => shelf.setAttribute('color', 'black'))
-                // element.setAttribute('color', 'pink')
+                console.log('\n\n\n\n SHELVVVEESSSSS',shelves);
+                shelves.forEach(shelf => {
+                    console.log('\n\n\n\n SHELF',shelf);
+                    shelf.setAttribute('class', 'shelflist dynamic')})
+                element.setAttribute('class','shelflist dynamic pink')
                 // console.log("This works!")
                 // console.log(event.target.id)
                 shelfName = event.target.id
