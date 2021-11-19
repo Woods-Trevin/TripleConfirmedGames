@@ -12,13 +12,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     const userId = document.querySelector('.myGamesUserId').id
     // console.log(userId)
 
-    const shelf = document.querySelectorAll(".shelf")
+    const shelf = document.querySelectorAll(".shelflist")
 
     // console.log(shelf)
 
     shelf.forEach(element => {
         element.addEventListener('click', async (event) => {
             try {
+                // const shelves = document.querySelectorAll(".shelflist")
+                // shelves.map(shelf => shelf.setAttribute('color', 'black'))
+                // element.setAttribute('color', 'pink')
                 // console.log("This works!")
                 // console.log(event.target.id)
                 shelfName = event.target.id

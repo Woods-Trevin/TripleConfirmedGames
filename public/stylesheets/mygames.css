@@ -3,8 +3,17 @@
 }
 
 .GameImg {
-    width: 100px;
+    height: auto;
+    width: 125px;
+    object-fit: contain;
+    transition: transform 500ms;;
+    margin-right: 0px;
 }
+
+.GameImg:hover {
+    transform:scale(1.1);
+}
+
 
 .accessibleHLink{
     transition: transform 500ms;
@@ -12,9 +21,9 @@
 
 .accessibleHLink:hover {
     font-size: x-large;
-    width: 5em;
+    /* width: 5em; */
     /* text-decoration: underline; */
-    transform:scale(1.001);
+    transform:scale(1.1);
 }
 
 .sidebar {
@@ -43,7 +52,7 @@
     /* right: 10px; */
     bottom: 320px;
     overflow: hidden;
-    margin-right: 30px;
+    /* margin-right: 30px; */
 }
 
 .tableHead {
@@ -101,15 +110,28 @@
     vertical-align: center;
 }
 
+.tableDataImage{
+    height: 125px;
+    width: 125px;
+    text-align: center;
+    vertical-align: center;
+    transform: translateX();
+    /* display: flex;
+    justify-content: center; */
+}
+
 .shelf {
 
-    display: flex;
+    /* display: flex; */
     /* width: 40px; */
     word-wrap: break-word;
-    
+    text-align: center;
+
 }
 .mygamesTR {
     justify-content: center;
+    margin-right: 0px;
+
 }
 
 .sidebar {
@@ -132,7 +154,7 @@
     scale: 2;
     color: #fb049c;
     cursor: pointer;
-    text-align: center;
+    /* text-align: center; */
 }
 
 /* .scale:hover{
