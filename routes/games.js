@@ -42,6 +42,13 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
 
     // console.log(games.Reviews);
     const reviews = games.Reviews
+    let notExists = true;
+    reviews.forEach(review => {
+      if (review.userId === currentUser) {
+        notExists = false;
+      }
+    })
+
 
     const reviewNames = await Review.findAll(
       {
@@ -98,7 +105,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
       usersWowsArr.push(element.dataValues.reviewId)
     });
 
-    res.render('game-page', { title: games.title, games, reviews, GameCurrentShelves, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, usersWowsArr, token: req.csrfToken() })
+    res.render('game-page', { title: games.title, games, reviews, GameCurrentShelves, reviewId, gameId, userId: currentUser, shelves, reviewNames, totalLikes, usersWowsArr, notExists, token: req.csrfToken() })
 
 
   } else {
