@@ -187,6 +187,11 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
             gamesOnShelvesOrReviews[game.id] = game
           }
         })
+        game.GameCleanRatings.forEach(rating => {
+          if (rating.userId === userId) {
+            gamesOnShelvesOrReviews[game.id] = game
+          }
+        })
       })
 
       userGamesArr = Object.values(gamesOnShelvesOrReviews)
