@@ -20,9 +20,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     shelf.forEach(element => {
         element.addEventListener('click', async (event) => {
             try {
-                console.log('\n\n\n\n SHELVVVEESSSSS',shelves);
+                // console.log('\n\n\n\n SHELVVVEESSSSS',shelves);
                 shelves.forEach(shelf => {
-                    console.log('\n\n\n\n SHELF',shelf);
+                    // console.log('\n\n\n\n SHELF',shelf);
                     shelf.setAttribute('class', 'shelflist dynamic')})
                 element.setAttribute('class','shelflist dynamic pink')
                 // console.log("This works!")
