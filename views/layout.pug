@@ -25,6 +25,10 @@ html
       a(href="/")
         img(src="/images/logo.png", alt="")
       div#nav
+        div.searchBar
+          form(action="/search", method="get")
+            input(type="search", name='searchVal', placeHolder='Search for a game...')
+            input(type="submit" value='search')
         nav.menu
           a(class='btn' href='/') Home
           a(class='btn' href='/games') Browse Games
@@ -41,7 +45,7 @@ html
         if locals.authenticated
           form(class='log' action='/users/logout' method='post')
             button(class='btn userIcon2' type='submit') Logout
-        else 
+        else
           p(class='btn userIcon') Login
 
 
