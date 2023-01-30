@@ -1,25 +1,36 @@
 'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('SlapOns', {
+    return queryInterface.createTable('ReviewLikes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      shelfId: {
+      like: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Shelves"
-        }
+        type: Sequelize.BOOLEAN
       },
-      gameId: {
+      reviewId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Games"
+          model: "Reviews"
+        }//,
+        // unique: true
+      },
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users"
         }
       },
       createdAt: {
@@ -30,9 +41,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }, options);
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('SlapOns');
+    options.tableName = 'ReviewLikes'
+    return queryInterface.dropTable(options);
   }
 };

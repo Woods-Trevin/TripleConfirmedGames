@@ -1,32 +1,25 @@
 {
-  "name": "express-project-starter",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "per-env",
-    "start:development": "nodemon -r dotenv/config ./bin/www",
-    "start:production": "node ./bin/www"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "connect-session-sequelize": "^7.0.4",
-    "cookie-parser": "~1.4.4",
-    "csurf": "^1.11.0",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "express-session": "^1.17.2",
-    "express-validator": "^6.12.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "per-env": "^1.0.2",
-    "pg": "^8.7.1",
-    "pug": "2.0.4",
-    "sequelize": "^5.22.3",
-    "sequelize-cli": "^5.5.1"
-  },
-  "devDependencies": {
-    "dotenv": "^8.6.0",
-    "dotenv-cli": "^4.0.0",
-    "nodemon": "^2.0.6"
+    "name": "TCG",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "install": "npm --prefix backend install backend",
+      "dev:backend": "npm install --prefix backend start",
+      "sequelize": "npm run --prefix backend sequelize",
+      "sequelize-cli": "npm run --prefix backend sequelize-cli",
+      "start": "npm start --prefix backend",
+      "build": "npm run build --prefix backend"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/RawaMem/TripleConfirmedGames"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/RawaMem/TripleConfirmedGames"
+    },
+    "homepage": "https://github.com/RawaMem/TripleConfirmedGames"
   }
-}

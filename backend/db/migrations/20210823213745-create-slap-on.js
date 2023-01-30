@@ -1,22 +1,24 @@
 'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('GameCleanRatings', {
+    return queryInterface.createTable('SlapOns', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      rating: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      userId: {
+      shelfId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "Users"
+          model: "Shelves"
         }
       },
       gameId: {
@@ -34,9 +36,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }, options);
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('GameCleanRatings');
+    options.tableName = 'SlapOns'
+
+    return queryInterface.dropTable(options);
   }
 };
