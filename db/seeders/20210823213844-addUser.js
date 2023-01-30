@@ -1,8 +1,14 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+options.tableName = 'Users'
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-   return queryInterface.bulkInsert('Users', [
+   return queryInterface.bulkInsert(options, [
     {username: 'demo user1', firstName: 'demo', lastName: 'user1', email: 'demouser1@gmail.com', hashedPassword: '$2a$10$ntKEU923CjZexJ1PL.K95./2yz0lMSmEN9HwP6d41D4Zj2BTRLzNy', createdAt: new Date(), updatedAt: new Date()},
     {username: 'demo user2', firstName: 'demo', lastName: 'user2', email: 'demouser2@gmail.com', hashedPassword: '$2a$10$ntKEU923CjZexJ1PL.K95./2yz0lMSmEN9HwP6d41D4Zj2BTRLzNy', createdAt: new Date(), updatedAt: new Date()},
     {username: 'TheCleanOne', firstName: 'demo', lastName: 'user2', email: 'TheCleanOne@gmail.com', hashedPassword: '$2a$10$ntKEU923CjZexJ1PL.K95./2yz0lMSmEN9HwP6d41D4Zj2BTRLzNy', createdAt: new Date(), updatedAt: new Date()},
@@ -28,6 +34,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, { truncate: true, cascade: true, restartIdentity: true });
+    return queryInterface.bulkDelete(options, null, { truncate: true, cascade: true, restartIdentity: true });
   }
 };

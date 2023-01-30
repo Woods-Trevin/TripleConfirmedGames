@@ -1,8 +1,15 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+options.tableName = 'Games'
+
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-   return queryInterface.bulkInsert('Games', [
+   return queryInterface.bulkInsert(options, [
      {title: 'League of Legends',
      url: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co254s.jpg',
      studio:'Riot Games',
@@ -167,5 +174,5 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Games', null, { truncate: true, cascade: true, restartIdentity: true });  }
+    return queryInterface.bulkDelete(options, null, { truncate: true, cascade: true, restartIdentity: true });  }
 };
