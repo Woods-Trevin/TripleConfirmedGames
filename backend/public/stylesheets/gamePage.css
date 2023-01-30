@@ -1,0 +1,144 @@
+.flex-outer {
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-between;
+    /* border: 2px solid red; */
+}
+
+.flex-inner {
+    display: flex;
+    justify-content: center;
+    /* margin-left: 20px; */
+    width: 100%;
+    /* border: 2px solid blue; */
+
+
+}
+
+.inner {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: space-between;
+    /* border: 2px solid green; */
+}
+
+.game-title {
+    font-size: 50px;
+    font-weight: bold;
+    
+}
+.marginbot {
+    margin-bottom: 40px;
+}
+
+.game-avgRating {
+    font-size: 50px;
+    background-color:#fb049c;
+    width: 90px;
+}
+
+.pink {
+    color:#fb049c;
+    /* border: 2px solid red; */
+}
+
+.bold {
+    font-weight: bold;
+
+}
+
+.raw-btn {
+    cursor: pointer;
+    background-color: white;
+    color: #fb049c;
+    font-weight: bold;
+    border: 2px solid #fb049c;
+    border-radius: 10px;
+    padding: 3px 5px;
+    /* box-shadow: 2px 2px 3px 2px #a1909a; */
+}
+
+.raw-btn:hover {
+    background-color: #fb049c;
+    color: white;
+}
+
+.box-art {
+
+}
+
+.midshelf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 2px solid blue; */
+}
+
+.dropbox1 {
+    margin-right: 80px;
+}
+
+.dropbox2 {
+    margin-right: 30px;
+}
+
+.textarea {
+    margin-right: 20px;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+.usernamerev {
+    font-size: 22px;
+    margin-top: 5px;
+}
+
+.fav{
+    display: flex;
+}
+
+.fav img{
+    display: inline-block;
+    height: 50px;
+    padding-right: 2em;
+}
+
+
+.likebtn {
+    margin-bottom: 30px;
+}
+
+.likes {
+    font-size: 15px;
+
+}
+
+.allRevContainer{
+    background-color: #fff0f2;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.dropDown {
+    padding: .5em 2em;
+}
+
+
+.currentShelves_label {
+    /* border: 2px solid red; */
+    color: #fb049c;
+    font-size: 30px;
+}
+
+.currentShelvesForGame {
+    border: 2px solid #fb049c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

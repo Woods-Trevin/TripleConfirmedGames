@@ -1,0 +1,61 @@
+extends layout.pug
+
+
+block content
+    h2.title #{title}
+    div(id=userId class='myGamesUserId')
+        input(type="hidden" id='myGamesUserId' value=userId)
+    div(id=shelfName class='myGamesGameId')
+    div.tableContainer
+        .sideBar
+            h3#Gameshelves Gameshelves
+            ul
+                div.shelfNames
+                    each shelf in shelves
+                        li(class='shelflist dynamic' id=shelf.name) #{shelf.name}(#{shelf.Games.length})
+                //- div.responseShelf
+                //- form(method='POST' class="addDeleteShelf" action=`/users/${userId}/addDeleteShelf`)
+                //-     input(type="text" class="addDeleteShelfInput" name='name' placeholder='Add/Delete Shelf')
+                //-     button(class="addDeleteShelfBtn raw-btn") Submit
+                div(class="AddShelf")
+                    a(href=`/users/${userId}/addShelf`)
+                        button(class='raw-btn') Add Shelf
+                div(class="DeleteShelf")
+                    a(href=`/users/${userId}/deleteShelf`)
+                        button(class='raw-btn') Delete Shelf
+        table.MyGamesTable
+            thead.tableHead
+                tr
+                    th.tableHead Box Art
+                    th.tableHead Title
+                    th.tableHead Studio
+                    th.tableHead AvgCleanRating
+                    th.tableHead Shelves
+                    //- th Review
+                    th.tableHead ReleaseDate
+            tbody.tableBody
+                each game in user.Games
+                    tr.mygamesTR
+                        td.tableDataImage
+                            a(href=`/games/${game.id}` )
+                                //- div( style=`background-image : url(${game.url}) ` class="GameImg")
+                                img( src= `${game.url}` class="GameImg")
+                        td.tableData
+                            a(href=`/games/${game.id}` class='scale dynamic')
+                                p(class='scale dynamic') #{game.title}
+                        td.tableData #{game.studio}
+                        td.tableData #{game.avgCleanRating}
+                        if game.Shelves && (user.id === userId)
+                            each shelf in game.Shelves
+                                td(class="shelf") #{shelf.name},
+                            else
+                                td(class="shelf")= "No shelves"
+
+                        //- td #{game.}
+                        //- each review in game.Reviews
+                        //-     if review.userId === userId
+                        //-         td #{review.content}
+                        //-     a(href=`/games/${userId}`) Write a Review
+                        td.tableData #{game.releaseDate}
+    script(src="/javascripts/mygamesDOM.js")
+    script(src='/javascripts/login.js')

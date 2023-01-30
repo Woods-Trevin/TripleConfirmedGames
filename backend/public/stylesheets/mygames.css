@@ -1,0 +1,166 @@
+.title {
+    font-size: xx-large;
+}
+
+.GameImg {
+    height: auto;
+    width: 125px;
+    object-fit: contain;
+    transition: transform 500ms;;
+    margin-right: 0px;
+}
+
+.GameImg:hover {
+    transform:scale(1.1);
+}
+
+
+.accessibleHLink{
+    transition: transform 500ms;
+}
+
+.accessibleHLink:hover {
+    font-size: x-large;
+    /* width: 5em; */
+    /* text-decoration: underline; */
+    transform:scale(1.1);
+}
+
+.sidebar {
+    display: flex;
+}
+
+#Gameshelves {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.tableContainer {
+    position: relative;
+    top: 60px;
+    right: 30px;
+}
+
+.MyGamesTable {
+    display: block;
+    position: relative;
+    background-color: white;
+    /* color: white; */
+    float: right;
+    width: 80%;
+    left: 100px;
+    /* right: 10px; */
+    bottom: 320px;
+    overflow: hidden;
+    /* margin-right: 30px; */
+}
+
+.tableHead {
+    width: 600px;
+}
+
+.AddShelf{
+    display: flex;
+    width: 105px;
+    margin-right: 20px;
+    padding-left: 5px;
+    margin: 10px;
+    /* border: 5px solid grey;
+    background-color: grey; */
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+
+}
+
+.DeleteShelf {
+    display: flex;
+    width: 130px;
+    margin-right: 20px;
+    padding-left: 5px;
+    margin: 10px;
+    /* border: 5px solid grey;
+    background-color: grey; */
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.tableHead {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
+    margin-right: 0px;
+    /* border: 2px solid black; */
+    /* border-bottom: 2px solid black; */
+
+
+}
+
+.tableData {
+    /* display: block; */
+    /* flex-direction: column; */
+    /* border-right: 2px solid white; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    text-align: center;
+    vertical-align: center;
+}
+
+.tableDataImage{
+    height: 125px;
+    width: 125px;
+    text-align: center;
+    vertical-align: center;
+    transform: translateX();
+    /* display: flex;
+    justify-content: center; */
+}
+
+.shelf {
+
+    /* display: flex; */
+    /* width: 40px; */
+    word-wrap: break-word;
+    text-align: center;
+
+}
+.mygamesTR {
+    justify-content: center;
+    margin-right: 0px;
+
+}
+
+.sidebar {
+    margin-left: 50px;
+}
+
+
+@media screen and (max-width: 900px) {
+    .MyGamesTable {
+      width: 80%;
+    }
+
+    .sidebar {
+        width: 50%;
+    }
+}
+
+
+.dynamic:hover {
+    scale: 2;
+    color: #fb049c;
+    cursor: pointer;
+    /* text-align: center; */
+}
+
+/* .scale:hover{
+    transform:scale(1.001);
+    font-size: x-large;
+    width: 5em;
+    text-align: center;
+
+} */

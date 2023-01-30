@@ -1,0 +1,12 @@
+mixin validationErrorSummary(errors)
+  if errors
+    div
+      p The following error(s) occurred:
+      ul
+        each error in errors
+          li= error
+
+mixin field(labelText, fieldName, fieldValue, inputType)
+  div(class='form-group')
+    //- label(type='hidden' for=fieldName)= labelText
+    input(type=inputType id=fieldName name=fieldName value=fieldValue placeholder=labelText class='form-control')

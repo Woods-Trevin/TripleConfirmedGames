@@ -1,0 +1,124 @@
+.carousel {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.first-txt {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: #000 0px 2px 8px;
+    -webkit-font-smoothing: antialiased;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.second-txt {
+    position: absolute;
+    width: 100vh;
+    /* bottom: 100px; */
+    color: white;
+    font-size: 1.32rem;
+    font-weight: 500;
+    text-shadow: #000 0px 2px 8px;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    /* transform: translateY(-53vh); */
+    top: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.splashBtn {
+    position: absolute;
+    text-decoration: none;
+    background-color: #ffa200;
+    color: white;
+    font-size: .95rem ;
+    letter-spacing: .15rem;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    padding: .8rem 3.5rem;
+    border-radius: 10rem;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.splashBtnVal {
+    position: absolute;
+    text-decoration: none;
+    background-color: #3fc0ac;
+    color: white;
+    font-size: .95rem ;
+    letter-spacing: .15rem;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    padding: .8rem 3.5rem;
+    border-radius: 10rem;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.splashBtnHonor {
+    position: absolute;
+    text-decoration: none;
+    background-color: #461c03;
+    color: white;
+    font-size: .95rem ;
+    letter-spacing: .15rem;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    padding: .8rem 3.5rem;
+    border-radius: 10rem;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.splashBtnMario {
+    position: absolute;
+    text-decoration: none;
+    background-color: #2c05f2;
+    color: white;
+    font-size: .95rem ;
+    letter-spacing: .15rem;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    padding: .8rem 3.5rem;
+    border-radius: 10rem;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.splashBtnAvatar {
+    position: absolute;
+    text-decoration: none;
+    background-color: #016aa4;
+    color: white;
+    font-size: .95rem ;
+    letter-spacing: .15rem;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    padding: .8rem 3.5rem;
+    border-radius: 10rem;
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.splashLogo {
+    position: absolute;
+    left: 50%;
+    width: 25vh;
+    height: auto;
+    transform: translateX(-50%);
+    bottom: 10%;
+}
